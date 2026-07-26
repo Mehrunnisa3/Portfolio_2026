@@ -1,0 +1,59 @@
+---
+/**
+ * Replaces the two raster research boards. Rendering them as markup rather than
+ * PNGs keeps participants anonymised at the data layer, drops ~2.4 MB, and makes
+ * the findings selectable, searchable and screen-reader accessible.
+ */
+interface Note {
+  label: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  caption?: string;
+  notes: Note[];
+  tone?: 'mint' | 'sky';
+  columns?: number;
+}
+
+const { title, caption, notes, tone = 'mint', columns = 4 } = Astro.props;
+
+const tones = {
+  mint: 'bg-[#d7f0dc] text-[#14301c]',
+  sky: 'bg-[#d3e7fa] text-[#12283d]',
+};
+
+const groups = [...new Set(notes.map((n) => n.label))];
+---
+
+<figure class="my-14">
+  <figcaption class="mb-6">
+    <h3 class="font-display text-2xl font-normal">{title}</h3>
+    {caption && <p class="mt-2 max-w-[60ch] text-[15px] text-ink/65">{caption}</p>}
+    <p class="label mt-3 !text-[11px]">
+      {notes.length} notes · {groups.length} sources
+    </p>
+  </figcaption>
+
+  <ul
+    class="grid list-none grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+    style={`--nb-cols: ${columns}`}
+  >
+    {
+      notes.map((note) => (
+        <li
+          class:list={[
+            'flex flex-col gap-2.5 rounded-[3px] p-4 shadow-[2px_3px_0_rgba(22,21,15,0.07)]',
+            tones[tone],
+          ]}
+        >
+          <span class="font-mono text-[10px] font-medium tracking-[0.16em] uppercase opacity-70">
+            {note.label}
+          </span>
+          <p class="text-[14.5px] leading-snug">{note.text}</p>
+        </li>
+      ))
+    }
+  </ul>
+</figure>

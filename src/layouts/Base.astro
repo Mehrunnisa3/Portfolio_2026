@@ -1,0 +1,120 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Lightbox from '../components/Lightbox.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  navTheme?: 'paper' | 'void';
+}
+
+const { title, description, navTheme = 'paper' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Instrument+Serif:ital@0;1&family=Mulish:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <!--
+      Inlined deliberately: it must run before first paint to hide reveal targets
+      without a flash, and it is too small to justify a module fetch.
+    -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var targets = document.querySelectorAll('.reveal');
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function showAll() {
+          for (var i = 0; i < targets.length; i++) {
+            targets[i].classList.add('is-visible');
+          }
+        }
+
+        if (reduced || !('IntersectionObserver' in window)) {
+          showAll();
+          return;
+        }
+
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.1 },
+        );
+
+        for (var j = 0; j < targets.length; j++) {
+          io.observe(targets[j]);
+        }
+
+        /*
+         * The nav sits over alternating dark and light sections, so it tracks
+         * every dark stage rather than just the hero. It goes void while any of
+         * them is under the bar, and back to paper otherwise.
+         */
+        var nav = document.querySelector('.site-nav');
+        var stages = document.querySelectorAll('[data-dark-stage]');
+
+        if (nav && stages.length && 'IntersectionObserver' in window) {
+          var overlapping = new Set();
+
+          var stageIO = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) overlapping.add(entry.target);
+                else overlapping.delete(entry.target);
+              });
+              nav.dataset.theme = overlapping.size ? 'void' : 'paper';
+            },
+            // Only the strip actually behind the nav bar counts.
+            { rootMargin: '0px 0px -95% 0px', threshold: 0 },
+          );
+
+          stages.forEach(function (el) {
+            stageIO.observe(el);
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+    >
+      Skip to content
+    </a>
+    <Nav theme={navTheme} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <Lightbox />
+  </body>
+</html>

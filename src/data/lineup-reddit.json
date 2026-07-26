@@ -1,0 +1,29 @@
+{
+  "note": "Transcription of the Reddit findings board. Quotes are verbatim from public r/SurreyBC posts; usernames from the original raster (uploads/redditFindig.png) are dropped — the subreddit is the relevant provenance, the account is not.",
+  "source": "r/SurreyBC",
+  "posts": [
+    { "quote": "No free indoor anything around here — best you can get is YMCA or Surrey rec centres", "theme": "discovery" },
+    { "quote": "You're not going to find a free indoor court anywhere — you can rent school gyms and rec centres, that's about it", "theme": "discovery" },
+    { "quote": "If there was a free one it would be packed with 100s of kids", "theme": "attendance" },
+    { "quote": "Why can't we just have more free drop in times for kids", "theme": "access" },
+    { "quote": "I just checked it out — do you know if it's possible to book a court or is it just drop in?", "theme": "discovery" },
+    { "quote": "Any place to play soccer or basketball for an older out of shape guy — I used to be an athlete but I want to make sure I'm not getting into a situation where I'm dragging others down", "theme": "skill level" },
+    { "quote": "Does anyone have experience playing at South Surrey Arts and Recreation centre drop ins on Tuesday and Friday evenings — how is the level and vibe there? I just moved to the South Surrey area", "theme": "skill level" },
+    { "quote": "Where do y'all play basketball in Surrey — pretty new to Surrey, wondering if you know indoor basketball courts good for drop ins, I'm down to join a league too if anyone is interested", "theme": "discovery" },
+    { "quote": "Rec Centres all do as far as I know and you have to register but it's nearly impossible to get in — always filled and the city's website can't handle the traffic come registration time", "theme": "attendance" },
+    { "quote": "Anyone down to play badminton beginner friendly — thinking about Newton rec or any rec in Surrey, it's been a while since I've picked up a racket so definitely will be rusty", "theme": "skill level" },
+    { "quote": "Any outdoor basketball court in Surrey? My place is around 8 minutes walk to Surrey Central station", "theme": "discovery" },
+    { "quote": "Anywhere to play volleyball? Near King George Station in Surrey", "theme": "discovery" },
+    { "quote": "Surrey.ca parks and recreation has a section to sign up for drop in sports — badminton every day almost at rec centres all over Surrey and it fills up fast", "theme": "attendance" },
+    { "quote": "Anywhere in Surrey/Langley that has badminton courts or just a gym with drop in badminton? Used to go to Richmond but now I live in Surrey", "theme": "discovery" },
+    { "quote": "Badminton scene in Surrey mostly from community centre drop ins — courts are shared with basketball and indoor soccer vs dedicated carpet in Richmond", "theme": "discovery" },
+    { "quote": "Been wondering about this too — new to the area, haven't played in a while, I see Guildford rec has badminton times but wondering how competitive it is and looks like they only have doubles", "theme": "skill level" },
+    { "quote": "I need help finding an indoor public basketball court in Surrey BC — most are packed with 100 kids and I need a not-known one", "theme": "attendance" },
+    { "quote": "Will we be total detriments to a team if we join — my friend has never played volleyball in her life", "theme": "skill level" },
+    { "quote": "Not sure if this is the best place to ask but I want to know the range of abilities typically at rec centre drop in volleyball", "theme": "skill level" },
+    { "quote": "I've been wondering this too — miss playing so much", "theme": "discovery" },
+    { "quote": "I just moved to Surrey and am trying to re-orient myself to communities and activities I like", "theme": "discovery" },
+    { "quote": "Hi where in poco do you play — I've been searching for dedicated badminton courts outside Richmond", "theme": "discovery" },
+    { "quote": "I wonder if solo players can go and hope to find a partner", "theme": "player connection" }
+  ]
+}

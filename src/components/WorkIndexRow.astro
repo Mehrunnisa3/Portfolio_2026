@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  href: string;
+  index: string;
+  title: string;
+  oneLiner: string;
+  disciplines: string[];
+  sector: string;
+  image: ImageMetadata;
+  alt: string;
+}
+
+const { href, index, title, oneLiner, disciplines, sector, image, alt } = Astro.props;
+---
+
+<article class="reveal" data-kind="project">
+  <a href={href} class="group block">
+    <!--
+      object-contain, not cover: the two hero assets are 1600x963 (landscape) and
+      2760x2800 (square). Cropping the square one to 4/3 cut the artwork, so both
+      are framed at native aspect on a tinted panel instead.
+    -->
+    <div class="relative aspect-4/3 overflow-hidden bg-rule/30">
+      <Image
+        src={image}
+        alt={alt}
+        widths={[600, 900, 1400]}
+        sizes="(min-width: 900px) 46vw, 92vw"
+        class="absolute inset-0 size-full object-contain p-3 transition-transform duration-700 ease-out-expo group-hover:scale-103"
+      />
+      <div
+        class="pointer-events-none absolute inset-0 bg-ink/8 transition-opacity duration-600 group-hover:opacity-0"
+      >
+      </div>
+    </div>
+
+    <div class="mt-6 flex items-baseline gap-4">
+      <span class="font-mono text-xs text-mute">{index}</span>
+      <h3
+        class="relative inline-block font-display text-[clamp(1.75rem,3.2vw,2.75rem)] font-normal leading-none after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-ink after:transition-transform after:duration-500 after:ease-out-expo group-hover:after:scale-x-100"
+      >
+        {title}
+      </h3>
+    </div>
+
+    <p class="mt-4 max-w-[46ch] text-[17px] leading-relaxed text-ink/70">
+      {oneLiner}
+    </p>
+
+    <ul class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+      {
+        disciplines.map((d) => (
+          <li class="label !text-[11px] !text-ink/55">{d}</li>
+        ))
+      }
+      <li aria-hidden="true" class="h-3 w-px bg-rule"></li>
+      <li class="label !text-[11px] !text-rose">{sector}</li>
+    </ul>
+  </a>
+</article>

@@ -1,0 +1,24 @@
+node_modules/
+dist/
+.astro/
+.idea/
+.DS_Store
+*.log
+
+# Scratch output from the one-off media extraction. Everything in here was
+# verified and consolidated into src/assets/ and public/media/ byte-identically,
+# so it is redundant — but do not delete it from disk until the .state.json
+# files below are gone, since together they are the provenance trail.
+rescued/
+
+# dc-runtime editor state. These are large (56 MB total) and are being retired,
+# but they still hold the only copy of some media — do not delete until
+# everything under rescued/ has been verified and wired into src/.
+.image-slots.state.json
+.video-slots.state.json
+.video-slot-*.state.json
+
+# Rasters that carry participant PII burned into the pixels: real first names on the
+# affinity map and Reddit usernames, plus full names tied to individual SUS scores.
+# Kept out of the repo entirely; the content lives anonymised in src/data/.
+.quarantine-pii/

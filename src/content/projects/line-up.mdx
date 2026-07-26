@@ -1,0 +1,408 @@
+---
+title: Line Up
+order: 2
+oneLiner: An all in one sports drop-in activity finder for residents looking to find sessions, see who is going, and show up with confidence based on their location.
+subtitle: An all-in-one sports drop-in activity finder for Surrey residents — find sessions, see who’s going, and show up with confidence.
+disciplines:
+  - UX Research
+  - Interaction Design
+  - Usability Testing
+sector: Sport & Community
+role: UX Researcher & Interaction Designer
+duration: 3 weeks
+readTime: 10 minutes
+year: '2026'
+indexImage: ../../assets/lineup/hero.png
+hero:
+  image: ../../assets/lineup/hero.png
+  video: /media/lineup-hero.mp4
+metrics:
+  - value: '87.14'
+    label: SUS score
+    sub: Grade B — vs 68 benchmark
+  - value: '76'
+    label: Data points
+    sub: Affinity mapped
+  - value: '12'
+    label: Wireframes
+    sub: Traced to research
+  - value: 'n=7'
+    label: Usability test
+    sub: Surrey residents
+next: d-gam
+---
+
+import Figure from '../../components/Figure.astro';
+import Quote from '../../components/Quote.astro';
+import NoteBoard from '../../components/NoteBoard.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import DataTable from '../../components/DataTable.astro';
+import CardGrid from '../../components/CardGrid.astro';
+import StatGrid from '../../components/StatGrid.astro';
+import StickyStage from '../../components/StickyStage.astro';
+import auditData from '../../data/lineup-audit.json';
+import susData from '../../data/lineup-sus.json';
+import survey from '../../data/lineup-survey.json';
+import reddit from '../../data/lineup-reddit.json';
+
+import persona from '../../assets/lineup/persona-marilyn.webp';
+import flow1 from '../../assets/lineup/flow-1.png';
+import flow2 from '../../assets/lineup/flow-2.png';
+import flow3 from '../../assets/lineup/flow-3.png';
+import wireframes from '../../assets/lineup/wireframes.webp';
+import designSystem from '../../assets/lineup/design-system.webp';
+import hifi from '../../assets/lineup/hifi-screens.webp';
+import participants from '../../assets/lineup/participants.webp';
+import iterations from '../../assets/lineup/iterations.webp';
+
+## The problem
+
+Finding recreational activities in Surrey means navigating a fragmented
+landscape. Rec centre drop-ins, nearby gyms, fitness classes, and local leagues
+all live in different places — separate websites, Facebook groups, and word of
+mouth. Nothing brings all of this together. And even when residents do find
+something, the information available is rarely enough to commit. How many people
+are actually going? What skill level are they? Will there be enough players for a
+real game? For someone new to Surrey or fitting sport into a busy schedule, that
+uncertainty is often enough to stop them going altogether.
+
+Surrey.ca — the city's primary recreation portal — lists drop-in sessions but was
+built as a general municipal platform covering everything from property tax to
+waste collection and so on. Recreation is one section among many, and the
+experience reflects that. Knowing just about the remaining spots tells you nothing
+about whether the session will have enough players, what skill level they play at,
+or whether showing up alone means you will get to play at all.
+
+This gap is not just a UX problem. For newcomers and immigrants building a life in
+a new place, recreational sport is one of the fastest pathways to community and
+belonging. When the system fails to surface that opportunity clearly, the people
+who need it most are the ones who miss out.
+
+## 01. Research Process
+
+### Problem identification and competitive audit
+
+I began with my own experience — arriving in Surrey as an athlete, unable to find
+indoor courts in winter, discovering Surrey.ca through word of mouth two years
+after moving, and showing up alone to sessions not knowing if enough players would
+be there. This personal experience became the foundation of the research.
+
+A competitive audit of five platforms — Surrey.ca, Meetup, Facebook Groups,
+Strava, and Sportiner — confirmed that no existing tool combined session
+discovery, attendance visibility, and player connection in one place for Surrey
+recreational sports.
+
+<ComparisonTable
+  platforms={auditData.platforms}
+  subject={auditData.subject}
+  features={auditData.features}
+  caption="Competitive audit — five platforms across the capabilities that matter."
+/>
+
+### User research
+
+To better understand the experiences of Surrey residents and validate the problem
+identified through competitive analysis, a questionnaire was distributed to 7
+Surrey residents who play recreational sports. In addition to the primary
+research, 17 posts from r/SurreyBC were analysed — documenting the same
+frustrations independently raised by strangers over years, confirming the problem
+extends beyond the study participants.
+
+<StatGrid
+  columns={3}
+  items={[
+    { value: '7', label: 'Surrey residents surveyed' },
+    { value: '17', label: 'Posts from r/SurreyBC analysed' },
+    { value: '76', label: 'Data points synthesised' },
+  ]}
+/>
+
+76 data points were synthesised through affinity mapping, producing four clusters
+that shaped every design decision in Line Up.
+
+<NoteBoard
+  title="Survey responses"
+  caption="Seven Surrey residents who play recreational sports. Participants are anonymised as P1–P7."
+  notes={survey.responses.map((r) => ({ label: r.participant, text: r.note }))}
+  tone="mint"
+/>
+
+<NoteBoard
+  title="Reddit findings"
+  caption="17 posts from r/SurreyBC spanning four years — the same questions asked repeatedly by people who had never met."
+  notes={reddit.posts.map((p) => ({ label: p.theme, text: p.quote }))}
+  tone="sky"
+/>
+
+### Affinity mapping
+
+76 data points were clustered into four themes. Each cluster below is stated in the
+wording used on the original board.
+
+<CardGrid
+  tinted
+  items={[
+    {
+      eyebrow: 'Cluster 01',
+      title: 'Skill level uncertainty',
+      body: 'Players cannot determine skill level of attendees before showing up — creating anxiety, wasted trips, and disappointing sessions.',
+    },
+    {
+      eyebrow: 'Cluster 02',
+      title: 'Attendance visibility',
+      body: 'Users have no way to know how many people will actually show up, or whether a session will have enough players for a real game — making every booking feel like a gamble.',
+    },
+    {
+      eyebrow: 'Cluster 03',
+      title: 'Discovery gaps',
+      body: 'People who do not know where to go in the first place. They cannot find courts, sessions, or activities. The information exists somewhere but it is invisible to them.',
+    },
+    {
+      eyebrow: 'Cluster 04',
+      title: 'Social connection',
+      body: 'People who want to find someone to play with before they show up. Not just knowing how many are attending, but connecting with specific players and finding a partner for partner-dependent sports.',
+    },
+  ]}
+/>
+
+### Key research findings
+
+<CardGrid
+  numberPrefix="Finding"
+  items={[
+    {
+      title: 'Skill level uncertainty',
+      body: '4 of 7 participants independently raised skill level uncertainty as a primary barrier. Experienced players avoided sessions where amateurs showed up. Beginners feared being unwelcome at competitive sessions. Neither group had any way to assess this before arriving.',
+    },
+    {
+      title: 'Attendance visibility',
+      body: 'The spots remaining format on Surrey.ca created anxiety rather than confidence. Participants who only had one or two evenings per week to play could not afford a wasted trip based on a meaningless number.',
+    },
+    {
+      title: 'Discovery gap',
+      body: 'Most participants discovered recreational activities through word of mouth, not through any platform. Several Reddit posts spanning four years show the same questions being asked repeatedly — confirming that Surrey.ca\u2019s recreation section is effectively invisible to new residents.',
+    },
+    {
+      title: 'Player connection',
+      body: 'For partner-dependent sports like badminton, showing up alone meant potentially not getting to play at all. Multiple participants had avoided sessions entirely because they had no one to go with.',
+    },
+  ]}
+/>
+
+### Persona
+
+Marilyn, 28, graduate student, South Surrey. New to Surrey, relies on classmates
+to find activities, has heard of Surrey.ca but never used it. Plays basketball and
+volleyball. Her core frustration: missing out on activities she does not know
+exist, and wasting time showing up to sessions that are not worth attending.
+
+<Figure
+  src={persona}
+  alt="Persona profile for Marilyn, a 28-year-old graduate student in South Surrey."
+  zoom
+/>
+
+<Quote attribution="Marilyn — primary persona">
+  When I want to be active after work, I want to quickly find a basketball session
+  near me where I know the skill level matches mine and there will be enough
+  players — so I can just show up, play, and feel like my time was well spent.
+</Quote>
+
+
+## 02. From Wireframes to UI
+
+### User flows
+
+Three user flows were mapped before any screens were designed.
+
+**Flow 1** covers finding and booking a drop-in session — the core journey.
+**Flow 2** covers gym and fitness class discovery. **Flow 3** covers player
+profiles and open-for-pairing across the attendees screen.
+
+<Figure
+  src={flow1}
+  alt="Flow 1, booking a drop-in session: launch app, complete onboarding, view homepage, choose session, view details, join waitlist if full, book session, log in, booking confirmed, open for pairing."
+  caption="Flow 1 — booking a drop-in session"
+  maxWidth={459}
+  zoom
+/>
+
+<Figure
+  src={flow2}
+  alt="Flow 2, finding nearby gyms: view home feed, view fitness feed, filter if no session found, select gym, view details, save info, add to profile."
+  caption="Flow 2 — gym and fitness class discovery"
+  maxWidth={377}
+  zoom
+/>
+
+<Figure
+  src={flow3}
+  alt="Flow 3, player connection: session detail, view attendees, view profile or anonymous depending on whether the player has one, book session, booking confirmed."
+  caption="Flow 3 — player profiles and open-for-pairing"
+  maxWidth={460}
+  zoom
+/>
+
+### Wireframes
+
+12 lo-fi wireframes were built in Figma before any visual design began. Every
+layout decision was traced back to a research finding — the attendance bar format,
+the price placement, the “who’s going” section, the open-for-pairing prompt at
+booking confirmation.
+
+<Figure
+  src={wireframes}
+  alt="Twelve lo-fi wireframes covering onboarding, session discovery, session detail, attendees and booking confirmation."
+  caption="12 lo-fi wireframes, each layout decision traced to a research finding."
+  bleed
+  zoom
+/>
+
+### Design system
+
+A design system was established before touching hi-fi screens. Plus Jakarta Sans
+for display headings. Inter for all body text. A 10-colour palette anchored by
+Midnight Navy and Electric Blue. An 8-component library including the session card
+in three states — good to go, filling up, and session full.
+
+<Figure
+  src={designSystem}
+  alt="Line Up design system: type scale, 10-colour palette and the 8-component library."
+  caption="Type, palette and components, fixed before hi-fi began."
+  bleed
+  zoom
+/>
+
+### Hi-fi screens
+
+<StickyStage
+  src={hifi}
+  alt="Hi-fi screens covering the journey from onboarding through booking confirmation."
+  label="Final prototype"
+  zoom
+>
+
+The final prototype covers the complete user journey from onboarding through
+booking confirmation. Key design decisions include the attendance bar showing 14/20
+rather than spots remaining, the confidence signal indicating whether a session has
+enough players, price visible upfront in the session hero block, and the
+open-for-pairing tag set at booking confirmation rather than during onboarding.
+
+</StickyStage>
+
+## 03. Usability Testing
+
+### Methodology
+
+A remote unmoderated usability test was conducted with 7 participants using the
+System Usability Scale and five post-task questions. Participants were Surrey
+residents who play recreational sports. The core task given to all participants was
+to find a basketball drop-in session, assess whether it was worth attending, and
+complete a booking.
+
+Testing was conducted remotely via questionnaire and voice note explanation.
+Results were analysed using thematic analysis across four clusters mirroring the
+original research methodology.
+
+### Participant profiles
+
+<Figure
+  src={participants}
+  alt="Participant profile table: seven Surrey residents, their ages, sports interest, Surrey.ca familiarity and task completion."
+  caption="Seven participants, all Surrey residents who play recreational sports."
+  zoom
+/>
+
+### SUS results
+
+Line Up achieved an average SUS score of **87.14 out of 100** — Grade B, Excellent
+— significantly above the industry benchmark of 68. Six of seven participants
+scored in the excellent to best-imaginable range. One participant scored 62.5,
+identified as a session discoverability gap for users less familiar with the app
+structure.
+
+<StatGrid
+  columns={3}
+  items={[
+    { value: '87.14', label: 'Average SUS score', sub: 'Grade B, Excellent — benchmark is 68' },
+    { value: '6/7', label: 'Excellent or above', sub: 'Excellent to best-imaginable range' },
+    { value: '62.5', label: 'Lowest score', sub: 'Session discoverability gap' },
+  ]}
+/>
+
+<DataTable
+  columns={['Participant', 'SUS score', 'Grade']}
+  rows={susData.rows}
+  caption="Individual SUS scores, n=7. Average 87.14 against a 68 industry benchmark."
+/>
+
+### Thematic analysis findings
+
+<CardGrid
+  tinted
+  items={[
+    {
+      eyebrow: 'Cluster 01',
+      title: 'Attendance and confidence',
+      body: '6 of 7 participants confirmed the attendance bar gave them confidence to book. Participants specifically mentioned that knowing 18 out of 20 spots were filled meant their time would not be wasted.',
+    },
+    {
+      eyebrow: 'Cluster 02',
+      title: 'Navigation and flow',
+      body: '5 of 7 found navigation clear and efficient. One participant completed the full booking flow in under 3 minutes. One participant could not find sessions at all, identifying a discoverability gap for less familiar users.',
+    },
+    {
+      eyebrow: 'Cluster 03',
+      title: 'Social features and player connection',
+      body: '5 of 7 found the “who’s going” feature and open-for-pairing tags genuinely useful. Two participants independently requested in-app partner request functionality — a strong signal for future iteration.',
+    },
+    {
+      eyebrow: 'Cluster 04',
+      title: 'Perceived value over existing solutions',
+      body: '6 of 7 compared Line Up favourably to their current discovery methods. The consolidation of location, timing, price, skill level, and attendance in one place was the most consistently mentioned advantage.',
+    },
+  ]}
+/>
+
+### Iterations
+
+Five design changes were made based on testing findings. The most significant were
+surfacing waitlist availability directly on the session detail screen, replacing
+icon-only sport filters with labelled pills, merging the “who’s going” and
+attendees sections, and adding skill level to each player row on the attendees
+screen.
+
+<Figure
+  src={iterations}
+  alt="Before and after of the five design changes made following usability testing."
+  caption="Five changes, each traced to a specific testing finding."
+  bleed
+  zoom
+/>
+
+## 04. Reflection
+
+Line Up validated that the attendance confidence problem is real and that a
+focused, research-backed solution can score significantly above industry usability
+benchmarks even at prototype stage.
+
+If I were to continue this project the immediate next step would be implementing
+partner request functionality — two participants independently requested this
+without prompting, suggesting the open-for-pairing tag meets awareness needs but
+leaves users wanting a more direct way to connect before sessions.
+
+A moderated usability test would strengthen the findings. Testing was conducted
+remotely without observation, which means friction points not captured through
+self-reporting may exist. One participant’s inability to find sessions in the
+unmoderated test is the clearest example — a moderated session would have revealed
+exactly where the discovery breakdown occurred.
+
+If Line Up were to ship, the metrics I would track are booking completion rate,
+return usage rate within 7 days, and whether the open-for-pairing feature
+correlates with reduced session abandonment — specifically whether users who see
+compatible pairing options are more likely to complete their booking.
+
+This project reinforced that the strongest design decisions are the ones you can
+trace directly back to something a real person said. Every feature in Line Up
+exists because someone in Surrey — in a survey, in a Reddit post, or in my own
+experience — encountered a problem that no existing platform was solving.

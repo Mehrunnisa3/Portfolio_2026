@@ -1,0 +1,55 @@
+{
+  "note": "Competitive audit, previously a raster screenshot (competitive-audit.webp) whose FEATURE column was cramped while the tick columns wasted width, and whose feature labels rendered run-together ('signalKnow'). Labels here come from the source HTML, which has the em dash separator; support values are transcribed from the rendered table.",
+  "platforms": ["Surrey.ca", "Meetup", "Facebook Groups", "Strava", "Sportiner"],
+  "subject": "Line Up",
+  "features": [
+    {
+      "name": "Attendance confidence",
+      "detail": "know if a session will actually happen",
+      "support": ["no", "partial", "no", "no", "no"],
+      "subjectSupport": "yes"
+    },
+    {
+      "name": "Attendee visibility",
+      "detail": "see who else is going before you book",
+      "support": ["no", "partial", "no", "no", "yes"],
+      "subjectSupport": "yes"
+    },
+    {
+      "name": "Skill level transparency",
+      "detail": "know the skill level of a session",
+      "support": ["no", "no", "no", "no", "partial"],
+      "subjectSupport": "yes"
+    },
+    {
+      "name": "Partner pairing",
+      "detail": "find someone to play with",
+      "support": ["no", "no", "partial", "no", "yes"],
+      "subjectSupport": "yes"
+    },
+    {
+      "name": "Fitness and gym discovery",
+      "detail": "find classes and gyms nearby",
+      "support": ["no", "no", "no", "no", "no"],
+      "subjectSupport": "yes"
+    },
+    {
+      "name": "Available in Surrey",
+      "detail": "works for Surrey residents",
+      "support": ["yes", "yes", "yes", "yes", "no"],
+      "subjectSupport": "yes"
+    },
+    {
+      "name": "Sports-specific focus",
+      "detail": "built for recreational sport",
+      "support": ["partial", "no", "no", "partial", "yes"],
+      "subjectSupport": "yes"
+    },
+    {
+      "name": "Find session by sport",
+      "detail": "filter by basketball, volleyball, etc",
+      "support": ["yes", "partial", "no", "no", "no"],
+      "subjectSupport": "yes"
+    }
+  ]
+}

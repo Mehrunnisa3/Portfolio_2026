@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #16150f;
+  --color-paper: #faf9f7;
+  --color-graphite: #1c1c1c;
+  --color-void: #0b0b0c;
+  --color-blush: #f4d9dc;
+  --color-rose: #e8b4b8;
+  --color-mute: #8a8785;
+  --color-rule: #e6e3dd;
+  --color-bone: #f2f0ee;
+
+  /*
+   * Instrument Serif carries all display type — it is high-contrast and tight,
+   * which is what makes the large settings read as designed. It ships a single
+   * weight (400) plus italic; `font-light` on display text therefore resolves to
+   * 400 rather than synthesising, which is harmless but means weight is not a
+   * lever here. Newsreader is retained for serif at text sizes, where a display
+   * face gets spindly.
+   */
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-serif-text: 'Newsreader', ui-serif, Georgia, serif;
+  --font-body: 'Mulish', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --text-display: clamp(2.75rem, 6.4vw, 6.25rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.015em;
+
+  --text-h2: clamp(2rem, 4.2vw, 3.5rem);
+  --text-h2--line-height: 1.02;
+  --text-h2--letter-spacing: -0.012em;
+
+  --text-lede: clamp(1.375rem, 2.4vw, 1.875rem);
+  --text-lede--line-height: 1.35;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1.1875rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-blush);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/*
+ * Scroll-aware nav. Case studies open on a dark hero and then run on paper, so
+ * the nav has to invert as it leaves the hero. The data attribute is toggled by
+ * the observer in Base.astro; the paper state is the default so it is correct
+ * without JS.
+ */
+.site-nav {
+  background: color-mix(in srgb, var(--color-paper) 82%, transparent);
+  color: var(--color-ink);
+}
+
+.site-nav[data-theme='void'] {
+  background: color-mix(in srgb, var(--color-void) 70%, transparent);
+  color: var(--color-bone);
+}
+
+.site-nav .monogram {
+  background: var(--color-graphite);
+}
+
+.site-nav .monogram span {
+  color: var(--color-paper);
+}
+
+.site-nav[data-theme='void'] .monogram {
+  background: var(--color-bone);
+}
+
+.site-nav[data-theme='void'] .monogram span {
+  color: var(--color-void);
+}
+
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+}
+
+/*
+ * Highlighter swipe: blush across the lower third of the letters rather than a
+ * solid block taller than the text. --swipe-top is measured from the top of the
+ * line box and is font-specific; the defaults are tuned for Instrument Serif.
+ */
+@utility mark-swipe {
+  background-image: linear-gradient(var(--color-blush), var(--color-blush));
+  background-repeat: no-repeat;
+  background-size: 100% var(--swipe-h, 0.34em);
+  background-position: 0 var(--swipe-top, 0.4em);
+  padding-inline: 0.06em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+@utility rule-y {
+  border-top: 1px solid var(--color-rule);
+}
+
+/*
+ * Reveal-on-scroll is a progressive enhancement: the hidden state is scoped to
+ * .js, which an inline script sets before first paint. Without JS the content
+ * is simply visible — it must never depend on script to be readable.
+ */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

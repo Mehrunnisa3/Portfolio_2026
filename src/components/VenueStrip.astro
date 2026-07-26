@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+
+/**
+ * Published-venue logos. The original was a scrolling marquee; a static strip is
+ * calmer, does not animate against prefers-reduced-motion, and keeps the venue
+ * names as text rather than pixels.
+ */
+const logos = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/venues/*.{png,jpg,jpeg,webp,svg}',
+  { eager: true },
+);
+
+const venues = [
+  { key: 'caadfutures', name: 'CAAD Futures', year: '2025' },
+  { key: 'hci', name: 'HCI International', year: '2025' },
+  { key: 'caadria', name: 'CAADRIA', year: '2025' },
+  { key: 'ahfe', name: 'AHFE', year: '2026' },
+];
+---
+
+<section class="reveal my-16 border-y border-rule py-8">
+  <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+    <p class="label !text-ink/70">Research published venues</p>
+    <p class="label !text-[11px] !text-ink/45">4 papers published</p>
+  </div>
+
+  <ul class="mt-7 grid grid-cols-2 items-center gap-x-8 gap-y-8 sm:grid-cols-4">
+    {
+      venues.map((v) => {
+        const mod = logos[`../assets/venues/${v.key}.png`];
+        return (
+          <li class="flex flex-col gap-3">
+            {mod && (
+              <Image
+                src={mod.default}
+                alt={`${v.name} logo`}
+                widths={[240]}
+                sizes="120px"
+                class="h-9 w-auto max-w-[130px] object-contain object-left opacity-90"
+              />
+            )}
+            <span class="label !text-[10.5px] !normal-case !tracking-wide">
+              {v.name} · {v.year}
+            </span>
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>

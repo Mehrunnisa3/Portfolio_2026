@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  venue: string;
+  venueShort: string;
+  year: string;
+  status: string;
+  url?: string;
+  logo: string;
+}
+
+const { title, venue, venueShort, year, status, url, logo } = Astro.props;
+
+const logos = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/venues/*.{png,jpg,jpeg,webp,svg}',
+);
+const logoEntry = logos[`../assets/venues/${logo}.png`];
+const logoImage = logoEntry ? (await logoEntry()).default : undefined;
+
+const Tag = url ? 'a' : 'div';
+const headline = title || venue;
+---
+
+<li class="reveal rule-y" data-kind="paper">
+  <Tag
+    {...url ? { href: url, target: '_blank', rel: 'noopener' } : {}}
+    class:list={[
+      'group grid grid-cols-1 items-center gap-x-8 gap-y-4 py-8 md:grid-cols-[7rem_1fr_auto]',
+      url && 'cursor-pointer',
+    ]}
+  >
+    <div class="flex h-10 w-28 items-center">
+      {
+        logoImage && (
+          <Image
+            src={logoImage}
+            alt={`${venueShort} logo`}
+            widths={[224]}
+            sizes="112px"
+            class="max-h-10 w-auto object-contain opacity-90 transition-opacity duration-400 group-hover:opacity-100"
+          />
+        )
+      }
+    </div>
+
+    <div>
+      <h3
+        class="font-serif-text text-[clamp(1.25rem,2vw,1.625rem)] font-normal leading-tight"
+      >
+        {headline}
+      </h3>
+      {
+        title && (
+          <p class="label mt-2 !text-[11px] !normal-case !tracking-wide">{venue}</p>
+        )
+      }
+    </div>
+
+    <div class="flex items-center gap-5 md:justify-self-end">
+      <span class="label !text-[11px]">{status}</span>
+      <span class="font-mono text-sm text-ink/80">{year}</span>
+      {
+        url && (
+          <span
+            aria-hidden="true"
+            class="font-mono text-sm text-mute transition-transform duration-300 ease-out-expo group-hover:translate-x-1 group-hover:text-rose"
+          >
+            ↗
+          </span>
+        )
+      }
+    </div>
+  </Tag>
+</li>

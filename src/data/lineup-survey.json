@@ -1,0 +1,60 @@
+{
+  "note": "Anonymised transcription of the Line Up survey board. The original raster (uploads/Surveyresponses.png) named five participants; those names are replaced with P-numbers here. The board already labelled two participants as 5 and 7, so the named five were assigned the remaining slots in order of first appearance. If the raw data numbers them differently, correct the `participant` values — the grouping is the only thing that depends on them.",
+  "responses": [
+    { "participant": "P1", "note": "Wants to know how busy the gym is in real time before going" },
+    { "participant": "P1", "note": "Was disappointed by a busy gym — didn't know it would be that crowded" },
+    { "participant": "P1", "note": "Has no hesitation attending a facility alone; the social barrier is not a factor" },
+    { "participant": "P1", "note": "Would feel more confident with more trainers available" },
+    { "participant": "P1", "note": "Wants the gym open later on weekends" },
+
+    { "participant": "P2", "note": "Has no hesitation showing up alone to play" },
+    { "participant": "P2", "note": "Comfortable using Surrey.ca — finds the system works fine" },
+    { "participant": "P2", "note": "Does not feel the need for more information before booking" },
+
+    { "participant": "P3", "note": "Bookmarked the focused search page directly to avoid navigating Surrey.ca from scratch every time — a personal workaround" },
+    { "participant": "P3", "note": "The search function on Surrey.ca is very convoluted" },
+    { "participant": "P3", "note": "Would not go if there was a last-minute scheduling conflict or illness" },
+    { "participant": "P3", "note": "Booking a session online involves too many steps" },
+    { "participant": "P3", "note": "Has experienced all forms of disappointment at sessions — too crowded, wrong skill level, not enough people for a proper game" },
+    { "participant": "P3", "note": "Hesitates if other participants might not be inclusive or welcoming" },
+    { "participant": "P3", "note": "Wants to know when a session is cancelled or on hiatus before travelling there" },
+    { "participant": "P3", "note": "Has avoided attending a session because he had no one to go with" },
+
+    { "participant": "P4", "note": "Friends not showing up has caused him to skip sessions" },
+    { "participant": "P4", "note": "Has been disappointed by sessions that were too crowded or had players at a much higher skill level" },
+    { "participant": "P4", "note": "Wants player profiles showing skill level and number of people attending" },
+    { "participant": "P4", "note": "Wants to know who else is coming and their skill level before showing up" },
+    { "participant": "P4", "note": "Wants to know if there will be a full court or half court game" },
+    { "participant": "P4", "note": "Books drop-in sessions immediately on Monday for Wednesday due to limited availability — has to plan days ahead" },
+    { "participant": "P4", "note": "Wants a way to organise tournaments through the booking platform" },
+
+    { "participant": "P5", "note": "Hesitates because of uncertainty about who will show up" },
+    { "participant": "P5", "note": "Hesitates because of uncertainty about the skill level of other players" },
+    { "participant": "P5", "note": "Hesitates because of uncertainty about whether players want singles or doubles" },
+    { "participant": "P5", "note": "Hesitates because of uncertainty about waiting time if too many people arrive" },
+    { "participant": "P5", "note": "Has been disappointed when no competitive players showed up to play against" },
+    { "participant": "P5", "note": "Has been disappointed many times — people wanted doubles but he prefers singles" },
+    { "participant": "P5", "note": "Wants player profiles showing skill level" },
+    { "participant": "P5", "note": "Wants an option to team up with someone online before the session" },
+    { "participant": "P5", "note": "Wants notifications about upcoming events and competitions" },
+    { "participant": "P5", "note": "Wants to know which days specific skilled players are attending" },
+
+    { "participant": "P6", "note": "Showing up alone is not the barrier — knowing the skill level beforehand is" },
+    { "participant": "P6", "note": "Books the facility either by phone or online after finding players" },
+    { "participant": "P6", "note": "Has been disappointed many times — plays football at a high level and amateurs showing up makes the game not enjoyable" },
+    { "participant": "P6", "note": "Always uncertain whether enough skilled players will show up" },
+    { "participant": "P6", "note": "Only gets two days a week to play, so each session matters — cannot afford a wasted trip" },
+    { "participant": "P6", "note": "Skill level uncertainty is the main thing that makes him change his mind about going" },
+    { "participant": "P6", "note": "Finds players through Facebook groups before booking a facility" },
+    { "participant": "P6", "note": "Wants categories separating pro and amateur players" },
+    { "participant": "P6", "note": "Wants player profiles that notify him when specific players are attending" },
+    { "participant": "P6", "note": "Has avoided attending a session because he had no one to go with or felt unsure about showing up alone" },
+
+    { "participant": "P7", "note": "Schedule conflicts are the main reason for not going" },
+    { "participant": "P7", "note": "Asked at the front desk to find out about sessions — no online discovery" },
+    { "participant": "P7", "note": "Wants live information on how many people are using the facility right now" },
+    { "participant": "P7", "note": "Wants to track their own schedule and progress" },
+    { "participant": "P7", "note": "Prefers going alone — solo participation is not a barrier" },
+    { "participant": "P7", "note": "Arrived and didn't know the pool was full — discovered only on arrival" }
+  ]
+}

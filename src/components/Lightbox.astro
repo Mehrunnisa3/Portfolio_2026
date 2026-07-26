@@ -1,0 +1,182 @@
+---
+/**
+ * One global lightbox, included once in Base. Any element marked `data-zoom` with a
+ * `data-zoom-src` opens it — no per-image dialogs, no dependencies.
+ *
+ * Built on native <dialog>, which gives modal semantics, Escape-to-close and focus
+ * containment for free. Zoom targets are real anchors to the full-size file, so
+ * without JS a click still opens the image rather than doing nothing.
+ */
+---
+
+<dialog
+  id="lightbox"
+  class="lightbox"
+  aria-label="Enlarged image"
+>
+  <div class="lightbox-bar">
+    <p class="label lightbox-caption" id="lightbox-caption"></p>
+    <div class="lightbox-actions">
+      <button type="button" class="lightbox-btn" data-lightbox-scale aria-pressed="false">
+        Actual size
+      </button>
+      <button type="button" class="lightbox-btn" data-lightbox-close aria-label="Close">
+        Close &#10005;
+      </button>
+    </div>
+  </div>
+
+  <div class="lightbox-stage" data-lightbox-stage>
+    <img alt="" data-lightbox-img />
+  </div>
+</dialog>
+
+<style>
+  .lightbox {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--color-void);
+    color: var(--color-bone);
+  }
+
+  .lightbox::backdrop {
+    background: rgb(11 11 12 / 0.92);
+  }
+
+  .lightbox:not([open]) {
+    display: none;
+  }
+
+  .lightbox-bar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: color-mix(in srgb, var(--color-void) 88%, transparent);
+    backdrop-filter: blur(6px);
+  }
+
+  .lightbox-caption {
+    margin: 0;
+    color: var(--color-mute) !important;
+    font-size: 0.6875rem !important;
+  }
+
+  .lightbox-actions {
+    display: flex;
+    flex: none;
+    gap: 0.5rem;
+  }
+
+  .lightbox-btn {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-bone);
+    background: transparent;
+    border: 1px solid rgb(242 240 238 / 0.28);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    transition:
+      border-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .lightbox-btn:hover,
+  .lightbox-btn[aria-pressed='true'] {
+    border-color: var(--color-rose);
+    color: var(--color-rose);
+  }
+
+  /* Fit mode: whole image visible. Actual-size mode: scrollable at native pixels. */
+  .lightbox-stage {
+    display: grid;
+    place-items: center;
+    height: calc(100dvh - 3.5rem);
+    overflow: auto;
+    padding: 1.25rem;
+  }
+
+  .lightbox-stage img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    cursor: zoom-in;
+  }
+
+  .lightbox-stage[data-scale='actual'] {
+    place-items: start center;
+  }
+
+  .lightbox-stage[data-scale='actual'] img {
+    max-width: none;
+    max-height: none;
+    cursor: zoom-out;
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    var dialog = document.getElementById('lightbox');
+    if (!dialog || typeof dialog.showModal !== 'function') return;
+
+    var img = dialog.querySelector('[data-lightbox-img]');
+    var stage = dialog.querySelector('[data-lightbox-stage]');
+    var caption = document.getElementById('lightbox-caption');
+    var scaleBtn = dialog.querySelector('[data-lightbox-scale]');
+    var closeBtn = dialog.querySelector('[data-lightbox-close]');
+
+    function setScale(mode) {
+      stage.dataset.scale = mode;
+      scaleBtn.setAttribute('aria-pressed', mode === 'actual' ? 'true' : 'false');
+      scaleBtn.textContent = mode === 'actual' ? 'Fit to screen' : 'Actual size';
+      if (mode === 'fit') stage.scrollTo({ top: 0, left: 0 });
+    }
+
+    document.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-zoom]');
+      if (!trigger) return;
+      event.preventDefault();
+
+      img.src = trigger.dataset.zoomSrc || trigger.getAttribute('href');
+      img.alt = trigger.dataset.zoomAlt || '';
+      caption.textContent = trigger.dataset.zoomCaption || '';
+      setScale('fit');
+      dialog.showModal();
+    });
+
+    img.addEventListener('click', function () {
+      setScale(stage.dataset.scale === 'actual' ? 'fit' : 'actual');
+    });
+
+    scaleBtn.addEventListener('click', function () {
+      setScale(stage.dataset.scale === 'actual' ? 'fit' : 'actual');
+    });
+
+    closeBtn.addEventListener('click', function () {
+      dialog.close();
+    });
+
+    // Clicking the surrounding stage, but not the image itself, dismisses.
+    stage.addEventListener('click', function (event) {
+      if (event.target === stage) dialog.close();
+    });
+
+    dialog.addEventListener('close', function () {
+      img.removeAttribute('src');
+    });
+  });
+</script>

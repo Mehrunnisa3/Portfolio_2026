@@ -1,0 +1,103 @@
+---
+/**
+ * Parallel findings as a grid of hairline-topped cards.
+ *
+ * Sets like "four gaps" or "four findings" were flattened into full-width
+ * bold-lead paragraphs during migration, which pushed every line to the full
+ * 1000px measure — too wide to scan and it hid the fact that the items are
+ * siblings. Two columns halves the measure to a comfortable ~45 characters and
+ * makes the parallel structure legible at a glance.
+ *
+ * Deliberately not colour-coded. A numbered set is a sequence, not a set of
+ * categories, so assigning four hues would add noise without encoding anything —
+ * unlike the tool audit, where colour marks genuinely recurring domains.
+ */
+interface Item {
+  eyebrow?: string;
+  title: string;
+  body: string;
+}
+
+interface Props {
+  items: Item[];
+  columns?: 2 | 3 | 4;
+  /** Auto-number the eyebrow, e.g. numberPrefix="Gap" → "GAP 01". */
+  numberPrefix?: string;
+  /**
+   * Soft tinted cards, carrying over the original gap-box language. Tints are
+   * decorative mnemonics only — the eyebrow label carries identity and body text
+   * stays ink, so nothing depends on the colour.
+   */
+  tinted?: boolean;
+}
+
+const { items, columns = 2, numberPrefix, tinted = false } = Astro.props;
+
+const cols = {
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 lg:grid-cols-3',
+  4: 'sm:grid-cols-2 lg:grid-cols-4',
+};
+
+// Muted to sit on paper rather than the saturated pastels of the original boxes.
+const tints = [
+  'bg-[#f7e3e5] ring-[#e9c9cc]',
+  'bg-[#f8ecd4] ring-[#ecd8b0]',
+  'bg-[#dfe8f5] ring-[#c6d5ea]',
+  'bg-[#eceae5] ring-[#dcd9d1]',
+];
+
+/*
+ * Applied via inline style, not a class: Tailwind cannot see class names built by
+ * runtime interpolation, so `!text-[${hex}]` silently produces nothing.
+ * All four clear 4.5:1 against their own tint.
+ */
+const eyebrowInk = ['#8f3c41', '#7d5a1c', '#2b5484', '#6b6862'];
+
+const pad = (n: number) => String(n + 1).padStart(2, '0');
+---
+
+<ul
+  class:list={[
+    'my-12 grid list-none grid-cols-1',
+    cols[columns],
+    tinted ? 'gap-4' : 'gap-x-10 gap-y-9',
+  ]}
+>
+  {
+    items.map((item, i) => (
+      <li
+        class:list={[
+          'reveal group',
+          tinted
+            ? ['rounded-lg p-6 ring-1', tints[i % tints.length]]
+            : 'border-t border-ink/18 pt-5',
+        ]}
+      >
+        {(item.eyebrow || numberPrefix) && (
+          <p
+            class:list={[
+              'label !text-[10.5px]',
+              !tinted &&
+                '!text-ink/45 transition-colors duration-300 group-hover:!text-rose',
+            ]}
+            style={tinted ? `color: ${eyebrowInk[i % eyebrowInk.length]}` : undefined}
+          >
+            {item.eyebrow ?? `${numberPrefix} ${pad(i)}`}
+          </p>
+        )}
+        <h4 class="mt-3 font-serif-text text-[1.3125rem] leading-tight font-normal text-ink">
+          {item.title}
+        </h4>
+        <p
+          class:list={[
+            'mt-2.5 text-[15.5px] leading-relaxed',
+            tinted ? 'text-ink/75' : 'text-ink/65',
+          ]}
+        >
+          {item.body}
+        </p>
+      </li>
+    ))
+  }
+</ul>

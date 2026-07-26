@@ -1,0 +1,113 @@
+{
+  "note": "Transcribed verbatim from the tool audit table, previously shipped as a Word screenshot (s1-tool-audit.webp) that carried spellcheck squiggles baked into the pixels. Row 16 duplicates row 9 exactly — that duplication exists in the source document; remove the last entry if it was unintended.",
+  "columns": [
+    "Tool name",
+    "Domain / context",
+    "Game mechanics used",
+    "Target audience"
+  ],
+  "rows": [
+    [
+      "Foldit",
+      "Scientific Research",
+      "Puzzle-solving, Competition",
+      "General Public, Science Enthusiasts"
+    ],
+    [
+      "ESP Game",
+      "Image Tagging for AI",
+      "Points, Time Constraints, Partner Matching",
+      "General Public"
+    ],
+    [
+      "Metadata Games",
+      "Cultural Heritage Archiving",
+      "Points, Leaderboards, Collaborative Tagging",
+      "Museum Visitors, Archivists, General Public"
+    ],
+    [
+      "Participatory Budgeting Platforms",
+      "Civic Engagement",
+      "Voting, Simulations, Rewards",
+      "Local Residents, Community Members"
+    ],
+    [
+      "Pol.is",
+      "Civic Engagement",
+      "Opinion Clustering, Real-Time Feedback",
+      "General Public, Policymakers"
+    ],
+    [
+      "Community PlanIt",
+      "Urban Planning",
+      "Missions, Coins, Leaderboards",
+      "Local Residents, Community Stakeholders"
+    ],
+    [
+      "Geo-Wiki",
+      "Environmental Monitoring",
+      "Crowdsourcing, Validation Games",
+      "Citizen Scientists, Environmentalists"
+    ],
+    [
+      "E-polis",
+      "Sociological Surveys",
+      "Adventure, Exploration, Simulation",
+      "Young Adults, Students"
+    ],
+    [
+      "EquiCity Game",
+      "Urban Design",
+      "Participatory Design, Simulation",
+      "Urban Planners, Community Members"
+    ],
+    [
+      "Participatory Chinatown",
+      "Urban Planning",
+      "Role-Playing, Missions",
+      "Local Residents, Community Stakeholders"
+    ],
+    [
+      "Unlimited Cities",
+      "Urban Planning",
+      "Simulation, Interactive Visualization",
+      "General Public, Urban Planners"
+    ],
+    [
+      "UrbanSim",
+      "Urban Planning",
+      "Simulation, Scenario Analysis",
+      "Urban Planners, Policymakers"
+    ],
+    [
+      "CityScopeAR",
+      "Urban Design",
+      "Augmented Reality, Collaborative Design",
+      "Urban Designers, Community Members"
+    ],
+    [
+      "CityScope",
+      "Urban Planning",
+      "Tangible User Interface, Simulation",
+      "Urban Planners, Community Members"
+    ],
+    [
+      "PlaceSpeak",
+      "Civic Engagement",
+      "Geo-Verification, Online Consultation",
+      "General Public, Policymakers"
+    ],
+    [
+      "EquiCity Game",
+      "Urban Design",
+      "Participatory Design, Simulation",
+      "Urban Planners, Community Members"
+    ]
+  ],
+  "accentColumn": 1,
+  "accentColors": {
+    "Urban Planning": "#2a78d6",
+    "Urban Design": "#eb6834",
+    "Civic Engagement": "#1baf7a"
+  }
+}

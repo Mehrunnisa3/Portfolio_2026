@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import WorkIndexRow from '../components/WorkIndexRow.astro';
+import PaperRow from '../components/PaperRow.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const papers = await getCollection('papers');
+
+const credentials = [
+  'MSc Interactive Arts & Technology, SFU',
+  '4 papers published',
+  'CAAD Futures · HCII · CAADRIA · AHFE',
+  'Surrey, BC',
+];
+
+const filters = [
+  { id: 'f-all', label: 'All' },
+  { id: 'f-work', label: 'Case Studies' },
+  { id: 'f-research', label: 'Research' },
+];
+---
+
+<Base
+  title="Mehrun-Nisa Raja — UX Researcher & Interaction Designer"
+  description="UX researcher and interaction designer studying why people engage, then designing so they do. Selected case studies and published research."
+>
+  <!-- Hero -->
+  <section
+    class="flex min-h-[76svh] flex-col justify-center px-6 pt-36 pb-12 md:px-14"
+  >
+    <div class="mx-auto w-full max-w-[1400px]">
+      <p class="label mb-8 !text-ink/45 md:mb-10">
+        UX Researcher &amp; Interaction Designer &mdash; Surrey, BC
+      </p>
+
+      <h1 class="max-w-[30ch] font-display text-display">
+        I&rsquo;m <span class="mark-swipe">Mehrun-Nisa</span>, a UX researcher
+        &amp; interaction designer who studies why people <em class="italic"
+          >engage</em
+        > &mdash; then designs so they do.
+      </h1>
+    </div>
+  </section>
+
+  <!-- Name + credentials: doubles as the hero's closing rule. -->
+  <div class="px-6 md:px-14">
+    <div
+      class="mx-auto flex max-w-[1400px] flex-wrap items-baseline gap-x-9 gap-y-3 border-y border-rule py-5"
+    >
+      <p class="font-serif-text text-xl font-light">Mehrun-Nisa Raja</p>
+      <ul class="flex flex-wrap items-baseline gap-x-8 gap-y-2">
+        {
+          credentials.map((item) => (
+            <li class="label !text-[11px] !text-ink/55">{item}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <!-- Index -->
+  <section id="work" class="px-6 pt-20 pb-24 md:px-14 md:pt-28">
+    <div class="index mx-auto max-w-[1400px]">
+      <fieldset>
+        <legend class="sr-only">Filter the index</legend>
+        {
+          filters.map((filter, i) => (
+            <input
+              type="radio"
+              name="index-filter"
+              id={filter.id}
+              class="sr-only"
+              checked={i === 0}
+            />
+          ))
+        }
+
+        <div class="tabs mb-16 flex flex-wrap items-center gap-2">
+          {
+            filters.map((filter) => (
+              <label
+                for={filter.id}
+                class="label cursor-pointer rounded-full border border-rule px-4 py-2 !text-[11px] transition duration-250 hover:border-ink/40 hover:!text-ink"
+              >
+                {filter.label}
+              </label>
+            ))
+          }
+        </div>
+
+        <div class="groups">
+          <div data-group="work">
+            <h2 class="label mb-10 !text-ink/45">Selected work</h2>
+            <div class="grid grid-cols-1 gap-x-12 gap-y-20 md:grid-cols-2">
+              {
+                projects.map((project, i) => (
+                  <WorkIndexRow
+                    href={`/work/${project.id}`}
+                    index={String(i + 1).padStart(2, '0')}
+                    title={project.data.title}
+                    oneLiner={project.data.oneLiner}
+                    disciplines={project.data.disciplines}
+                    sector={project.data.sector}
+                    image={project.data.indexImage}
+                    alt={`${project.data.title} — ${project.data.oneLiner}`}
+                  />
+                ))
+              }
+            </div>
+          </div>
+
+          <div data-group="research" id="research" class="mt-24 scroll-mt-28">
+            <h2 class="label mb-4 !text-ink/45">Research</h2>
+            <p class="mb-10 max-w-[52ch] text-[17px] text-ink/70">
+              Peer-reviewed work on engagement, gamification, and participation in
+              built-environment design.
+            </p>
+            <ul class="border-b border-rule">
+              {papers.map((paper) => <PaperRow {...paper.data} />)}
+            </ul>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="scroll-mt-28 px-6 py-24 md:px-14 md:py-32">
+    <div class="mx-auto max-w-[900px]">
+      <p class="label mb-8 !text-ink/45">About</p>
+      <p class="reveal font-serif-text text-lede font-light text-ink/90">
+        I&rsquo;m a UX researcher and interaction designer focused on engagement
+        &mdash; understanding the behaviours and motivations behind why people act,
+        then translating that into interfaces that earn attention honestly.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* CSS-only filtering — the radios precede .groups, so sibling selectors do the work. */
+  #f-work:checked ~ .groups [data-group='research'],
+  #f-research:checked ~ .groups [data-group='work'] {
+    display: none;
+  }
+
+  /* When only research shows, drop its top margin so it doesn't float. */
+  #f-research:checked ~ .groups [data-group='research'] {
+    margin-top: 0;
+  }
+
+  #f-all:checked ~ .tabs label[for='f-all'],
+  #f-work:checked ~ .tabs label[for='f-work'],
+  #f-research:checked ~ .tabs label[for='f-research'] {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper) !important;
+  }
+
+  /* Keyboard focus on the visually hidden radio must surface on its label. */
+  #f-all:focus-visible ~ .tabs label[for='f-all'],
+  #f-work:focus-visible ~ .tabs label[for='f-work'],
+  #f-research:focus-visible ~ .tabs label[for='f-research'] {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+</style>

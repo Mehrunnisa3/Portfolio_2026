@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+---
+
+<section class="border-t border-rule">
+  <a href={`/work/${project.id}`} class="group block">
+    <div
+      data-dark-stage
+      class="relative flex min-h-[62svh] items-center overflow-hidden bg-void px-6 py-20 md:px-14"
+    >
+      <Image
+        src={project.data.indexImage}
+        alt=""
+        aria-hidden="true"
+        widths={[900, 1600]}
+        sizes="100vw"
+        class="absolute inset-0 size-full object-cover opacity-22 transition-all duration-1000 ease-out-expo group-hover:scale-104 group-hover:opacity-32"
+      />
+      <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-void via-void/70 to-void/40"
+      >
+      </div>
+
+      <div class="relative mx-auto w-full max-w-[1400px] text-bone">
+        <p class="label !text-mute">Next project</p>
+        <h2
+          class="mt-5 font-display text-[clamp(2.25rem,6vw,4.5rem)] font-light leading-none tracking-tight"
+        >
+          {project.data.title}
+        </h2>
+        <p class="mt-6 max-w-[46ch] text-[17px] leading-relaxed text-bone/70">
+          {project.data.oneLiner}
+        </p>
+        <span
+          class="mt-9 inline-flex items-center gap-3 font-mono text-xs tracking-widest text-bone uppercase"
+        >
+          Read case study
+          <span
+            aria-hidden="true"
+            class="transition-transform duration-400 ease-out-expo group-hover:translate-x-1.5"
+          >
+            &rarr;
+          </span>
+        </span>
+      </div>
+    </div>
+  </a>
+</section>

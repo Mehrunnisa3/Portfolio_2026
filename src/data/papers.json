@@ -1,0 +1,38 @@
+[
+  {
+    "id": "caad-futures-2025",
+    "title": "",
+    "venue": "CAAD Futures",
+    "venueShort": "CAAD Futures",
+    "year": "2025",
+    "status": "Published",
+    "logo": "caadfutures"
+  },
+  {
+    "id": "hcii-2025",
+    "title": "",
+    "venue": "HCI International",
+    "venueShort": "HCII",
+    "year": "2025",
+    "status": "Published",
+    "logo": "hci"
+  },
+  {
+    "id": "caadria-2025",
+    "title": "",
+    "venue": "Computer-Aided Architectural Design Research in Asia",
+    "venueShort": "CAADRIA",
+    "year": "2025",
+    "status": "Published",
+    "logo": "caadria"
+  },
+  {
+    "id": "ahfe-2026",
+    "title": "",
+    "venue": "Applied Human Factors & Ergonomics",
+    "venueShort": "AHFE",
+    "year": "2026",
+    "status": "Published",
+    "logo": "ahfe"
+  }
+]

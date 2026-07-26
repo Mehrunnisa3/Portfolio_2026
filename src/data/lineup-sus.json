@@ -1,0 +1,15 @@
+{
+  "note": "Transcribed from sus-results.webp, which carried a 'Participant Name' column with FULL names tied to individual scores (including the one failing grade). That image must never be reintroduced. Participants are P1-P7 in the order the original table listed them; the mapping to participants.webp is unverified, so treat the labels as row identifiers only.",
+  "average": "87.14",
+  "grade": "B",
+  "benchmark": "68",
+  "rows": [
+    ["P1", "97.5", "B"],
+    ["P2", "90.0", "B"],
+    ["P3", "90.0", "B"],
+    ["P4", "97.5", "B"],
+    ["P5", "87.5", "B"],
+    ["P6", "85.0", "B"],
+    ["P7", "62.5", "D"]
+  ]
+}

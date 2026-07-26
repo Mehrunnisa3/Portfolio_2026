@@ -1,0 +1,56 @@
+---
+interface Props {
+  theme?: 'paper' | 'void';
+}
+
+const { theme = 'paper' } = Astro.props;
+
+const links = [
+  { href: '/#work', label: 'Work' },
+  { href: '/#research', label: 'Research' },
+  { href: '/#about', label: 'About' },
+  { href: '/#contact', label: 'Contact' },
+];
+
+const monogram = [
+  { char: 'm', left: '14px', top: '10px' },
+  { char: 'n', left: '26px', top: '21px' },
+  { char: 'r', left: '17px', top: '32px' },
+];
+---
+
+<header
+  class="site-nav fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 backdrop-blur-md transition-colors duration-500 md:px-14 md:py-7"
+  data-theme={theme}
+  data-initial-theme={theme}
+>
+  <a href="/" class="group flex-none" aria-label="Mehrun-Nisa Raja — home">
+    <span
+      class="monogram relative block size-15 rounded-full border-2 border-transparent transition duration-300 ease-out-expo group-hover:scale-110 group-hover:border-rose"
+    >
+      {
+        monogram.map(({ char, left, top }) => (
+          <span
+            class="absolute text-[13px] leading-none font-medium tracking-wide"
+            style={`left: ${left}; top: ${top};`}
+          >
+            {char}
+          </span>
+        ))
+      }
+    </span>
+  </a>
+
+  <nav class="flex items-center gap-5 text-sm font-medium sm:gap-8 md:gap-12 md:text-base">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class="relative py-1 transition-colors duration-250 hover:text-rose after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-rose after:transition-transform after:duration-300 after:ease-out-expo hover:after:scale-x-100"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

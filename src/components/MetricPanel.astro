@@ -1,0 +1,42 @@
+---
+interface Metric {
+  value: string;
+  label: string;
+  sub?: string;
+}
+
+interface Props {
+  metrics: Metric[];
+  caption?: string;
+}
+
+const { metrics, caption } = Astro.props;
+---
+
+<section data-dark-stage class="bg-void px-6 py-24 text-bone md:px-14 md:py-32">
+  <div class="mx-auto max-w-[1400px]">
+    {caption && <p class="label reveal mb-16 !text-mute">{caption}</p>}
+
+    <dl
+      class="grid grid-cols-2 gap-x-8 gap-y-14 md:grid-cols-4 md:gap-x-12"
+    >
+      {
+        metrics.map((metric) => (
+          <div class="reveal">
+            <dd
+              class="font-display text-[clamp(2.75rem,6vw,5rem)] font-light leading-none tracking-tight"
+            >
+              {metric.value}
+            </dd>
+            <dt class="label mt-5 !text-bone/85">{metric.label}</dt>
+            {metric.sub && (
+              <p class="mt-1.5 font-mono text-[11px] tracking-wider text-mute">
+                {metric.sub}
+              </p>
+            )}
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

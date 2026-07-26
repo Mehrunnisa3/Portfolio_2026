@@ -1,0 +1,391 @@
+---
+title: D-GAM
+order: 1
+oneLiner: Built D-GAM — a flexible gamification framework that reimagines public participation in built-environment design by transforming static feedback processes into engaging, adaptive experiences. Developed through iterative research and validated with real users.
+subtitle: D-GAM; develops an adaptable gamification conceptual model designed to increase user engagement and motivation into measurable, honest engagement.
+disciplines:
+  - UX Research
+  - Interaction Design
+  - Gamification
+sector: Civic & Public
+role: UX Researcher, Interaction Design
+duration: 16 Weeks
+readTime: 12 minutes
+year: '2024'
+indexImage: ../../assets/dgam/hero.png
+hero:
+  image: ../../assets/dgam/hero.png
+  video: /media/dgam-hero.mp4
+metrics:
+  - value: '76.0'
+    label: Final SUS score
+    sub: Grade B — up from 67.46
+  - value: '+8.54'
+    label: Improvement
+    sub: Across two iterations
+  - value: '37'
+    label: Tools audited
+    sub: 17 analysed in depth
+  - value: '04'
+    label: Papers published
+    sub: Peer reviewed
+next: line-up
+---
+
+import Figure from '../../components/Figure.astro';
+import Quote from '../../components/Quote.astro';
+import StatGrid from '../../components/StatGrid.astro';
+import CardGrid from '../../components/CardGrid.astro';
+import ScreenGallery from '../../components/ScreenGallery.astro';
+import StickyStage from '../../components/StickyStage.astro';
+import DataTable from '../../components/DataTable.astro';
+import VenueStrip from '../../components/VenueStrip.astro';
+import toolAuditData from '../../data/dgam-tool-audit.json';
+
+import grounding from '../../assets/dgam/s1-grounding.webp';
+import focusGroup from '../../assets/dgam/focus-group-blurred.png';
+import frameworkOverview from '../../assets/dgam/framework-overview.png';
+import schemaReward from '../../assets/dgam/schema-1-reward.png';
+import schemaFeedback from '../../assets/dgam/schema-2-feedback.png';
+import schemaUser from '../../assets/dgam/schema-3-user.png';
+import schemaProject from '../../assets/dgam/schema-4-project.png';
+import redesignPoster from '../../assets/dgam/s4-redesign.png';
+
+import v1_01 from '../../assets/dgam/v1-01.png';
+import v1_02 from '../../assets/dgam/v1-02-ar.png';
+import v1_03 from '../../assets/dgam/v1-03.png';
+import v1_04 from '../../assets/dgam/v1-04.png';
+import v1_05 from '../../assets/dgam/v1-05.png';
+import v1_06 from '../../assets/dgam/v1-06.png';
+import v1_07 from '../../assets/dgam/v1-07.png';
+import v1_08 from '../../assets/dgam/v1-08.png';
+import v1_09 from '../../assets/dgam/v1-09.png';
+import v1_10 from '../../assets/dgam/v1-10.png';
+import rd_01 from '../../assets/dgam/redesign-01.png';
+import rd_02 from '../../assets/dgam/redesign-02.png';
+import rd_03 from '../../assets/dgam/redesign-03.png';
+import rd_04 from '../../assets/dgam/redesign-04.png';
+import rd_05 from '../../assets/dgam/redesign-05.png';
+import rd_06 from '../../assets/dgam/redesign-06.png';
+import rd_07 from '../../assets/dgam/redesign-07.png';
+import rd_08 from '../../assets/dgam/redesign-08.png';
+
+## The problem
+
+Imagine, there is a new retail store being proposed in your neighbourhood. You
+might have several questions and concerns. Being a resident you want to provide
+some insight, however, problem isnt access, the infrastructure for public
+participation exists, the problem is the lower motivational and sustained
+engagement in the infrastructure of public participation in built environment.
+
+D-GAM framework was built to answer one question: can gamification enhance user
+engagement and motivation in participatory processes?
+
+<VenueStrip />
+
+## 01. Problem Identification
+
+### What existing tools get wrong
+
+A structured review of 37 civic engagement and gamification tools, narrowed to 17
+targeting general public participation, revealed a consistent pattern. Tools that
+attract users rarely sustain them. When gamification existed at all, it was applied
+at the system level: the same points and badges for every project, regardless of
+context or stakeholder.
+
+<DataTable
+  columns={toolAuditData.columns}
+  rows={toolAuditData.rows}
+  accentColumn={toolAuditData.accentColumn}
+  accentColors={toolAuditData.accentColors}
+  caption="37 tools reviewed, 17 analysed in depth."
+/>
+
+### Four gaps identified in the same group
+
+<CardGrid
+  tinted
+  numberPrefix="Gap"
+  items={[
+    {
+      title: 'Fixed system-wide gamification',
+      body: 'The same points and badges applied to every project, regardless of context, stakeholder type, or participation goal.',
+    },
+    {
+      title: 'No mechanism for sustained engagement',
+      body: 'Existing platforms attract users once but provide no reason to explore deeply, return, or contribute over multiple review stages.',
+    },
+    {
+      title: 'Rewards motivate completion, not quality',
+      body: 'Reward structures incentivise task completion as a checkbox rather than meaningful reflection on design alternatives.',
+    },
+    {
+      title: 'AR novelty wears off quickly',
+      body: 'Augmented reality tools improve spatial understanding on first use but do not sustain ongoing engagement without motivational scaffolding.',
+    },
+  ]}
+/>
+
+### Research grounding
+
+The framework was grounded in three theories. Self-Determination Theory defined
+what meaningful motivation requires: autonomy, competence, and relatedness. Operant
+conditioning explained reward timing. Flow theory explained how to keep task
+complexity matched to user capability.
+
+<Figure
+  src={grounding}
+  alt="The three theories grounding the framework: Self-Determination Theory (autonomy, competence, relatedness), operant conditioning (reward timing and reinforcement), and flow theory (total absorption and optimal performance)."
+  zoom
+/>
+
+## 02. Research Process
+
+### Four phase process
+
+<CardGrid
+  columns={4}
+  numberPrefix="Phase"
+  items={[
+    {
+      title: 'Literature review & initial prototype',
+      body: 'Established the foundations for D-GAM and built the first task-based prototype, grounded in Self-Determination Theory, operant conditioning, and flow theory.',
+    },
+    {
+      title: 'Evaluation & testing',
+      body: 'Evaluated the first task-based prototype and tested it with a focus group of professionals.',
+    },
+    {
+      title: 'Formation of the flexible D-GAM framework',
+      body: 'Based on the focus group findings, the task-based approach shifted to task-free, resulting in the adaptable gamification schema — four schemas mapped onto activities.',
+    },
+    {
+      title: 'Re-design and testing',
+      body: 'Re-iterated the prototype implementing the four schemas, followed by a user study.',
+    },
+  ]}
+/>
+
+## 03. Design
+
+### From idea to wireframe to UI — V1
+
+The first prototype followed a task-based approach. Users moved through a
+structured four step review: select a project, explore the design in 3D and AR,
+review performance data, engage in discussion, earning points and rewards at each
+stage. This was the version taken into the focus group study.
+
+<ScreenGallery
+  columns={5}
+  shape="alpha"
+  caption="V1 — the task-based prototype taken into the focus group. Includes the 3D and AR exploration views. Click any screen to enlarge."
+  items={[
+    { src: v1_01, alt: 'V1 screen 1 — project selection.' },
+    { src: v1_02, alt: 'V1 screen 2 — augmented reality exploration view.' },
+    { src: v1_03, alt: 'V1 screen 3 — design exploration.' },
+    { src: v1_04, alt: 'V1 screen 4 — performance data review.' },
+    { src: v1_05, alt: 'V1 screen 5 — review step.' },
+    { src: v1_06, alt: 'V1 screen 6 — feedback entry.' },
+    { src: v1_07, alt: 'V1 screen 7 — discussion.' },
+    { src: v1_08, alt: 'V1 screen 8 — points and rewards.' },
+    { src: v1_09, alt: 'V1 screen 9 — reward state.' },
+    { src: v1_10, alt: 'V1 screen 10 — completion.' },
+  ]}
+/>
+
+### Initial focus group study
+
+Based on the initial task-based prototype, a focus group study was carried out
+which included seven participants who were given an overview and interacted with
+the prototype. Four themes emerged that fundamentally changed the direction of the
+framework.
+
+<Figure
+  src={focusGroup}
+  alt="Focus group session in progress. Participant faces are blurred."
+  caption="Focus group, n=7. Sessions were recorded with consent; faces are blurred."
+/>
+
+Sessions were audio-recorded and video recorded with consent and transcribed
+verbatim. Field notes captured non-verbal cues and moments of disagreement between
+participants. Transcripts were coded inductively using AI (NotebookLM), then grouped
+into candidate themes through affinity mapping and reviewed against the raw data for
+consistency.
+
+### Four themes that redirected the framework
+
+**Theme 1 — Rewards motivated engagement but lacked transparency**
+
+<Quote attribution="P1">
+  I would like to know about the potential rewards in the beginning — it confuses
+  me why there is a definite and an indefinite reward.
+</Quote>
+
+**Theme 2 — Task rigidity caused fatigue**
+
+<Quote attribution="P3">
+  I have to add a comment under every section, which is a tiring process. Rather, I
+  would prefer adding a combined comment at the end.
+</Quote>
+
+**Theme 3 — Intrinsic motivation mattered as much as extrinsic rewards**
+
+<Quote attribution="P5">
+  Knowing my feedback will make a difference motivates me more than a material
+  reward.
+</Quote>
+
+**Theme 4 — Users needed freedom to explore non-linearly**
+
+<Quote attribution="P1">
+  I should not be forced to complete the tasks in order to earn rewards. I may
+  switch to different tasks.
+</Quote>
+
+### The D-GAM framework — four schemas
+
+D-GAM is built on four interrelated schemas. Each operates independently — meaning
+the reward logic, feedback model, project structure, or user tracking can each be
+modified without disrupting the others. This is what makes the framework adaptable
+across different project types and engagement goals.
+
+<Figure
+  src={frameworkOverview}
+  alt="Overview of the D-GAM framework showing how the four schemas interrelate."
+  bleed
+  zoom
+/>
+
+<div class="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+  <Figure src={schemaReward} alt="Reward schema diagram." caption="1. Reward schema"
+  zoom
+/>
+  <Figure src={schemaFeedback} alt="Feedback schema diagram." caption="2. Feedback schema"
+  zoom
+/>
+  <Figure src={schemaUser} alt="User schema diagram." caption="3. User schema"
+  zoom
+/>
+  <Figure src={schemaProject} alt="Project schema diagram." caption="4. Project schema"
+  zoom
+/>
+</div>
+
+### Framework in action — four scenarios
+
+To demonstrate adaptability, four scenarios were designed using the same four
+schemas — each with a different project context, stakeholder profile, and reward
+configuration.
+
+<DataTable
+  columns={['Scenario', 'Context', 'Goal', 'Reward type']}
+  rows={[
+    ['S1 · In-depth form exploration', 'Mixed-use building — three design alternatives posted for visual feedback', 'Encourage deep exploration of form and AR views, with detailed qualitative feedback', 'Fixed + surprise'],
+    ['S2 · Full participation and reward redemption', 'University café — designers need structured feedback across all data and form views', 'Ensure users complete the full review including a final survey before reward is unlocked', 'Fixed only'],
+    ['S3 · Social participation and community interaction', 'New school — designers seek community dialogue and collective sentiment on proposals', 'Encourage discussion and reply chains between participants rather than individual review', 'Surprise only'],
+    ['S4 · Full exploration for points accumulation', 'Any project where full exploration of all views is the primary participation goal', 'Increase task completion through direct redeemable rewards tied to exploration depth', 'Fixed only'],
+  ]}
+  caption="Four scenarios built from the same four schemas."
+/>
+
+### Re-designed prototype
+
+{/* controls + poster, not autoplay: the recording runs 5m26s and its first frames
+    catch an iOS Control Centre swipe. Trim the source and this can autoplay. */}
+
+<StickyStage
+  video="/media/dgam-redesign.mp4"
+  poster={redesignPoster}
+  controls
+  alt="Walkthrough of the redesigned D-GAM prototype for the mixed-use building scenario."
+  label="Scenario 1 — mixed-use building · 5m26s"
+  phone
+>
+
+The redesigned prototype implemented the framework across two live project
+scenarios — a mixed-use building and a university café — each configured with
+different reward logic and navigation models. This video demonstrates the first
+case scenario.
+
+Users move freely rather than through a fixed sequence. Rewards are declared
+upfront. Feedback can be given per view or combined at the end, which was the
+single most requested change from the focus group.
+
+</StickyStage>
+
+<ScreenGallery
+  columns={4}
+  shape="rect"
+  caption="Redesigned prototype — the four schemas applied across two live project scenarios. Click any screen to enlarge."
+  items={[
+    { src: rd_01, alt: 'Redesigned prototype — home.' },
+    { src: rd_02, alt: 'Redesigned prototype — project view.' },
+    { src: rd_03, alt: 'Redesigned prototype — form exploration.' },
+    { src: rd_04, alt: 'Redesigned prototype — data view.' },
+    { src: rd_05, alt: 'Redesigned prototype — discussion.' },
+    { src: rd_06, alt: 'Redesigned prototype — reward configuration.' },
+    { src: rd_07, alt: 'Redesigned prototype — reward unlocked.' },
+    { src: rd_08, alt: 'Redesigned prototype — completion.' },
+  ]}
+/>
+
+## 04. User Study
+
+### Participants
+
+Ten participants were recruited through purposive sampling across design,
+technology, and academic backgrounds — none affiliated with the D-GAM project.
+Sessions ran remotely via Zoom, lasting 40–45 minutes each. Each participant
+interacted with two scenarios, completed a post-task semi-structured interview, and
+filled out a System Usability Scale survey.
+
+<DataTable
+  columns={['Participant', 'Background', 'Age']}
+  rows={[
+    ['P01', 'Entrepreneur', '29'],
+    ['P02', 'Developer', '27'],
+    ['P03', 'UX Designer', '31'],
+    ['P04', 'Designer, Researcher', '32'],
+    ['P05', 'Teaching Assistant', '27'],
+    ['P06', 'Sales Associate', '27'],
+    ['P07', 'Teacher', '26'],
+    ['P08', 'Designer', '25'],
+    ['P09', 'Graduate Student', '29'],
+    ['P10', 'Architect', '28'],
+  ]}
+  caption="Study participants — n=10, purposive sampling, none affiliated with the project."
+/>
+
+### SUS results
+
+The redesign is where the framework earns its claim. The task-based prototype
+scored below the industry average; the schema-driven redesign scored above it.
+
+<StatGrid
+  columns={3}
+  items={[
+    { value: '67.46', label: 'Phase 02 · focus group · n=7', sub: 'Grade D · Needs improvement — below industry average, structural redesign required' },
+    { value: '76.0', label: 'Phase 04 · final study · n=10', sub: 'Grade B — above industry average, framework redesign validated' },
+    { value: '+8.54', label: 'Improvement across iterations', sub: 'The gain that validated the shift from task-based to task-free' },
+  ]}
+/>
+
+### Key findings of thematic analysis
+
+<StatGrid
+  items={[
+    { value: '8/10', label: 'Gamification guided the process', sub: 'Strongly agreed that game elements helped them navigate the review without confusion.' },
+    { value: '9/10', label: 'Scenario 1 more motivating', sub: 'Combined incremental points and surprise rewards outperformed a single upfront fixed reward.' },
+    { value: '7/10', label: 'Flexibility and adaptability', sub: 'Agreed designers should be able to configure reward logic per project — validating the core premise of D-GAM.' },
+    { value: '#1', label: 'Surprise reward most engaging', sub: 'Consistently identified as the most motivating element — more than progress bars or leaderboards.' },
+  ]}
+/>
+
+## 05. Reflection
+
+The next step is implementing the application with a larger pool of participants,
+and developing a working prototype — along with integrating AI for semantic
+analysis of feedback.
+
+Four papers came out of this work, published at CAAD Futures, HCI International,
+CAADRIA and AHFE.

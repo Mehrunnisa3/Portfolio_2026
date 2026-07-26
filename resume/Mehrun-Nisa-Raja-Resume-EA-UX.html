@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mehrun-Nisa Raja — UX Designer</title>
+    <!--
+      Print-first resume. Open in a browser and Cmd+P → Save as PDF.
+      Sized to exactly one US Letter page at 0.45in margins; if content grows,
+      reduce --scale rather than the margins.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --scale: 0.94;
+        --ink: #14151a;
+        --body: #33363d;
+        --muted: #6b6f77;
+        --rule: #d8dade;
+        --accent: #0b3d91;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-family: 'Inter', -apple-system, sans-serif;
+        color: var(--body);
+        font-size: calc(10.1pt * var(--scale));
+        line-height: 1.38;
+      }
+
+      body {
+        width: 8.5in;
+        min-height: 11in;
+        margin: 0 auto;
+        padding: 0.45in 0.5in;
+        background: #fff;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ---------- header ---------- */
+      header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 0.42rem;
+      }
+
+      h1 {
+        font-size: 1.92em;
+        font-weight: 700;
+        letter-spacing: -0.022em;
+        color: var(--ink);
+        line-height: 1;
+      }
+
+      .role {
+        font-size: 0.93em;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 0.01em;
+      }
+
+      .contact {
+        margin-top: 0.34rem;
+        font-size: 0.85em;
+        color: var(--muted);
+      }
+
+      .contact span + span::before {
+        content: '  ·  ';
+      }
+
+      /* ---------- sections ---------- */
+      h2 {
+        font-size: 0.79em;
+        font-weight: 700;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: var(--ink);
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 0.16rem;
+        margin: 0.72rem 0 0.4rem;
+      }
+
+      .summary {
+        margin-top: 0.5rem;
+        font-size: 0.97em;
+      }
+
+      /* ---------- entries ---------- */
+      .entry {
+        margin-bottom: 0.42rem;
+      }
+
+      .entry:last-child {
+        margin-bottom: 0;
+      }
+
+      .entry-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+
+      .entry-title {
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .entry-title em {
+        font-style: normal;
+        font-weight: 400;
+        color: var(--body);
+      }
+
+      .entry-meta {
+        flex: none;
+        font-size: 0.85em;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      ul {
+        margin: 0.16rem 0 0 0.92rem;
+      }
+
+      li {
+        margin-bottom: 0.1rem;
+      }
+
+      li::marker {
+        color: var(--muted);
+      }
+
+      strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      /* ---------- skills ---------- */
+      .skills {
+        display: grid;
+        grid-template-columns: 5.2rem 1fr;
+        row-gap: 0.16rem;
+        column-gap: 0.6rem;
+        font-size: 0.95em;
+      }
+
+      .skills dt {
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      /* ---------- compact two-column tail ---------- */
+      .tail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 1.6rem;
+      }
+
+      @page {
+        size: letter;
+        margin: 0;
+      }
+
+      @media print {
+        body {
+          padding: 0.45in 0.5in;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div>
+        <h1>Mehrun-Nisa Raja</h1>
+        <p class="role">UX Designer — Games &amp; Interactive Systems</p>
+      </div>
+    </header>
+
+    <p class="contact">
+      <span>Surrey, BC</span><span>mra140@sfu.ca</span><span>+1 604-724-6457</span
+      ><span><a href="https://www.linkedin.com/in/mehrunnisa-raja">linkedin.com/in/mehrunnisa-raja</a></span
+      ><span><a href="https://mehrunnisaraja.com">mehrunnisaraja.com</a></span>
+    </p>
+
+    <p class="summary">
+      UX designer and researcher with an <strong>MSc in Interactive Arts &amp;
+      Technology (HCI)</strong>, specialising in <strong>player motivation, reward
+      systems, and social/matchmaking interfaces</strong>. Four peer-reviewed
+      publications on engagement and gamification. Rapid-prototyping and
+      playtest-driven — from lo-fi wireframes and design systems through to
+      hi-fi flows validated with measured usability outcomes.
+    </p>
+
+    <h2>Selected Projects</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">
+          D-GAM — Adaptive Gamification &amp; Reward System Framework
+          <em>· MSc thesis</em>
+        </p>
+        <span class="entry-meta">4 peer-reviewed papers</span>
+      </div>
+      <ul>
+        <li>
+          Designed a <strong>configurable reward system</strong> — fixed versus
+          variable “surprise” reward schedules — grounded in operant conditioning,
+          Self-Determination Theory (autonomy, competence, relatedness) and
+          <strong>flow theory for difficulty pacing</strong>.
+        </li>
+        <li>
+          Architected <strong>four independently configurable schemas</strong>
+          (reward, feedback, user, project) so reward logic, progression and
+          feedback can each be retuned per context without disturbing the others —
+          then validated the architecture across <strong>four scenarios</strong>
+          with different goals and reward configurations.
+        </li>
+        <li>
+          Two full <strong>playtest-and-iterate cycles</strong>: focus group (n=7)
+          → task-free redesign → user study (n=10). <strong>SUS 67.46 → 76.0
+          (+8.54)</strong>, taking the build from below to above benchmark.
+        </li>
+        <li>
+          <strong>Variable rewards out-motivated fixed rewards, progress bars and
+          leaderboards</strong> (9/10 participants) — the finding that drove the
+          reward-logic rewrite. 8/10 reported the game elements guided them through
+          the flow without confusion.
+        </li>
+        <li>
+          Benchmarked <strong>37 engagement products, 16 in depth</strong>, on
+          mechanics — points, leaderboards, missions, badges, role-play, simulation
+          — and prototyped <strong>3D and AR exploration views</strong>.
+        </li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">
+          Line Up — Session Discovery, Lobby Visibility &amp; LFG Pairing
+          <em>· mobile, end-to-end</em>
+        </p>
+        <span class="entry-meta">SUS 87.14 · Grade B</span>
+      </div>
+      <ul>
+        <li>
+          Designed matchmaking-adjacent UX: <strong>session discovery, a lobby-fill
+          indicator (14/20 rather than “spots remaining”), skill-level
+          transparency, LFG “open-for-pairing” tags and queue/waitlist
+          states</strong> — each traced to a research finding.
+        </li>
+        <li>
+          Built the <strong>design system before hi-fi</strong> (type scale,
+          10-colour palette, 8 components including three session-state variants),
+          then playtested remotely (n=7): <strong>SUS 87.14 against a 68
+          benchmark</strong>, with 5 iterations shipped from the findings.
+        </li>
+      </ul>
+    </div>
+
+    <h2>Experience</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Research Assistant <em>· SIAT, Simon Fraser University</em></p>
+      </div>
+      <ul>
+        <li>
+          Ran user research and usability studies on <strong>interactive and
+          gamified systems</strong>, translating findings into design
+          recommendations.
+        </li>
+        <li>
+          Analysed <strong>engagement and behavioural data</strong> to inform
+          interaction and interface decisions.
+        </li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">UI/UX Designer Intern <em>· HomeVism</em></p>
+      </div>
+      <ul>
+        <li>
+          Ran usability testing sessions and shipped iterative UI improvements from
+          the findings; benchmarked competitor patterns to identify opportunities.
+        </li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <p class="entry-title">Teaching Assistant <em>· SIAT, Simon Fraser University</em></p>
+      </div>
+      <ul>
+        <li>
+          Taught Web Design &amp; Development and Information Design — UX
+          principles, front-end implementation and design-thinking method.
+        </li>
+      </ul>
+    </div>
+
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Design</dt>
+      <dd>
+        Figma · Framer · Adobe XD · design systems · typography · colour ·
+        iconography · layout &amp; visual hierarchy
+      </dd>
+      <dt>UX</dt>
+      <dd>
+        Interaction design · rapid prototyping · wireframing · user flows ·
+        usability testing (SUS) · competitive analysis · mobile, web &amp; AR
+      </dd>
+      <dt>Research</dt>
+      <dd>
+        Player motivation &amp; reward design · gamification systems · thematic
+        analysis · affinity mapping · focus groups · behavioural data
+      </dd>
+      <dt>Technical</dt>
+      <dd>HTML · CSS · SQL — comfortable working directly with engineers</dd>
+    </dl>
+
+    <div class="tail">
+      <div>
+        <h2>Education</h2>
+        <div class="entry">
+          <div class="entry-head">
+            <p class="entry-title">MSc, Interactive Arts &amp; Technology</p>
+            <span class="entry-meta">2023–2026</span>
+          </div>
+          <p>Simon Fraser University — HCI</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head">
+            <p class="entry-title">BSc, Computer Science</p>
+            <span class="entry-meta">2018–2022</span>
+          </div>
+          <p>Bahria University</p>
+        </div>
+      </div>
+
+      <div>
+        <h2>Publications</h2>
+        <p>
+          Four peer-reviewed papers on engagement, motivation and gamification:
+          <strong>CAAD Futures 2025</strong> · <strong>HCI International
+          2025</strong> · <strong>CAADRIA 2025</strong> ·
+          <strong>AHFE 2026</strong>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

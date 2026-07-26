@@ -1,0 +1,36 @@
+---
+interface Item {
+  value: string;
+  label: string;
+  sub?: string;
+}
+
+interface Props {
+  items: Item[];
+  columns?: 2 | 3 | 4;
+}
+
+const { items, columns = 4 } = Astro.props;
+
+const cols = {
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 lg:grid-cols-3',
+  4: 'sm:grid-cols-2 lg:grid-cols-4',
+};
+---
+
+<dl class:list={['reveal my-12 grid grid-cols-1 gap-x-8 gap-y-10', cols[columns]]}>
+  {
+    items.map((item) => (
+      <div class="border-t border-rule pt-5">
+        <dd class="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-light leading-none">
+          {item.value}
+        </dd>
+        <dt class="label mt-4 !text-[11px] !text-ink/70">{item.label}</dt>
+        {item.sub && (
+          <p class="mt-2 text-[14.5px] leading-snug text-ink/60">{item.sub}</p>
+        )}
+      </div>
+    ))
+  }
+</dl>

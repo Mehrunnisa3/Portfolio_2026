@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CaseHero from '../../components/CaseHero.astro';
+import MetricPanel from '../../components/MetricPanel.astro';
+import NextProject from '../../components/NextProject.astro';
+import StepTracker from '../../components/StepTracker.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content, headings } = await render(project);
+
+// The tracker mirrors the h2s, so sections stay in sync with the prose for free.
+const steps = headings
+  .filter((h) => h.depth === 2)
+  .map((h) => ({ slug: h.slug, text: h.text }));
+
+const all = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const next =
+  all.find((p) => p.id === project.data.next) ??
+  all.find((p) => p.id !== project.id);
+---
+
+<Base
+  title={`${project.data.title} — Mehrun-Nisa Raja`}
+  description={project.data.oneLiner}
+  navTheme="void"
+>
+  <CaseHero
+    title={project.data.title}
+    subtitle={project.data.subtitle ?? project.data.oneLiner}
+    role={project.data.role}
+    duration={project.data.duration}
+    readTime={project.data.readTime}
+    year={project.data.year}
+    image={project.data.hero.image}
+    video={project.data.hero.video}
+  />
+
+  <StepTracker steps={steps} />
+
+  <article class="px-6 py-24 md:px-14 md:py-32">
+    <div
+      class="prose-case mx-auto max-w-[1000px] [&>h2]:scroll-mt-28 [&>h2]:mt-24 [&>h2]:mb-8 [&>h2]:font-display [&>h2]:text-h2 [&>h2]:font-normal [&>h2:first-child]:mt-0 [&_h3]:mt-14 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_p]:mb-6 [&_p]:text-ink/75 [&_strong]:font-semibold [&_strong]:text-ink"
+    >
+      <Content />
+    </div>
+  </article>
+
+  <MetricPanel metrics={project.data.metrics} caption="Outcomes" />
+
+  {next && <NextProject project={next} />}
+</Base>

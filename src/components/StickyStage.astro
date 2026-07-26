@@ -1,0 +1,112 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Cartelle's pinned-media moment: the visual holds while the commentary beside it
+ * scrolls past. Sticky only from lg up — below that it fights touch scrolling, so
+ * it degrades to media-then-text.
+ */
+interface Props {
+  src?: ImageMetadata;
+  video?: string;
+  alt: string;
+  label?: string;
+  /** phone renders the media in a device-proportioned frame. */
+  phone?: boolean;
+  flip?: boolean;
+  /**
+   * Long walkthroughs get controls and a poster instead of autoplay-loop —
+   * autoplaying several minutes of screen recording is both heavy and unwatchable.
+   */
+  controls?: boolean;
+  poster?: ImageMetadata;
+  /** Open full-resolution in the lightbox on click. */
+  zoom?: boolean;
+}
+
+const {
+  src,
+  video,
+  alt,
+  label,
+  phone = false,
+  flip = false,
+  controls = false,
+  poster,
+  zoom = false,
+} = Astro.props;
+
+const full =
+  zoom && src
+    ? await getImage({ src, width: Math.min(src.width, 2400), format: 'webp' })
+    : undefined;
+---
+
+<section
+  class:list={[
+    'my-20 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16',
+    flip && 'lg:[&>figure]:order-2',
+  ]}
+>
+  <figure class="lg:sticky lg:top-28 lg:h-fit lg:self-start">
+    <div
+      class:list={[
+        'overflow-hidden bg-rule/25 ring-1 ring-ink/10',
+        phone ? 'mx-auto max-w-[300px] rounded-[2rem] p-2' : 'rounded-sm',
+      ]}
+    >
+      {
+        video ? (
+          <video
+            src={video}
+            poster={poster?.src}
+            controls={controls}
+            autoplay={!controls}
+            loop={!controls}
+            muted
+            playsinline
+            preload="metadata"
+            class:list={[
+              'block h-auto w-full object-contain',
+              phone && 'rounded-[1.6rem]',
+            ]}
+            aria-label={alt}
+          />
+        ) : (
+          src && (
+            <a
+              href={full ? full.src : undefined}
+              data-zoom={full ? true : undefined}
+              data-zoom-src={full?.src}
+              data-zoom-alt={full ? alt : undefined}
+              data-zoom-caption={full ? (label ?? alt) : undefined}
+              class:list={['group/zoom relative block', full && 'cursor-zoom-in']}
+            >
+              <Image
+                src={src}
+                alt={alt}
+                widths={[500, 800, 1200]}
+                sizes="(min-width: 1024px) 46vw, 92vw"
+                class:list={[
+                  'block h-auto w-full object-contain',
+                  phone && 'rounded-[1.6rem]',
+                ]}
+              />
+              {full && (
+                <span class="label pointer-events-none absolute right-3 bottom-3 rounded-full bg-void/80 px-3 py-1.5 !text-[10px] !text-bone opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover/zoom:opacity-100">
+                  Click to enlarge
+                </span>
+              )}
+            </a>
+          )
+        )
+      }
+    </div>
+    {label && <figcaption class="label mt-4 !text-[11px]">{label}</figcaption>}
+  </figure>
+
+  <div class="reveal [&>*:first-child]:mt-0">
+    <slot />
+  </div>
+</section>

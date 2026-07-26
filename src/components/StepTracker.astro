@@ -1,0 +1,283 @@
+---
+/**
+ * Section index for case studies: a hairline spine in the left gutter with a tick
+ * per section.
+ *
+ * Labels are always visible rather than revealed on hover — a pill appearing over
+ * the prose was the unpleasant part of the previous version. Instead the rail is
+ * sized to fit the gutter beside the centred 1000px column and only appears at
+ * viewports wide enough to hold it, so it never overlaps the text.
+ */
+interface Step {
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+
+/** "01. Problem Identification" → { num: "01", label: "Problem Identification" } */
+function split(text: string) {
+  const match = text.match(/^(\d+)\.\s*(.+)$/);
+  return match
+    ? { num: match[1], label: match[2] }
+    : { num: null, label: text };
+}
+---
+
+{
+  steps.length > 1 && (
+    <nav class="cs-tracker" aria-label="Sections">
+      <span class="cs-spine" aria-hidden="true" />
+      <ol class="cs-steps">
+        {steps.map((step) => {
+          const { num, label } = split(step.text);
+          return (
+            <li>
+              <a
+                href={`#${step.slug}`}
+                class="cs-step"
+                data-step={step.slug}
+                title={step.text}
+                aria-label={step.text}
+              >
+                <span class="cs-tick" aria-hidden="true" />
+                <span class="cs-num">{num}</span>
+                <span class="cs-label">{label}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .cs-tracker {
+    position: fixed;
+    top: 50%;
+    left: 1.75rem;
+    z-index: 40;
+    display: none;
+    width: 1.5rem;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+  }
+
+  /*
+   * Two stages, because the gutter beside the centred 1000px prose column is only
+   * (viewport - 1000) / 2. From 1180px there is room for the dots alone, which is
+   * enough to show progress and offer jump links — the section name comes through
+   * the title/aria-label. From 1440px the gutter reaches 220px and the labels fit
+   * without touching the prose.
+   *
+   * This was previously gated at 1440px only, which hid the whole thing on any
+   * window narrower than that — i.e. most of them.
+   */
+  @media (min-width: 1180px) {
+    .cs-tracker {
+      display: block;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .cs-tracker {
+      left: 2.5rem;
+      width: 10.5rem;
+    }
+  }
+
+  /* Labels only once there is gutter to hold them. */
+  .cs-num,
+  .cs-label {
+    display: none;
+  }
+
+  @media (min-width: 1440px) {
+    .cs-num,
+    .cs-label {
+      display: block;
+    }
+  }
+
+  .cs-tracker[data-visible] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Spine sits under the centre of the 7px tick column. */
+  .cs-spine {
+    position: absolute;
+    top: 0.45rem;
+    bottom: 0.45rem;
+    left: 3px;
+    width: 1px;
+    background: var(--color-rule);
+  }
+
+  .cs-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cs-step {
+    display: grid;
+    grid-template-columns: 0.4375rem 1.5rem 1fr;
+    align-items: start;
+    column-gap: 0.625rem;
+    text-decoration: none;
+  }
+
+  .cs-tick {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    margin-top: 0.3rem;
+    border-radius: 50%;
+    background: var(--color-rule);
+    transition:
+      background 0.35s ease,
+      transform 0.35s var(--ease-out-expo);
+  }
+
+  .cs-num,
+  .cs-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.35;
+    /* Recessive but still readable — plain --color-rule is too faint for text. */
+    color: color-mix(in srgb, var(--color-mute) 58%, var(--color-paper));
+    transition: color 0.35s ease;
+  }
+
+  .cs-num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Sections already read: legible but recessive. */
+  .cs-step[data-state='past'] .cs-tick {
+    background: var(--color-mute);
+  }
+
+  .cs-step[data-state='past'] .cs-num,
+  .cs-step[data-state='past'] .cs-label {
+    color: var(--color-mute);
+  }
+
+  .cs-step[data-state='active'] .cs-tick {
+    background: var(--color-rose);
+    transform: scale(1.5);
+  }
+
+  .cs-step[data-state='active'] .cs-num,
+  .cs-step[data-state='active'] .cs-label {
+    color: var(--color-ink);
+  }
+
+  .cs-step:hover .cs-tick {
+    background: var(--color-rose);
+  }
+
+  .cs-step:hover .cs-num,
+  .cs-step:hover .cs-label {
+    color: var(--color-ink);
+  }
+
+  .cs-step:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cs-step[data-state='active'] .cs-tick {
+      transform: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Deferred: the rail renders before <article>, so the headings do not exist yet.
+  document.addEventListener('DOMContentLoaded', function () {
+    var rail = document.querySelector('.cs-tracker');
+    if (!rail) return;
+
+    var headings = Array.prototype.slice.call(document.querySelectorAll('h2[id]'));
+    var steps = Array.prototype.slice.call(rail.querySelectorAll('.cs-step'));
+    if (!headings.length || !steps.length) return;
+
+    var active = null;
+    var queued = false;
+
+    function paint(id) {
+      if (id === active) return;
+      active = id;
+      var reached = true;
+      steps.forEach(function (el) {
+        if (el.dataset.step === id) {
+          el.dataset.state = 'active';
+          reached = false;
+        } else {
+          el.dataset.state = reached ? 'past' : 'upcoming';
+        }
+      });
+    }
+
+    /*
+     * MDX renders headings and prose as flat siblings, so there is no section
+     * element to observe. Scrollspy instead: the active step is the last heading
+     * whose top has passed a line 42% down the viewport — high enough that the
+     * rail turns over as the heading becomes prominent, not after it leaves.
+     */
+    function update() {
+      queued = false;
+      var line = window.innerHeight * 0.42;
+      var current = headings[0].id;
+
+      for (var i = 0; i < headings.length; i++) {
+        if (headings[i].getBoundingClientRect().top <= line) current = headings[i].id;
+        else break;
+      }
+
+      paint(current);
+    }
+
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+
+    var article = document.querySelector('article');
+    if (article && 'IntersectionObserver' in window) {
+      new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) rail.setAttribute('data-visible', '');
+            else rail.removeAttribute('data-visible');
+          });
+        },
+        // Narrow band at the vertical centre: the rail is only useful when there
+        // is prose actually beside it.
+        { rootMargin: '-45% 0px -45% 0px', threshold: 0 },
+      ).observe(article);
+    } else {
+      rail.setAttribute('data-visible', '');
+    }
+  });
+</script>

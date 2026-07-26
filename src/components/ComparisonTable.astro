@@ -1,0 +1,126 @@
+---
+/**
+ * Feature-by-platform comparison matrix.
+ *
+ * Column widths are explicit: the feature column gets roughly a third and the
+ * platform columns split the rest evenly. As a screenshot this table had the
+ * opposite proportions — feature text crushed into a narrow column while the tick
+ * columns wasted width — which is what made it look stretched.
+ *
+ * Support states are conveyed by symbol *and* text: the glyph is aria-hidden and a
+ * visually hidden label carries the meaning, so it does not rely on colour alone.
+ */
+interface Feature {
+  name: string;
+  detail: string;
+  support: string[];
+  subjectSupport: string;
+}
+
+interface Props {
+  platforms: string[];
+  subject: string;
+  features: Feature[];
+  caption?: string;
+}
+
+const { platforms, subject, features, caption } = Astro.props;
+
+const marks: Record<string, { glyph: string; label: string; class: string }> = {
+  yes: { glyph: '✓', label: 'Yes — fully supported', class: 'text-[#2f7d4f]' },
+  partial: { glyph: '–', label: 'Partial — limited support', class: 'text-[#b3862f]' },
+  no: { glyph: '✕', label: 'No — not supported', class: 'text-[#b24545]' },
+};
+
+const colCount = platforms.length + 1;
+---
+
+<figure class="reveal my-14">
+  <div class="-mx-6 overflow-x-auto px-6 md:mx-0 md:px-0">
+    <table class="w-full min-w-[44rem] border-collapse text-left">
+      {caption && <caption class="sr-only">{caption}</caption>}
+      <colgroup>
+        <col style="width: 32%" />
+        {platforms.map(() => <col style={`width: ${68 / colCount}%`} />)}
+        <col style={`width: ${(68 / colCount) * 1.15}%`} />
+      </colgroup>
+
+      <thead>
+        <tr class="border-b border-ink/25">
+          <th scope="col" class="label py-3 pr-4 !text-[10.5px] !text-ink/70">Feature</th>
+          {
+            platforms.map((p) => (
+              <th scope="col" class="label px-2 py-3 text-center !text-[10.5px] !text-ink/55">
+                {p}
+              </th>
+            ))
+          }
+          <th scope="col" class="px-2 py-3 text-center">
+            <span
+              class="label inline-block rounded-full bg-ink px-3 py-1 !text-[10.5px] !text-paper"
+            >
+              {subject}
+            </span>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {
+          features.map((f) => (
+            <tr class="border-b border-rule last:border-b-0">
+              <th scope="row" class="py-4 pr-4 align-top font-normal">
+                <span class="block text-[15px] font-semibold text-ink">{f.name}</span>
+                <span class="mt-0.5 block text-[13.5px] leading-snug text-ink/55">
+                  {f.detail}
+                </span>
+              </th>
+
+              {
+                f.support.map((state, i) => (
+                  <td class="px-2 py-4 text-center align-middle">
+                    <span aria-hidden="true" class:list={['text-lg', marks[state].class]}>
+                      {marks[state].glyph}
+                    </span>
+                    <span class="sr-only">{`${platforms[i]}: ${marks[state].label}`}</span>
+                  </td>
+                ))
+              }
+
+              <td class="bg-blush/25 px-2 py-4 text-center align-middle">
+                <span
+                  aria-hidden="true"
+                  class:list={['text-lg', marks[f.subjectSupport].class]}
+                >
+                  {marks[f.subjectSupport].glyph}
+                </span>
+                <span class="sr-only">{`${subject}: ${marks[f.subjectSupport].label}`}</span>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <ul class="mt-5 flex flex-wrap gap-x-7 gap-y-2">
+    {
+      Object.values(marks).map((m) => (
+        <li class="flex items-center gap-2">
+          <span aria-hidden="true" class:list={['text-base', m.class]}>
+            {m.glyph}
+          </span>
+          <span class="label !text-[10.5px] !normal-case !tracking-wide">{m.label}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    caption && (
+      <figcaption class="label mt-4 !text-[11px] !normal-case !tracking-wide !text-ink/55">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>

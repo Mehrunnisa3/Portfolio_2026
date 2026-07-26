@@ -1,0 +1,50 @@
+---
+const year = 2026;
+
+/*
+ * Resume points at the games-framed version, which is the current one. The earlier
+ * general UX PDF is still in public/ (Mehrun_Nisa_Raja_Resume_UXUI.pdf) — swap the
+ * href to switch which one the site serves.
+ */
+const elsewhere = [
+  { href: 'https://www.linkedin.com/in/mehrunnisa-raja', label: 'LinkedIn' },
+  { href: '/Mehrun-Nisa-Raja-Resume-EA-UX.pdf', label: 'Resume' },
+];
+---
+
+<footer id="contact" class="bg-graphite px-6 pt-22 pb-16 text-paper md:px-14">
+  <div
+    class="mx-auto flex max-w-[1400px] flex-wrap items-end justify-between gap-10"
+  >
+    <div>
+      <p class="label !text-mute">Get in touch</p>
+      <a
+        href="mailto:ra.mehru@gmail.com"
+        class="mt-4 block font-display text-[clamp(1.75rem,4vw,3.25rem)] font-light leading-none transition-colors duration-300 hover:text-rose"
+      >
+        ra.mehru@gmail.com
+      </a>
+    </div>
+
+    <ul class="flex gap-7 text-[15px] font-medium">
+      {
+        elsewhere.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener"
+              class="relative py-1 text-bone/75 transition-colors duration-250 hover:text-rose after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-rose after:transition-transform after:duration-300 after:ease-out-expo hover:after:scale-x-100"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <p class="mx-auto mt-16 max-w-[1400px] font-mono text-xs text-mute">
+    © {year} Mehrun-Nisa Raja
+  </p>
+</footer>
