@@ -14,6 +14,8 @@ import type { ImageMetadata } from 'astro';
 interface Item {
   src: ImageMetadata;
   alt: string;
+  /** Short caption rendered under the screen, e.g. "Project selection". */
+  label?: string;
 }
 
 interface Props {
@@ -61,28 +63,37 @@ const cols = {
   <ul class:list={['grid list-none items-start gap-3 sm:gap-4', cols[columns]]}>
     {
       items.map((item, i) => (
-        <li class="flex justify-center" style={`aspect-ratio: ${boxAspect}`}>
-          <a
-            href={zoomed[i].src}
-            data-zoom
-            data-zoom-src={zoomed[i].src}
-            data-zoom-alt={item.alt}
-            data-zoom-caption={item.alt}
-            class:list={[
-              'group/zoom relative block h-full cursor-zoom-in',
-              shape === 'alpha'
-                ? 'screen-alpha'
-                : 'overflow-hidden rounded-[16%/7.7%] shadow-[2px_4px_12px_rgba(22,21,15,0.16)] transition-shadow duration-300 hover:shadow-[2px_6px_18px_rgba(22,21,15,0.24)]',
-            ]}
-          >
-            <Image
-              src={item.src}
-              alt={item.alt}
-              widths={[260, 480, 760]}
-              sizes="(min-width: 1024px) 18vw, 45vw"
-              class="block h-full w-auto object-contain"
-            />
-          </a>
+        <li class="flex flex-col items-center gap-2">
+          <div class="flex w-full justify-center" style={`aspect-ratio: ${boxAspect}`}>
+            <a
+              href={zoomed[i].src}
+              data-zoom
+              data-zoom-src={zoomed[i].src}
+              data-zoom-alt={item.alt}
+              data-zoom-caption={item.alt}
+              class:list={[
+                'group/zoom relative block h-full cursor-zoom-in',
+                shape === 'alpha'
+                  ? 'screen-alpha'
+                  : 'overflow-hidden rounded-[16%/7.7%] shadow-[2px_4px_12px_rgba(22,21,15,0.16)] transition-shadow duration-300 hover:shadow-[2px_6px_18px_rgba(22,21,15,0.24)]',
+              ]}
+            >
+              <Image
+                src={item.src}
+                alt={item.alt}
+                widths={[260, 480, 760]}
+                sizes="(min-width: 1024px) 18vw, 45vw"
+                class="block h-full w-auto object-contain"
+              />
+            </a>
+          </div>
+          {
+            item.label && (
+              <span class="label text-center !text-[10px] !tracking-wide !text-ink/55">
+                {item.label}
+              </span>
+            )
+          }
         </li>
       ))
     }
