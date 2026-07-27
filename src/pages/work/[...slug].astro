@@ -56,7 +56,11 @@ const next =
     </div>
   </article>
 
-  <MetricPanel metrics={project.data.metrics} caption="Outcomes" />
+  {
+    !project.data.hideOutcomePanel && (
+      <MetricPanel metrics={project.data.metrics} caption="Outcomes" />
+    )
+  }
 
   {next && <NextProject project={next} />}
 </Base>

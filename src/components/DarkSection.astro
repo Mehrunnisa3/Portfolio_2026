@@ -1,0 +1,35 @@
+---
+/**
+ * Full-bleed black stage for a run of case-study content, matching the
+ * Outcomes panel's look (bg-void, text-bone, data-dark-stage for the Nav
+ * inversion) but usable mid-article rather than only as the page-level
+ * MetricPanel. Breaks out of the 1000px prose column to the viewport edges
+ * since it is nested inside .prose-case, unlike MetricPanel which is a
+ * sibling of <article>.
+ *
+ * .prose-case forces `p` and `strong` to ink via [&_p]/[&_strong] selectors
+ * of equal specificity, so those need an !important override here to read on
+ * a dark background. `h3` has no forced colour in .prose-case, so it inherits
+ * text-bone without any extra work.
+ */
+---
+
+<div
+  data-dark-stage
+  class="relative left-1/2 right-1/2 w-screen -mx-[50vw] bg-void px-6 py-24 text-bone md:px-14 md:py-32"
+>
+  <div class="dark-stage mx-auto max-w-[1000px]">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .dark-stage :global(p) {
+    color: var(--color-bone) !important;
+    opacity: 0.8;
+  }
+
+  .dark-stage :global(strong) {
+    color: var(--color-bone) !important;
+  }
+</style>

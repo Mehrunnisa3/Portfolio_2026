@@ -18,6 +18,8 @@ interface Props {
   accentColumn?: number;
   /** Value → hex. Only recurring values need a hue; the rest stay neutral. */
   accentColors?: Record<string, string>;
+  /** Use on a dark stage (bg-void) instead of the default paper background. */
+  dark?: boolean;
 }
 
 const {
@@ -27,6 +29,7 @@ const {
   labelColumn = 0,
   accentColumn,
   accentColors = {},
+  dark = false,
 } = Astro.props;
 
 const hasAccents = accentColumn !== undefined && Object.keys(accentColors).length > 0;
@@ -37,10 +40,16 @@ const hasAccents = accentColumn !== undefined && Object.keys(accentColors).lengt
     <table class="w-full min-w-[46rem] border-collapse text-left">
       {caption && <caption class="sr-only">{caption}</caption>}
       <thead>
-        <tr class="border-b border-ink/25">
+        <tr class:list={['border-b', dark ? 'border-bone/25' : 'border-ink/25']}>
           {
             columns.map((col) => (
-              <th scope="col" class="label px-3 py-3 !text-[10.5px] !text-ink/70 first:pl-0 last:pr-0">
+              <th
+                scope="col"
+                class:list={[
+                  'label px-3 py-3 !text-[10.5px] first:pl-0 last:pr-0',
+                  dark ? '!text-bone/70' : '!text-ink/70',
+                ]}
+              >
                 {col}
               </th>
             ))
@@ -50,17 +59,25 @@ const hasAccents = accentColumn !== undefined && Object.keys(accentColors).lengt
       <tbody>
         {
           rows.map((row) => (
-            <tr class="align-top odd:bg-blush/18">
+            <tr class:list={['align-top', dark ? 'odd:bg-bone/5' : 'odd:bg-blush/18']}>
               {row.map((cell, i) =>
                 i === labelColumn ? (
                   <th
                     scope="row"
-                    class="px-3 py-3.5 pr-6 text-[15px] font-semibold text-ink first:pl-3"
+                    class:list={[
+                      'px-3 py-3.5 pr-6 text-[15px] font-semibold first:pl-3',
+                      dark ? 'text-bone' : 'text-ink',
+                    ]}
                   >
                     {cell}
                   </th>
                 ) : (
-                  <td class="px-3 py-3.5 text-[15px] leading-snug text-ink/70 last:pr-3">
+                  <td
+                    class:list={[
+                      'px-3 py-3.5 text-[15px] leading-snug last:pr-3',
+                      dark ? 'text-bone/70' : 'text-ink/70',
+                    ]}
+                  >
                     {i === accentColumn && accentColors[cell] ? (
                       <span class="flex items-baseline gap-2">
                         {/*
@@ -108,7 +125,12 @@ const hasAccents = accentColumn !== undefined && Object.keys(accentColors).lengt
   }
   {
     caption && (
-      <figcaption class="label mt-4 !text-[12px] !normal-case !tracking-wide !text-ink/70">
+      <figcaption
+        class:list={[
+          'label mt-4 !text-[12px] !normal-case !tracking-wide',
+          dark ? '!text-bone/70' : '!text-ink/70',
+        ]}
+      >
         {caption}
       </figcaption>
     )

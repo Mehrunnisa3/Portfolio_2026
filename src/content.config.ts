@@ -30,6 +30,9 @@ const projects = defineCollection({
         }),
       ),
       next: z.string().optional(),
+      /** Skip the page-level Outcomes MetricPanel, e.g. when the case study
+       * already presents its results inline (see Line Up's SUS results). */
+      hideOutcomePanel: z.boolean().optional(),
     }),
 });
 

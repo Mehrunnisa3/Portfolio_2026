@@ -30,6 +30,7 @@ metrics:
     label: Usability test
     sub: Surrey residents
 next: d-gam
+hideOutcomePanel: true
 ---
 
 import Figure from '../../components/Figure.astro';
@@ -40,6 +41,7 @@ import DataTable from '../../components/DataTable.astro';
 import CardGrid from '../../components/CardGrid.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import StickyStage from '../../components/StickyStage.astro';
+import DarkSection from '../../components/DarkSection.astro';
 import auditData from '../../data/lineup-audit.json';
 import susData from '../../data/lineup-sus.json';
 import survey from '../../data/lineup-survey.json';
@@ -313,6 +315,8 @@ original research methodology.
   zoom
 />
 
+<DarkSection>
+
 ### SUS results
 
 Line Up achieved an average SUS score of **87.14 out of 100** — Grade B, Excellent
@@ -322,6 +326,7 @@ identified as a session discoverability gap for users less familiar with the app
 structure.
 
 <StatGrid
+  dark
   columns={3}
   items={[
     { value: '87.14', label: 'Average SUS score', sub: 'Grade B, Excellent — benchmark is 68' },
@@ -331,6 +336,7 @@ structure.
 />
 
 <DataTable
+  dark
   columns={['Participant', 'SUS score', 'Grade']}
   rows={susData.rows}
   caption="Individual SUS scores, n=7. Average 87.14 against a 68 industry benchmark."
@@ -363,6 +369,8 @@ structure.
     },
   ]}
 />
+
+</DarkSection>
 
 ### Iterations
 
