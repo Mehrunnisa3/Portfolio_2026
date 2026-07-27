@@ -88,7 +88,10 @@ function split(text: string) {
 
   @media (min-width: 1440px) {
     .cs-tracker {
-      left: 2.5rem;
+      /* Right edge sits a fixed 2rem clear of the prose's left edge at any
+         width, instead of a static left offset that only happened to clear
+         it right at the 1440px breakpoint and closed back up above it. */
+      left: calc((100vw - 1000px) / 2 - 12.5rem);
       width: 10.5rem;
     }
   }
