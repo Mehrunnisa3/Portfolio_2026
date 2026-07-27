@@ -11,6 +11,13 @@
  * of equal specificity, so those need an !important override here to read on
  * a dark background. `h3` has no forced colour in .prose-case, so it inherits
  * text-bone without any extra work.
+ *
+ * The override only targets *direct-child* paragraphs — the raw MDX prose —
+ * not a blanket `p` descendant selector. Components slotted in here (CardGrid,
+ * StatGrid, DataTable) render their own nested `<p>`s with colours tuned to
+ * their own background (e.g. CardGrid's tinted cards keep dark ink text on a
+ * light card); a descendant selector with !important stomped on those too and
+ * turned card copy invisible-on-light instead of readable.
  */
 ---
 
@@ -24,12 +31,13 @@
 </div>
 
 <style>
-  .dark-stage :global(p) {
+  .dark-stage > :global(p) {
     color: var(--color-bone) !important;
     opacity: 0.8;
   }
 
-  .dark-stage :global(strong) {
+  .dark-stage > :global(p) :global(strong) {
     color: var(--color-bone) !important;
+    opacity: 1;
   }
 </style>
