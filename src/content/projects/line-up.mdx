@@ -15,7 +15,6 @@ year: '2026'
 indexImage: ../../assets/lineup/hero.png
 hero:
   image: ../../assets/lineup/hero.png
-  video: /media/lineup-hero.mp4
 metrics:
   - value: '87.14'
     label: SUS score
@@ -52,7 +51,6 @@ import userFlowAll from '../../assets/lineup/UserFlow_All.png';
 import wireframes from '../../assets/lineup/wireframes.webp';
 import designSystem from '../../assets/lineup/design-system.webp';
 import hifi from '../../assets/lineup/hifi-screens.webp';
-import participants from '../../assets/lineup/participants.webp';
 import iterations from '../../assets/lineup/iterations.webp';
 
 ## The problem
@@ -199,6 +197,7 @@ exist, and wasting time showing up to sessions that are not worth attending.
 <Figure
   src={persona}
   alt="Persona profile for Marilyn, a 28-year-old graduate student in South Surrey."
+  maxWidth={700}
   zoom
 />
 
@@ -287,11 +286,18 @@ original research methodology.
 
 ### Participant profiles
 
-<Figure
-  src={participants}
-  alt="Participant profile table: seven Surrey residents, their ages, sports interest, Surrey.ca familiarity and task completion."
+<DataTable
+  columns={['Participant', 'Age', 'Interested in sports', 'Surrey.ca familiar', 'Task completed']}
+  rows={[
+    ['P1', '25', 'Yes — Basketball', 'Yes', 'Yes'],
+    ['P2', '28', 'Yes — Gym', 'Yes', 'Yes'],
+    ['P3', '30', 'Yes — Basketball', 'Yes', 'Yes'],
+    ['P4', '26', 'Yes — Basketball', 'No', 'Yes'],
+    ['P5', '29', 'Yes — Mix', 'No', 'Yes'],
+    ['P6', '28', 'Yes — Basketball', 'Yes', 'Yes'],
+    ['P7', '34', 'Yes — Swimming', 'Yes', 'Yes'],
+  ]}
   caption="Seven participants, all Surrey residents who play recreational sports."
-  zoom
 />
 
 <DarkSection>
