@@ -30,6 +30,7 @@ metrics:
     label: Papers published
     sub: Peer reviewed
 next: line-up
+hideOutcomePanel: true
 ---
 
 import Figure from '../../components/Figure.astro';
@@ -40,6 +41,7 @@ import ScreenGallery from '../../components/ScreenGallery.astro';
 import StickyStage from '../../components/StickyStage.astro';
 import DataTable from '../../components/DataTable.astro';
 import VenueStrip from '../../components/VenueStrip.astro';
+import DarkSection from '../../components/DarkSection.astro';
 import toolAuditData from '../../data/dgam-tool-audit.json';
 
 import grounding from '../../assets/dgam/s1-grounding.webp';
@@ -354,12 +356,15 @@ filled out a System Usability Scale survey.
   caption="Study participants — n=10, purposive sampling, none affiliated with the project."
 />
 
+<DarkSection>
+
 ### SUS results
 
 The redesign is where the framework earns its claim. The task-based prototype
 scored below the industry average; the schema-driven redesign scored above it.
 
 <StatGrid
+  dark
   columns={3}
   items={[
     { value: '67.46', label: 'Phase 02 · focus group · n=7', sub: 'Grade D · Needs improvement — below industry average, structural redesign required' },
@@ -371,6 +376,7 @@ scored below the industry average; the schema-driven redesign scored above it.
 ### Key findings of thematic analysis
 
 <StatGrid
+  dark
   items={[
     { value: '8/10', label: 'Gamification guided the process', sub: 'Strongly agreed that game elements helped them navigate the review without confusion.' },
     { value: '9/10', label: 'Scenario 1 more motivating', sub: 'Combined incremental points and surprise rewards outperformed a single upfront fixed reward.' },
@@ -378,6 +384,8 @@ scored below the industry average; the schema-driven redesign scored above it.
     { value: '#1', label: 'Surprise reward most engaging', sub: 'Consistently identified as the most motivating element — more than progress bars or leaderboards.' },
   ]}
 />
+
+</DarkSection>
 
 ## 05. Reflection
 
