@@ -88,10 +88,12 @@ function split(text: string) {
 
   @media (min-width: 1440px) {
     .cs-tracker {
-      /* Right edge sits a fixed 2rem clear of the prose's left edge at any
+      /* Right edge sits a fixed 3rem clear of the prose's left edge at any
          width, instead of a static left offset that only happened to clear
-         it right at the 1440px breakpoint and closed back up above it. */
-      left: calc((100vw - 1000px) / 2 - 12.5rem);
+         it right at the 1440px breakpoint and closed back up above it. The
+         1rem floor keeps the rail from crowding the window edge right at
+         the 1440px boundary, where the gutter is at its narrowest. */
+      left: max(1rem, calc((100vw - 1000px) / 2 - 13.5rem));
       width: 10.5rem;
     }
   }
