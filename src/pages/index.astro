@@ -29,21 +29,73 @@ const filters = [
 >
   <!-- Hero -->
   <section
-    class="flex min-h-[76svh] flex-col justify-center px-6 pt-36 pb-12 md:px-14"
+    class="relative flex min-h-[90svh] flex-col justify-center overflow-hidden px-6 pt-36 pb-12 md:px-14"
   >
-    <div class="mx-auto w-full max-w-[1400px]">
-      <p class="label mb-8 !text-ink/45 md:mb-10">
+    <div class="relative mx-auto w-full max-w-[1400px]">
+      <p class="label relative z-20 mb-8 !text-ink/45 md:mb-10">
         UX Researcher &amp; Interaction Designer &mdash; Surrey, BC
       </p>
 
-      <h1 class="max-w-[30ch] font-display text-display">
-        I&rsquo;m <span class="mark-swipe">Mehrun-Nisa</span>, a UX researcher
-        &amp; interaction designer who studies why people <em class="italic"
-          >engage</em
-        > &mdash; then designs so they do.
-      </h1>
+      <div class="relative">
+        <!--
+          The figurine video sits behind both text tiers, sized via
+          aspect-ratio before it loads so nothing shifts once it decodes its
+          first frame. No controls, no UI chrome — it reads as part of the
+          page, not an embedded player.
+
+          mix-blend-mode: multiply dissolves the video's near-white backdrop
+          into --color-paper, and the radial-gradient mask fades the whole
+          box to transparent at its edges. The mask is the one that actually
+          matters: relying on multiply's colour math alone still left a
+          visible rectangle, because video compression means the backdrop is
+          never perfectly flat pixel-to-pixel. A soft fade hides that
+          regardless of how close the colours actually match.
+        -->
+        <div
+          class="pointer-events-none absolute top-1/2 right-[-9vw] z-0 aspect-[1244/1664] w-[88vw] max-w-[560px] -translate-y-1/2 opacity-90 sm:right-[-6vw] sm:w-[62vw] lg:right-[-5vw] lg:w-[40vw]"
+          style="mask-image: radial-gradient(ellipse 62% 58% at 50% 48%, black 55%, transparent 92%); -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 48%, black 55%, transparent 92%);"
+        >
+          <video
+            data-hero-figurine
+            src="/media/home-figurine.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+            disablepictureinpicture
+            preload="auto"
+            class="mix-blend-multiply size-full object-contain"
+          ></video>
+        </div>
+
+        <h1 class="relative z-20">
+          <span class="block max-w-[20ch] font-display text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.95] tracking-tight">
+            I&rsquo;m <span
+              class="mark-swipe"
+              style="--swipe-top: 0.6em; --swipe-h: 0.3em;"
+            >Mehrun-Nisa</span>,
+          </span>
+          <span class="mt-2 block max-w-[30ch] font-display text-display">
+            a UX researcher &amp; interaction designer who studies why people
+            <em class="italic">engage</em> &mdash; then designs so they do.
+          </span>
+        </h1>
+      </div>
     </div>
   </section>
+
+  <script>
+    // Autoplaying background video is motion some visitors have asked their
+    // OS to suppress — honour it by freezing on the first frame.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document
+        .querySelectorAll<HTMLVideoElement>('video[data-hero-figurine]')
+        .forEach((video) => {
+          video.removeAttribute('autoplay');
+          video.pause();
+        });
+    }
+  </script>
 
   <!-- Name + credentials: doubles as the hero's closing rule. -->
   <div class="px-6 md:px-14">

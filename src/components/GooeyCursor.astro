@@ -1,0 +1,226 @@
+---
+/**
+ * Custom cursor: a spring-physics ball with squash/stretch and three
+ * trailing droplets, merged into one blob via an SVG goo filter. Included
+ * once in Base, same as Lightbox.
+ *
+ * Progressive enhancement, same pattern as the reveal script in Base.astro:
+ * the native cursor stays until this script confirms a fine pointer (no
+ * touch, no reduced-motion) and adds `cursor-gooey` to <html>. Without JS,
+ * or on touch/reduced-motion, the native cursor is simply never hidden.
+ */
+---
+
+<svg aria-hidden="true" focusable="false" class="sr-only">
+  <filter id="goo-cursor">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+    <feColorMatrix
+      in="blur"
+      mode="matrix"
+      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+    />
+  </filter>
+</svg>
+
+<div class="gooey-cursor" aria-hidden="true" data-gooey-cursor>
+  <div class="gooey-cursor__goo">
+    <div class="gooey-cursor__drop" data-gooey-drop="3"></div>
+    <div class="gooey-cursor__drop" data-gooey-drop="2"></div>
+    <div class="gooey-cursor__drop" data-gooey-drop="1"></div>
+    <div class="gooey-cursor__ball" data-gooey-ball></div>
+  </div>
+</div>
+
+<style>
+  .gooey-cursor {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  :global(html.cursor-gooey) .gooey-cursor {
+    opacity: 1;
+  }
+
+  /* Native cursor only actually disappears once the layer is live, so a
+     failed/slow init never leaves the visitor with no cursor at all. */
+  :global(html.cursor-gooey),
+  :global(html.cursor-gooey *) {
+    cursor: none;
+  }
+
+  :global(html.cursor-gooey input),
+  :global(html.cursor-gooey textarea),
+  :global(html.cursor-gooey [contenteditable='true']) {
+    cursor: text;
+  }
+
+  .gooey-cursor__goo {
+    position: absolute;
+    inset: 0;
+    filter: url('#goo-cursor');
+  }
+
+  .gooey-cursor__ball,
+  .gooey-cursor__drop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    border-radius: 50%;
+    background: var(--color-rose);
+    will-change: transform;
+  }
+
+  /* data-hidden covers both "left the window" and "over a text field" —
+     same fade, two different triggers. */
+  .gooey-cursor[data-hidden] .gooey-cursor__goo {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+</style>
+
+<script>
+  function initGooeyCursor() {
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!hasFinePointer || reducedMotion) return;
+
+    const layer = document.querySelector<HTMLElement>('[data-gooey-cursor]');
+    const ball = document.querySelector<HTMLElement>('[data-gooey-ball]');
+    // Ascending by data-gooey-drop (1, 2, 3): index 0 must be the droplet
+    // that chases the ball directly, since the tick loop below chains each
+    // droplet to the previous array entry.
+    const dropEls = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-gooey-drop]'),
+    ).sort(
+      (a, b) => Number(a.dataset.gooeyDrop) - Number(b.dataset.gooeyDrop),
+    );
+    if (!layer || !ball || dropEls.length !== 3) return;
+
+    const BALL_SIZE = 26;
+    const DROP_SCALES = [0.62, 0.42, 0.28];
+    dropEls.forEach((el, i) => {
+      const size = BALL_SIZE * DROP_SCALES[i];
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+      el.style.margin = `${-size / 2}px 0 0 ${-size / 2}px`;
+    });
+
+    const STIFFNESS = 0.18;
+    const DAMPING = 0.78;
+    const SCALE_EASE = 0.2;
+    const DROP_EASE = 0.35;
+    const HOVER_SCALE = 2.2;
+    const DOWN_SCALE = 0.7;
+
+    const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const pos = { x: mouse.x, y: mouse.y, vx: 0, vy: 0 };
+    const drops = dropEls.map(() => ({ x: mouse.x, y: mouse.y }));
+    let scale = 0;
+    let targetScale = 1;
+    let hovering = false;
+    let pressed = false;
+    let started = false;
+
+    document.documentElement.classList.add('cursor-gooey');
+
+    window.addEventListener(
+      'pointermove',
+      (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        if (!started) {
+          // Jump to the first real position instead of springing in from
+          // the window centre.
+          pos.x = mouse.x;
+          pos.y = mouse.y;
+          drops.forEach((d) => {
+            d.x = mouse.x;
+            d.y = mouse.y;
+          });
+          started = true;
+        }
+        const target = e.target as Element | null;
+        const overField = !!target?.closest('input, textarea, [contenteditable="true"]');
+        layer.toggleAttribute('data-hidden', overField);
+
+        const overInteractive = !!target?.closest('a, button, label');
+        if (overInteractive !== hovering) {
+          hovering = overInteractive;
+          if (!pressed) targetScale = hovering ? HOVER_SCALE : 1;
+        }
+      },
+      { passive: true },
+    );
+
+    window.addEventListener(
+      'pointerdown',
+      () => {
+        pressed = true;
+        targetScale = DOWN_SCALE;
+      },
+      { passive: true },
+    );
+
+    window.addEventListener(
+      'pointerup',
+      () => {
+        pressed = false;
+        targetScale = hovering ? HOVER_SCALE : 1;
+      },
+      { passive: true },
+    );
+
+    document.addEventListener(
+      'mouseout',
+      (e) => {
+        if (!e.relatedTarget) layer.setAttribute('data-hidden', '');
+      },
+      { passive: true },
+    );
+
+    function tick() {
+      const dx = mouse.x - pos.x;
+      const dy = mouse.y - pos.y;
+      pos.vx = pos.vx * DAMPING + dx * STIFFNESS;
+      pos.vy = pos.vy * DAMPING + dy * STIFFNESS;
+      pos.x += pos.vx;
+      pos.y += pos.vy;
+
+      scale += (targetScale - scale) * SCALE_EASE;
+
+      const speed = Math.min(Math.hypot(pos.vx, pos.vy), 36);
+      const angle = speed > 0.4 ? (Math.atan2(pos.vy, pos.vx) * 180) / Math.PI : 0;
+      const stretch = 1 + speed * 0.022;
+      const squeeze = 1 / Math.sqrt(stretch);
+
+      ball.style.transform = `translate(${pos.x}px, ${pos.y}px) rotate(${angle}deg) scale(${stretch * scale}, ${squeeze * scale})`;
+
+      let prevX = pos.x;
+      let prevY = pos.y;
+      drops.forEach((d, i) => {
+        d.x += (prevX - d.x) * DROP_EASE;
+        d.y += (prevY - d.y) * DROP_EASE;
+        dropEls[i].style.transform = `translate(${d.x}px, ${d.y}px) scale(${scale})`;
+        prevX = d.x;
+        prevY = d.y;
+      });
+
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGooeyCursor);
+  } else {
+    initGooeyCursor();
+  }
+</script>

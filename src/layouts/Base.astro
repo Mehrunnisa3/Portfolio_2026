@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Lightbox from '../components/Lightbox.astro';
+import GooeyCursor from '../components/GooeyCursor.astro';
 
 interface Props {
   title: string;
@@ -116,5 +117,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </main>
     <Footer />
     <Lightbox />
+    <GooeyCursor />
   </body>
 </html>
