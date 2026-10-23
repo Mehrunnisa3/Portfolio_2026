@@ -29,7 +29,7 @@ const filters = [
 >
   <!-- Hero -->
   <section
-    class="relative flex min-h-[90svh] flex-col justify-center overflow-hidden px-6 pt-44 pb-12 md:px-14"
+    class="relative flex min-h-[90svh] flex-col justify-center overflow-hidden px-6 pt-44 pb-28 md:px-14"
   >
     <div class="relative mx-auto w-full max-w-[1400px]">
       <p class="label relative z-20 mb-8 !text-ink/45 md:mb-10">
@@ -45,15 +45,15 @@ const filters = [
 
           mix-blend-mode: multiply dissolves the video's near-white backdrop
           into --color-paper, and the radial-gradient mask fades the whole
-          box to transparent at its edges. The mask is the one that actually
-          matters: relying on multiply's colour math alone still left a
-          visible rectangle, because video compression means the backdrop is
-          never perfectly flat pixel-to-pixel. A soft fade hides that
-          regardless of how close the colours actually match.
+          box to transparent at its edges. Both live on the video element
+          itself, not split across it and its wrapper — put the mask on a
+          parent and the blend mode on the child and browsers composite them
+          in separate layers, which blends the fade zone against a
+          transparent/black backdrop and shows up as a dark halo right where
+          the mask starts fading.
         -->
         <div
           class="pointer-events-none absolute top-[58%] right-[-9vw] z-0 aspect-[1244/1664] w-[80vw] max-w-[500px] -translate-y-1/2 opacity-90 sm:right-[-6vw] sm:w-[56vw] lg:right-[-5vw] lg:w-[36vw]"
-          style="mask-image: radial-gradient(ellipse 62% 58% at 50% 48%, black 55%, transparent 92%); -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 48%, black 55%, transparent 92%);"
         >
           <video
             data-autoplay-video
@@ -64,6 +64,7 @@ const filters = [
             playsinline
             disablepictureinpicture
             preload="auto"
+            style="mask-image: radial-gradient(ellipse 62% 58% at 50% 48%, black 55%, transparent 92%); -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 48%, black 55%, transparent 92%);"
             class="mix-blend-multiply size-full object-contain"
           ></video>
         </div>
@@ -76,7 +77,7 @@ const filters = [
             >Mehrun-Nisa</span>,
           </span>
           <span class="mt-2 block max-w-[30ch] font-display text-display">
-            a UX researcher &amp; interaction designer who studies why people
+            a UX researcher &amp; interaction&nbsp;designer who studies why people
             <em class="italic">engage</em> &mdash; then designs so they do.
           </span>
         </h1>
