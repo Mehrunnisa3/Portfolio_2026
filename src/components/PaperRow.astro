@@ -32,45 +32,37 @@ const headline = title || venue;
     ]}
   >
     <div class="flex h-10 w-28 items-center">
-      {
-        logoImage && (
-          <Image
-            src={logoImage}
-            alt={`${venueShort} logo`}
-            widths={[224]}
-            sizes="112px"
-            class="max-h-10 w-auto object-contain opacity-90 transition-opacity duration-400 group-hover:opacity-100"
-          />
-        )
-      }
+      {logoImage && (
+        <Image
+          src={logoImage}
+          alt={`${venueShort} logo`}
+          widths={[224]}
+          sizes="112px"
+          class="max-h-10 w-auto object-contain opacity-90 transition-opacity duration-400 group-hover:opacity-100"
+        />
+      )}
     </div>
 
     <div>
-      <h3
-        class="font-serif-text text-[clamp(1.25rem,2vw,1.625rem)] font-normal leading-tight"
-      >
+      <h3 class="font-serif-text text-[clamp(1.25rem,2vw,1.625rem)] font-normal leading-tight">
         {headline}
       </h3>
-      {
-        title && (
-          <p class="label mt-2 !text-[11px] !normal-case !tracking-wide">{venue}</p>
-        )
-      }
+      {title && (
+        <p class="label mt-2 !text-[11px] !normal-case !tracking-wide">{venue}</p>
+      )}
     </div>
 
     <div class="flex items-center gap-5 md:justify-self-end">
       <span class="label !text-[11px]">{status}</span>
       <span class="font-mono text-sm text-ink/80">{year}</span>
-      {
-        url && (
-          <span
-            aria-hidden="true"
-            class="font-mono text-sm text-mute transition-transform duration-300 ease-out-expo group-hover:translate-x-1 group-hover:text-rose"
-          >
-            ↗
-          </span>
-        )
-      }
+      {url && (
+        <span
+          aria-hidden="true"
+          class="font-mono text-sm text-mute transition-transform duration-300 ease-out-expo group-hover:translate-x-1 group-hover:text-rose"
+        >
+          ↗
+        </span>
+      )}
     </div>
   </Tag>
 </li>

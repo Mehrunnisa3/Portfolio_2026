@@ -56,7 +56,7 @@ const filters = [
           style="mask-image: radial-gradient(ellipse 62% 58% at 50% 48%, black 55%, transparent 92%); -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 48%, black 55%, transparent 92%);"
         >
           <video
-            data-hero-figurine
+            data-autoplay-video
             src="/media/home-figurine.mp4"
             autoplay
             loop
@@ -85,11 +85,11 @@ const filters = [
   </section>
 
   <script>
-    // Autoplaying background video is motion some visitors have asked their
-    // OS to suppress — honour it by freezing on the first frame.
+    // Autoplaying video is motion some visitors have asked their OS to
+    // suppress — honour it by freezing every such clip on its first frame.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document
-        .querySelectorAll<HTMLVideoElement>('video[data-hero-figurine]')
+        .querySelectorAll<HTMLVideoElement>('video[data-autoplay-video]')
         .forEach((video) => {
           video.removeAttribute('autoplay');
           video.pause();
@@ -165,14 +165,44 @@ const filters = [
           </div>
 
           <div data-group="research" id="research" class="mt-24 scroll-mt-28">
-            <h2 class="label mb-4 !text-ink/45">Research</h2>
-            <p class="mb-10 max-w-[52ch] text-[17px] text-ink/70">
-              Peer-reviewed work on engagement, gamification, and participation in
-              built-environment design.
-            </p>
-            <ul class="border-b border-rule">
-              {papers.map((paper) => <PaperRow {...paper.data} />)}
-            </ul>
+            <div
+              class="grid grid-cols-1 gap-10 md:grid-cols-[1fr_280px] md:items-start md:gap-16 lg:grid-cols-[1fr_320px] lg:gap-24"
+            >
+              <div>
+                <h2 class="label mb-4 !text-ink/45">Research</h2>
+                <p class="mb-6 max-w-[24ch] font-display text-[clamp(2rem,3.6vw,3rem)] font-normal leading-[1.05] tracking-tight text-ink">
+                  Yes, I have published three papers, here check them out.
+                </p>
+                <ul class="border-b border-rule">
+                  {papers.map((paper) => <PaperRow {...paper.data} />)}
+                </ul>
+              </div>
+
+              <!--
+                Emphasised rather than a small corner badge — this is the same
+                figurine as the hero, close-up, framed like a poster. object-cover
+                within an aspect-ratio box keeps it from shifting the layout as it
+                loads. mix-blend-mode: multiply dissolves the video's own
+                near-white backdrop into --color-paper, same technique as the
+                hero figurine, so the panel doesn't read as a separate white box
+                sitting on the page — no ring here, a hard border would undo that.
+              -->
+              <div
+                class="relative mx-auto aspect-[716/1284] w-full max-w-[260px] overflow-hidden rounded-sm bg-paper md:mx-0 lg:max-w-[320px]"
+              >
+                <video
+                  data-autoplay-video
+                  src="/media/papers-closeup.mp4"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  disablepictureinpicture
+                  preload="auto"
+                  class="mix-blend-multiply size-full object-cover"
+                ></video>
+              </div>
+            </div>
           </div>
         </div>
       </fieldset>
