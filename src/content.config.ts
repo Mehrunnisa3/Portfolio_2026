@@ -18,7 +18,9 @@ const projects = defineCollection({
       year: z.string(),
       indexImage: image(),
       hero: z.object({
-        image: image(),
+        /** Omit while a case study doesn't have real hero art yet — the
+         * hero section then renders title/subtitle only. */
+        image: image().optional(),
         video: z.string().optional(),
         poster: z.string().optional(),
       }),

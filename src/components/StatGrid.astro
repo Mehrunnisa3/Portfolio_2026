@@ -10,23 +10,35 @@ interface Props {
   columns?: 2 | 3 | 4;
   /** Use on a dark stage (bg-void) instead of the default paper background. */
   dark?: boolean;
+  /** Count each whole-number value up from 0 when the grid scrolls into view. */
+  countUp?: boolean;
+  /** Extra classes for the outer <dl>, e.g. to add breathing room before a
+   * sibling element. */
+  class?: string;
 }
 
-const { items, columns = 4, dark = false } = Astro.props;
+const { items, columns = 4, dark = false, countUp = false, class: className } = Astro.props;
 
 const cols = {
   2: 'sm:grid-cols-2',
   3: 'sm:grid-cols-2 lg:grid-cols-3',
   4: 'sm:grid-cols-2 lg:grid-cols-4',
 };
+
+const isWholeNumber = (value: string) => /^\d+$/.test(value);
 ---
 
-<dl class:list={['reveal my-12 grid grid-cols-1 gap-x-8 gap-y-10', cols[columns]]}>
+<dl class:list={['reveal my-12 grid grid-cols-1 gap-x-8 gap-y-10', cols[columns], className]}>
   {
     items.map((item) => (
       <div class:list={['border-t pt-5', dark ? 'border-bone/25' : 'border-rule']}>
-        <dd class="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-light leading-none">
-          {item.value}
+        <dd
+          class="font-display text-[clamp(2rem,3.6vw,2.75rem)] font-light leading-none"
+          {...countUp && isWholeNumber(item.value)
+            ? { 'data-count-to': item.value }
+            : {}}
+        >
+          {countUp && isWholeNumber(item.value) ? '0' : item.value}
         </dd>
         <dt class:list={['label mt-4 !text-[11px]', dark ? '!text-bone/85' : '!text-ink/70']}>
           {item.label}
@@ -40,3 +52,46 @@ const cols = {
     ))
   }
 </dl>
+
+<script>
+  /*
+   * Counts each [data-count-to] value up from 0 once its StatGrid scrolls
+   * into view. One observer for every instance on the page — Astro dedupes
+   * this script tag across repeated <StatGrid> usages.
+   */
+  const targets = document.querySelectorAll<HTMLElement>('[data-count-to]');
+  if (targets.length) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const animate = (el: HTMLElement) => {
+      const target = parseInt(el.dataset.countTo ?? '0', 10);
+      if (reduceMotion || !target) {
+        el.textContent = String(target);
+        return;
+      }
+      const duration = 900;
+      const start = performance.now();
+      const step = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = String(Math.round(eased * target));
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(entry.target as HTMLElement);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 },
+    );
+
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>

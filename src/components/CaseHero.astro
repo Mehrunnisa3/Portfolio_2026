@@ -9,7 +9,7 @@ interface Props {
   duration: string;
   readTime: string;
   year: string;
-  image: ImageMetadata;
+  image?: ImageMetadata;
   video?: string;
 }
 
@@ -29,9 +29,12 @@ const meta = [
   class="relative flex min-h-svh flex-col justify-between overflow-hidden bg-void px-6 pt-32 pb-10 text-bone md:px-14 md:pt-40"
 >
   <div
-    class="mx-auto grid w-full max-w-[1400px] flex-1 grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20"
+    class:list={[
+      'mx-auto grid w-full max-w-[1400px] flex-1 grid-cols-1 items-center gap-12',
+      image && 'lg:grid-cols-[1.05fr_0.95fr] lg:gap-20',
+    ]}
   >
-    <div>
+    <div class:list={[!image && 'max-w-[46ch]']}>
       <h1
         class="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-light leading-[1.02] tracking-tight"
       >
@@ -42,39 +45,40 @@ const meta = [
       </p>
     </div>
 
-    <!--
-      Assets top out at 2760px wide (Line Up) and 1600px (D-GAM), and the hero
-      videos are 500x500 / 830x720. Presenting them at native aspect inside a
-      framed stage keeps them sharp; stretching them edge-to-edge would not.
-    -->
-    <figure class="relative">
-      <div
-        class="relative overflow-hidden rounded-sm bg-bone/5 ring-1 ring-bone/10"
-      >
-        {
-          video ? (
-            <video
-              src={video}
-              poster={image.src}
-              autoplay
-              loop
-              muted
-              playsinline
-              preload="metadata"
-              class="block max-h-[58svh] w-full object-contain"
-            />
-          ) : (
-            <Image
-              src={image}
-              alt={`${title} — project hero`}
-              widths={[700, 1100, 1600]}
-              sizes="(min-width: 1024px) 46vw, 92vw"
-              class="block max-h-[58svh] w-full object-contain"
-            />
-          )
-        }
-      </div>
-    </figure>
+    {
+      image && (
+        /*
+          Assets top out at 2760px wide (Line Up) and 1600px (D-GAM), and the
+          hero videos are 500x500 / 830x720. Presenting them at native aspect
+          inside a framed stage keeps them sharp; stretching them edge-to-edge
+          would not.
+        */
+        <figure class="relative">
+          <div class="relative overflow-hidden rounded-sm bg-bone/5 ring-1 ring-bone/10">
+            {video ? (
+              <video
+                src={video}
+                poster={image.src}
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                class="block max-h-[58svh] w-full object-contain"
+              />
+            ) : (
+              <Image
+                src={image}
+                alt={`${title} — project hero`}
+                widths={[700, 1100, 1600]}
+                sizes="(min-width: 1024px) 46vw, 92vw"
+                class="block max-h-[58svh] w-full object-contain"
+              />
+            )}
+          </div>
+        </figure>
+      )
+    }
   </div>
 
   <dl
