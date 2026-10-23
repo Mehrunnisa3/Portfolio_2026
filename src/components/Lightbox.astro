@@ -40,12 +40,12 @@
     margin: 0;
     padding: 0;
     border: 0;
-    background: var(--color-void);
-    color: var(--color-bone);
+    background: var(--color-paper);
+    color: var(--color-ink);
   }
 
   .lightbox::backdrop {
-    background: rgb(11 11 12 / 0.92);
+    background: color-mix(in srgb, var(--color-paper) 94%, transparent);
   }
 
   .lightbox:not([open]) {
@@ -61,7 +61,7 @@
     justify-content: space-between;
     gap: 1.5rem;
     padding: 1rem 1.25rem;
-    background: color-mix(in srgb, var(--color-void) 88%, transparent);
+    background: color-mix(in srgb, var(--color-paper) 88%, transparent);
     backdrop-filter: blur(6px);
   }
 
@@ -82,9 +82,9 @@
     font-size: 0.6875rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-bone);
+    color: var(--color-ink);
     background: transparent;
-    border: 1px solid rgb(242 240 238 / 0.28);
+    border: 1px solid rgb(22 21 15 / 0.18);
     border-radius: 999px;
     padding: 0.4rem 0.85rem;
     cursor: pointer;
@@ -138,6 +138,10 @@
     var caption = document.getElementById('lightbox-caption');
     var scaleBtn = dialog.querySelector('[data-lightbox-scale]');
     var closeBtn = dialog.querySelector('[data-lightbox-close]');
+    // The gooey cursor is a fixed, sibling element — not part of the dialog's
+    // top layer — so it keeps rendering over the modal instead of staying
+    // hidden behind it. Drop back to the native cursor while open.
+    var hadCursorGooey = false;
 
     function setScale(mode) {
       stage.dataset.scale = mode;
@@ -155,6 +159,10 @@
       img.alt = trigger.dataset.zoomAlt || '';
       caption.textContent = trigger.dataset.zoomCaption || '';
       setScale('fit');
+
+      hadCursorGooey = document.documentElement.classList.contains('cursor-gooey');
+      if (hadCursorGooey) document.documentElement.classList.remove('cursor-gooey');
+
       dialog.showModal();
     });
 
@@ -177,6 +185,7 @@
 
     dialog.addEventListener('close', function () {
       img.removeAttribute('src');
+      if (hadCursorGooey) document.documentElement.classList.add('cursor-gooey');
     });
   });
 </script>
