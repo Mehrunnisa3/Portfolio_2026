@@ -18,18 +18,13 @@ const { href, index, title, oneLiner, disciplines, sector, image, alt } = Astro.
 
 <article class="reveal" data-kind="project">
   <a href={href} class="group block">
-    <!--
-      object-contain, not cover: the two hero assets are 1600x963 (landscape) and
-      2760x2800 (square). Cropping the square one to 4/3 cut the artwork, so both
-      are framed at native aspect on a tinted panel instead.
-    -->
-    <div class="relative aspect-4/3 overflow-hidden bg-rule/30">
+    <div class="relative aspect-4/3 overflow-hidden">
       <Image
         src={image}
         alt={alt}
         widths={[600, 900, 1400]}
         sizes="(min-width: 900px) 46vw, 92vw"
-        class="absolute inset-0 size-full object-contain transition-transform duration-700 ease-out-expo group-hover:scale-103"
+        class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-103"
       />
       <div
         class="pointer-events-none absolute inset-0 bg-ink/8 transition-opacity duration-600 group-hover:opacity-0"
