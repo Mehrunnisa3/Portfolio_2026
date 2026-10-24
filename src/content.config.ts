@@ -8,12 +8,15 @@ const projects = defineCollection({
       title: z.string(),
       order: z.number(),
       oneLiner: z.string(),
+      /** Short first-person hook shown above the hero subtitle. */
+      tagline: z.string().optional(),
       /** Hero subtitle when it differs from the index one-liner. */
       subtitle: z.string().optional(),
       disciplines: z.array(z.string()),
       sector: z.string(),
       role: z.string(),
       duration: z.string(),
+      tools: z.string().optional(),
       readTime: z.string(),
       year: z.string(),
       indexImage: image(),

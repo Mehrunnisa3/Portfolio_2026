@@ -33,13 +33,14 @@ const next =
 <Base
   title={`${project.data.title} — Mehrun-Nisa Raja`}
   description={project.data.oneLiner}
-  navTheme="void"
 >
   <CaseHero
     title={project.data.title}
+    tagline={project.data.tagline}
     subtitle={project.data.subtitle ?? project.data.oneLiner}
     role={project.data.role}
     duration={project.data.duration}
+    tools={project.data.tools}
     readTime={project.data.readTime}
     year={project.data.year}
     image={project.data.hero.image}

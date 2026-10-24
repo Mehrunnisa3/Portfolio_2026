@@ -2,7 +2,8 @@
 title: D-GAM
 order: 1
 oneLiner: Built D-GAM — a flexible gamification framework that reimagines public participation in built-environment design by transforming static feedback processes into engaging, adaptive experiences. Developed through iterative research and validated with real users.
-subtitle: D-GAM; develops an adaptable gamification conceptual model designed to increase user engagement and motivation into measurable, honest engagement.
+tagline: I used gamification to help people stay engaged and motivated in shaping their cities.
+subtitle: D-GAM is a flexible gamification framework that adapts to any public design project.
 disciplines:
   - UX Research
   - Interaction Design
@@ -10,6 +11,7 @@ disciplines:
 sector: Civic & Public
 role: UX Researcher, Interaction Design
 duration: 16 Weeks
+tools: Figma, NotebookLM, Zoom
 readTime: 12 minutes
 year: '2024'
 indexImage: ../../assets/dgam/hero.png
@@ -26,7 +28,7 @@ metrics:
   - value: '37'
     label: Tools audited
     sub: 17 analysed in depth
-  - value: '04'
+  - value: '3'
     label: Papers published
     sub: Peer reviewed
 next: line-up
@@ -44,6 +46,7 @@ import VenueStrip from '../../components/VenueStrip.astro';
 import DarkSection from '../../components/DarkSection.astro';
 import toolAuditData from '../../data/dgam-tool-audit.json';
 
+import problemIllustration from '../../assets/dgam/D-GAM illustration.jpg';
 import grounding from '../../assets/dgam/s1-grounding.webp';
 import focusGroup from '../../assets/dgam/focus-group-blurred.png';
 import frameworkOverview from '../../assets/dgam/SchemasTogether.png';
@@ -72,16 +75,39 @@ import rd_06 from '../../assets/dgam/redesign-06.png';
 import rd_07 from '../../assets/dgam/redesign-07.png';
 import rd_08 from '../../assets/dgam/redesign-08.png';
 
+## Overview
+
+<div class="grid grid-cols-1 items-center gap-x-16 gap-y-8 md:grid-cols-2">
+  <p class="text-[17px] leading-relaxed text-ink/75">
+    D-GAM turns static city-planning feedback forms into adaptive, game-based experiences that keep residents
+    engaged. It's built around four independent schemas — reward, feedback, project, and user — so it can be
+    reconfigured for different civic contexts without a redesign. Two playtest-and-iterate cycles took it from a
+    67.46 to a 76.0 System Usability Scale score.
+  </p>
+  <StatGrid
+    columns={2}
+    items={[
+      { value: '76.0', label: 'Final SUS score', sub: 'Grade B — up from 67.46' },
+      { value: '+8.54', label: 'Improvement', sub: 'Across two iterations' },
+      { value: '37', label: 'Tools audited', sub: '17 analysed in depth' },
+      { value: '3', label: 'Papers published', sub: 'Peer reviewed' },
+    ]}
+    class="!my-0"
+  />
+</div>
+
 ## The problem
 
-Imagine, there is a new retail store being proposed in your neighbourhood. You
-might have several questions and concerns. Being a resident you want to provide
-some insight, however, problem isnt access, the infrastructure for public
-participation exists, the problem is the lower motivational and sustained
-engagement in the infrastructure of public participation in built environment.
+<Figure
+  src={problemIllustration}
+  alt="Three-step illustration: a resident notices a new retail store proposal, finds that consultation access already exists, then loses motivation to long forms with no reason to stay"
+/>
 
-D-GAM framework was built to answer one question: can gamification enhance user
-engagement and motivation in participatory processes?
+<p class="font-display text-[clamp(1.6rem,3vw,2.3rem)] font-normal leading-[1.3] !text-ink">
+  D-GAM framework was built to answer one question: can{' '}
+  <span class="text-rose">gamification</span> enhance user engagement and motivation in
+  participatory processes?
+</p>
 
 <VenueStrip />
 
@@ -97,7 +123,7 @@ context or stakeholder.
 
 <DataTable
   columns={toolAuditData.columns}
-  rows={toolAuditData.rows}
+  rows={[...toolAuditData.rows.slice(0, 3), [`… ${toolAuditData.rows.length - 3} more rows`, '', '', '']]}
   accentColumn={toolAuditData.accentColumn}
   accentColors={toolAuditData.accentColors}
   caption="37 tools reviewed, 17 analysed in depth."
@@ -111,19 +137,15 @@ context or stakeholder.
   items={[
     {
       title: 'Fixed system-wide gamification',
-      body: 'Gamification is applied at a system level rather than a project level, lacking flexibility',
     },
     {
       title: 'No mechanism for sustained engagement',
-      body: 'Existing platforms attract users once but provide no reason to explore deeply, return, or contribute over multiple review stages.',
     },
     {
       title: 'Accessibility of gamified tools ',
-      body: 'While some platforms successfully utilize online access to engage a diverse audience, other initiatives, face limiitations due to their dependency on particular technologies or the need for in-person interaction.',
     },
     {
       title: 'Gamifcation as superficial engagement',
-      body: 'Relying on game mechanics such as points and leaderboards can sometimes oversimplify complex issues, potentially leading to superficial engagement. Moreover, while these mechanics can motivate participation, they may inadvertently prioritize competition over meaningful contributions.',
     },
   ]}
 />
@@ -149,22 +171,10 @@ complexity matched to user capability.
   columns={4}
   numberPrefix="Phase"
   items={[
-    {
-      title: 'Literature review & initial prototype',
-      body: 'Established the foundations for D-GAM and built the first task-based prototype, grounded in Self-Determination Theory, operant conditioning, and flow theory.',
-    },
-    {
-      title: 'Evaluation & testing',
-      body: 'Evaluated the first task-based prototype and tested it with a focus group of professionals.',
-    },
-    {
-      title: 'Formation of the flexible D-GAM framework',
-      body: 'Based on the focus group findings, the task-based approach shifted to task-free, resulting in the adaptable gamification schema — four schemas mapped onto activities.',
-    },
-    {
-      title: 'Re-design and testing',
-      body: 'Re-iterated the prototype implementing the four schemas, followed by a user study.',
-    },
+    { title: 'Literature review & initial prototype' },
+    { title: 'Evaluation & testing' },
+    { title: 'Formation of the flexible D-GAM framework' },
+    { title: 'Re-design and testing' },
   ]}
 />
 
