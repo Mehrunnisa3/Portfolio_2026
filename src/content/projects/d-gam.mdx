@@ -38,7 +38,6 @@ hideOutcomePanel: true
 import Figure from '../../components/Figure.astro';
 import Quote from '../../components/Quote.astro';
 import StatGrid from '../../components/StatGrid.astro';
-import CardGrid from '../../components/CardGrid.astro';
 import ScreenGallery from '../../components/ScreenGallery.astro';
 import StickyStage from '../../components/StickyStage.astro';
 import DataTable from '../../components/DataTable.astro';
@@ -47,7 +46,7 @@ import DarkSection from '../../components/DarkSection.astro';
 import toolAuditData from '../../data/dgam-tool-audit.json';
 
 import problemIllustration from '../../assets/dgam/D-GAM illustration.jpg';
-import grounding from '../../assets/dgam/s1-grounding.webp';
+import grounding from '../../assets/dgam/Rewardlogic-removebg-preview.png';
 import focusGroup from '../../assets/dgam/focus-group-blurred.png';
 import frameworkOverview from '../../assets/dgam/SchemasTogether.png';
 import schemaReward from '../../assets/dgam/Rewards Schema.png';
@@ -77,37 +76,35 @@ import rd_08 from '../../assets/dgam/redesign-08.png';
 
 ## Overview
 
-<div class="grid grid-cols-1 items-center gap-x-16 gap-y-8 md:grid-cols-2">
-  <p class="text-[17px] leading-relaxed text-ink/75">
-    D-GAM turns static city-planning feedback forms into adaptive, game-based experiences that keep residents
-    engaged. It's built around four independent schemas — reward, feedback, project, and user — so it can be
-    reconfigured for different civic contexts without a redesign. Two playtest-and-iterate cycles took it from a
-    67.46 to a 76.0 System Usability Scale score.
-  </p>
-  <StatGrid
-    columns={2}
-    items={[
-      { value: '76.0', label: 'Final SUS score', sub: 'Grade B — up from 67.46' },
-      { value: '+8.54', label: 'Improvement', sub: 'Across two iterations' },
-      { value: '37', label: 'Tools audited', sub: '17 analysed in depth' },
-      { value: '3', label: 'Papers published', sub: 'Peer reviewed' },
-    ]}
-    class="!my-0"
-  />
-</div>
+<p class="text-[17px] leading-relaxed text-ink/75">
+  D-GAM turns static city-planning feedback forms into adaptive, game-based experiences that keep residents
+  engaged. It's built around four independent schemas — reward, feedback, project, and user — so it can be
+  reconfigured for different civic contexts without a redesign. Two playtest-and-iterate cycles took it from a
+  67.46 to a 76.0 System Usability Scale score.
+</p>
+
+<StatGrid
+  columns={4}
+  items={[
+    { value: '76.0', label: 'Final SUS score', sub: 'Grade B — up from 67.46' },
+    { value: '+8.54', label: 'Improvement', sub: 'Across two iterations' },
+    { value: '37', label: 'Tools audited', sub: '17 analysed in depth' },
+    { value: '3', label: 'Papers published', sub: 'Peer reviewed' },
+  ]}
+/>
 
 ## The problem
+
+<p class="italic text-[16px] leading-relaxed text-ink/75">
+  D-GAM framework was built to answer one question: can{' '}
+  <span class="text-rose">gamification</span> enhance user engagement and motivation in
+  participatory processes?
+</p>
 
 <Figure
   src={problemIllustration}
   alt="Three-step illustration: a resident notices a new retail store proposal, finds that consultation access already exists, then loses motivation to long forms with no reason to stay"
 />
-
-<p class="font-display text-[clamp(1.6rem,3vw,2.3rem)] font-normal leading-[1.3] !text-ink">
-  D-GAM framework was built to answer one question: can{' '}
-  <span class="text-rose">gamification</span> enhance user engagement and motivation in
-  participatory processes?
-</p>
 
 <VenueStrip />
 
@@ -115,11 +112,11 @@ import rd_08 from '../../assets/dgam/redesign-08.png';
 
 ### What existing tools get wrong
 
-A structured review of 37 civic engagement and gamification tools, narrowed to 17
-targeting general public participation, revealed a consistent pattern. Tools that
-attract users rarely sustain them. When gamification existed at all, it was applied
-at the system level: the same points and badges for every project, regardless of
-context or stakeholder.
+To cater the problem a review of 37 civic engagement and gamification tools, narrowed
+to 17 targeting general public participation, revealed a consistent pattern. Tools
+that attract users rarely sustain them. When gamification existed at all, it was
+applied at the system level: the same points and badges for every project, regardless
+of context or stakeholder.
 
 <DataTable
   columns={toolAuditData.columns}
@@ -129,33 +126,49 @@ context or stakeholder.
   caption="37 tools reviewed, 17 analysed in depth."
 />
 
-### Four gaps identified in the same group
+### Gaps identified
 
-<CardGrid
-  tinted
-  numberPrefix="Gap"
-  items={[
-    {
-      title: 'Fixed system-wide gamification',
-    },
-    {
-      title: 'No mechanism for sustained engagement',
-    },
-    {
-      title: 'Accessibility of gamified tools ',
-    },
-    {
-      title: 'Gamifcation as superficial engagement',
-    },
-  ]}
-/>
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+  <div class="flex items-center justify-between gap-5 rounded-md border bg-paper px-7 py-7" style="border-color: #e9c9cc;">
+    <div>
+      <p class="label mb-2 !text-[11px]" style="color: #ac3960;">Gap 01</p>
+      <h4 class="font-serif-text text-xl leading-tight font-normal text-ink">Fixed system-wide gamification</h4>
+    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#ac3960" stroke-width="1.5" class="size-7 flex-none"><path d="M12 3 2 20h20L12 3Z" stroke-linejoin="round" /><path d="M12 10v4" stroke-linecap="round" /><circle cx="12" cy="17" r="0.75" fill="#ac3960" stroke="none" /></svg>
+  </div>
+  <div class="flex items-center justify-between gap-5 rounded-md border bg-paper px-7 py-7" style="border-color: #ecd8b0;">
+    <div>
+      <p class="label mb-2 !text-[11px]" style="color: #a67c3d;">Gap 02</p>
+      <h4 class="font-serif-text text-xl leading-tight font-normal text-ink">No mechanism for sustained engagement</h4>
+    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#a67c3d" stroke-width="1.5" class="size-7 flex-none"><path d="M12 3 2 20h20L12 3Z" stroke-linejoin="round" /><path d="M12 10v4" stroke-linecap="round" /><circle cx="12" cy="17" r="0.75" fill="#a67c3d" stroke="none" /></svg>
+  </div>
+  <div class="flex items-center justify-between gap-5 rounded-md border bg-paper px-7 py-7" style="border-color: #c6d5ea;">
+    <div>
+      <p class="label mb-2 !text-[11px]" style="color: #3d6ea6;">Gap 03</p>
+      <h4 class="font-serif-text text-xl leading-tight font-normal text-ink">Accessibility of gamified tools</h4>
+    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#3d6ea6" stroke-width="1.5" class="size-7 flex-none"><path d="M12 3 2 20h20L12 3Z" stroke-linejoin="round" /><path d="M12 10v4" stroke-linecap="round" /><circle cx="12" cy="17" r="0.75" fill="#3d6ea6" stroke="none" /></svg>
+  </div>
+  <div class="flex items-center justify-between gap-5 rounded-md border bg-paper px-7 py-7" style="border-color: #dcd9d1;">
+    <div>
+      <p class="label mb-2 !text-[11px]" style="color: #6b6964;">Gap 04</p>
+      <h4 class="font-serif-text text-xl leading-tight font-normal text-ink">Gamification as superficial engagement</h4>
+    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b6964" stroke-width="1.5" class="size-7 flex-none"><path d="M12 3 2 20h20L12 3Z" stroke-linejoin="round" /><path d="M12 10v4" stroke-linecap="round" /><circle cx="12" cy="17" r="0.75" fill="#6b6964" stroke="none" /></svg>
+  </div>
+</div>
 
 ### Research grounding
 
-The framework was grounded in three theories. Self-Determination Theory defined
-what meaningful motivation requires: autonomy, competence, and relatedness. Operant
-conditioning explained reward timing. Flow theory explained how to keep task
-complexity matched to user capability.
+This is the step where the foundations of the framework began. The framework was
+grounded in three theories.
+
+<ol class="list-decimal space-y-2 pl-5 text-[17px] leading-relaxed text-ink/75">
+  <li>Self-Determination Theory defined what meaningful motivation requires: autonomy, competence, and relatedness.</li>
+  <li>Operant conditioning explained reward timing.</li>
+  <li>Flow theory explained how to keep task complexity matched to user capability.</li>
+</ol>
 
 <Figure
   src={grounding}
@@ -165,18 +178,60 @@ complexity matched to user capability.
 
 ## 02. Research Process
 
-### Four phase process
+<div class="my-14">
+  <p class="label mb-4 !text-ink/45">02. The Process</p>
+  <h2 class="font-display text-h2 font-normal">
+    Four phases, from a fixed task-based approach to an adaptable schema process
+  </h2>
 
-<CardGrid
-  columns={4}
-  numberPrefix="Phase"
-  items={[
-    { title: 'Literature review & initial prototype' },
-    { title: 'Evaluation & testing' },
-    { title: 'Formation of the flexible D-GAM framework' },
-    { title: 'Re-design and testing' },
-  ]}
-/>
+  <div class="mt-8 hidden grid-cols-4 gap-5 md:grid">
+    <div class="col-span-2 flex items-center gap-2.5 rounded-sm px-[18px] py-2.5" style="background: #eceae5;">
+      <span class="label !text-[10.5px]" style="color: #6b6964;">Version 1</span>
+      <span class="text-sm font-semibold text-ink">Fixed, task-based</span>
+    </div>
+    <div class="col-span-2 flex items-center gap-2.5 rounded-sm px-[18px] py-2.5" style="background: #f8dfe2;">
+      <span class="label !text-[10.5px]" style="color: #ac3960;">Version 2</span>
+      <span class="text-sm font-semibold text-ink">Adaptable, schema-based</span>
+    </div>
+  </div>
+
+  <div class="relative mt-7 grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-4">
+    <div class="absolute inset-x-0 top-2 hidden h-px bg-ink md:block"></div>
+
+    <div class="relative flex flex-col items-start">
+      <span class="relative z-10 mb-3 hidden size-[18px] rounded-full border-2 border-ink bg-paper md:block"></span>
+      <span class="font-mono text-[11px] text-ink/45">01</span>
+      <h4 class="mt-2 font-serif-text text-base leading-tight">Literature review &amp; first prototype</h4>
+      <span class="label !mt-auto !pt-3 !text-[11px] !normal-case !tracking-wide !text-ink/70">37 tools reviewed &middot; 17 in depth</span>
+    </div>
+
+    <div class="relative flex flex-col items-start">
+      <span class="relative z-10 mb-3 hidden size-[18px] rounded-full border-2 border-ink bg-paper md:block"></span>
+      <span class="font-mono text-[11px] text-ink/45">02</span>
+      <h4 class="mt-2 font-serif-text text-base leading-tight">Focus group evaluation</h4>
+      <span class="label !mt-auto !pt-3 !text-[11px] !normal-case !tracking-wide !text-ink/70">n=7 &middot; SUS 67.46</span>
+    </div>
+
+    <div class="relative flex flex-col items-start">
+      <span class="relative z-10 mb-3 hidden size-[18px] rounded-full border-2 bg-paper md:block" style="border-color: #ac3960;"></span>
+      <span class="font-mono text-[11px] text-ink/45">03</span>
+      <h4 class="mt-2 font-serif-text text-base leading-tight">Framework formation: four schemas</h4>
+      <span class="label !mt-auto !pt-3 !rounded-full !px-3 !py-1 !text-[11px] !font-semibold !normal-case !tracking-wide" style="background: #f8dfe2; color: #ac3960;">Task-free &middot; 4 schemas</span>
+    </div>
+
+    <div class="relative flex flex-col items-start">
+      <span class="relative z-10 mb-3 hidden size-[18px] rounded-full border-2 bg-paper md:block" style="border-color: #ac3960;"></span>
+      <span class="font-mono text-[11px] text-ink/45">04</span>
+      <h4 class="mt-2 font-serif-text text-base leading-tight">Redesign &amp; user study</h4>
+      <span class="label !mt-auto !pt-3 !rounded-full !px-3 !py-1 !text-[11px] !font-semibold !normal-case !tracking-wide" style="background: #f8dfe2; color: #ac3960;">n=10 &middot; SUS 76.0</span>
+    </div>
+  </div>
+
+  <p class="mt-10 flex items-start gap-2.5 text-sm text-ink/75">
+    <span class="flex-none" style="color: #ac3960;">&rarr;</span>
+    <span>Each study fed the next design. Findings from the focus group shaped the schema-based redesign.</span>
+  </p>
+</div>
 
 ## 03. Design
 
@@ -347,24 +402,8 @@ Ten participants were recruited through purposive sampling across design,
 technology, and academic backgrounds — none affiliated with the D-GAM project.
 Sessions ran remotely via Zoom, lasting 40–45 minutes each. Each participant
 interacted with two scenarios, completed a post-task semi-structured interview, and
-filled out a System Usability Scale survey.
-
-<DataTable
-  columns={['Participant', 'Background', 'Age']}
-  rows={[
-    ['P01', 'Entrepreneur', '29'],
-    ['P02', 'Developer', '27'],
-    ['P03', 'UX Designer', '31'],
-    ['P04', 'Designer, Researcher', '32'],
-    ['P05', 'Teaching Assistant', '27'],
-    ['P06', 'Sales Associate', '27'],
-    ['P07', 'Teacher', '26'],
-    ['P08', 'Designer', '25'],
-    ['P09', 'Graduate Student', '29'],
-    ['P10', 'Architect', '28'],
-  ]}
-  caption="Study participants — n=10, purposive sampling, none affiliated with the project."
-/>
+filled out a System Usability Scale survey. They ranged from entrepreneurs and
+developers to designers, teachers, and an architect, aged 25 to 32.
 
 <DarkSection>
 
