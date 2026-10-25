@@ -108,4 +108,13 @@ const next =
   .prose-compact figure figcaption {
     font-size: 10.5px !important;
   }
+  /* Figure and ScreenGallery both render a plain <figure class="reveal my-14">
+     at full column width — shrink that box itself so every image/gallery
+     inside scales down with it, rather than overriding each image tag. */
+  .prose-compact > figure,
+  .prose-compact div > figure {
+    max-width: 82% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 </style>
