@@ -42,13 +42,8 @@ const meta = [
       >
         {title}
       </h1>
-      {tagline && (
-        <p class="mt-6 max-w-[42ch] font-serif-text text-[clamp(1.25rem,2vw,1.625rem)] leading-snug text-ink">
-          {tagline}
-        </p>
-      )}
-      <p class="mt-5 max-w-[46ch] text-[clamp(1.0625rem,1.5vw,1.3125rem)] leading-relaxed text-ink/70">
-        {subtitle}
+      <p class="mt-6 max-w-[46ch] text-[clamp(1.0625rem,1.5vw,1.3125rem)] leading-relaxed text-ink/70">
+        {tagline && `${tagline} `}{subtitle}
       </p>
     </div>
 
@@ -98,7 +93,11 @@ const meta = [
       meta.map((item) => (
         <div>
           <dt class="label !text-[11px] !text-mute">{item.label}</dt>
-          <dd class="mt-2 text-[15px] text-ink/90">{item.value}</dd>
+          <dd class="mt-2 text-[15px] text-ink/90">
+            {item.value.split(', ').map((part) => (
+              <span class="block">{part}</span>
+            ))}
+          </dd>
         </div>
       ))
     }

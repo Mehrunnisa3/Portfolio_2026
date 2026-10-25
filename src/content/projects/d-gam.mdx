@@ -41,18 +41,12 @@ import StatGrid from '../../components/StatGrid.astro';
 import ScreenGallery from '../../components/ScreenGallery.astro';
 import StickyStage from '../../components/StickyStage.astro';
 import DataTable from '../../components/DataTable.astro';
-import VenueStrip from '../../components/VenueStrip.astro';
-import DarkSection from '../../components/DarkSection.astro';
 import toolAuditData from '../../data/dgam-tool-audit.json';
 
 import problemIllustration from '../../assets/dgam/D-GAM illustration.jpg';
 import grounding from '../../assets/dgam/Rewardlogic-removebg-preview.png';
 import focusGroup from '../../assets/dgam/focus-group-blurred.png';
 import frameworkOverview from '../../assets/dgam/SchemasTogether.png';
-import schemaReward from '../../assets/dgam/Rewards Schema.png';
-import schemaFeedback from '../../assets/dgam/Feedback.drawio.png';
-import schemaUser from '../../assets/dgam/user.png';
-import schemaProject from '../../assets/dgam/ProjectSchema.png';
 import redesignPoster from '../../assets/dgam/s4-redesign.png';
 
 import v1_01 from '../../assets/dgam/v1-01.png';
@@ -96,8 +90,9 @@ import rd_08 from '../../assets/dgam/redesign-08.png';
 ## The problem
 
 <p class="italic text-[16px] leading-relaxed text-ink/75">
-  D-GAM framework was built to answer one question: can{' '}
-  <span class="text-rose">gamification</span> enhance user engagement and motivation in
+  D-GAM framework was built to answer one question:
+  <br />
+  Can <span class="text-rose">gamification</span> enhance user engagement and motivation in
   participatory processes?
 </p>
 
@@ -105,8 +100,6 @@ import rd_08 from '../../assets/dgam/redesign-08.png';
   src={problemIllustration}
   alt="Three-step illustration: a resident notices a new retail store proposal, finds that consultation access already exists, then loses motivation to long forms with no reason to stay"
 />
-
-<VenueStrip />
 
 ## 01. Problem Identification
 
@@ -176,13 +169,12 @@ grounded in three theories.
   zoom
 />
 
-## 02. Research Process
+## 02. Process
 
 <div class="my-14">
-  <p class="label mb-4 !text-ink/45">02. The Process</p>
-  <h2 class="font-display text-h2 font-normal">
-    Four phases, from a fixed task-based approach to an adaptable schema process
-  </h2>
+  <p class="text-[17px] leading-relaxed text-ink/75">
+    Four phases, from a fixed task-based approach to an adaptable schema process.
+  </p>
 
   <div class="mt-8 hidden grid-cols-4 gap-5 md:grid">
     <div class="col-span-2 flex items-center gap-2.5 rounded-sm px-[18px] py-2.5" style="background: #eceae5;">
@@ -242,6 +234,38 @@ structured four step review: select a project, explore the design in 3D and AR,
 review performance data, engage in discussion, earning points and rewards at each
 stage. This was the version taken into the focus group study.
 
+<div class="relative my-10 grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-4">
+  <div class="absolute inset-x-0 top-6 hidden h-px bg-rule sm:block"></div>
+  <div class="relative flex flex-col items-center text-center">
+    <div class="relative z-10 flex size-12 items-center justify-center rounded-full border border-ink/20 bg-paper">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-5 text-ink/70"><rect x="4" y="4" width="16" height="16" rx="1.5" /><path d="M4 9h16" stroke-linecap="round" /></svg>
+    </div>
+    <p class="mt-3 font-mono text-[11px] text-ink/45">01</p>
+    <p class="mt-1 text-[13px] leading-snug text-ink/75">Select a project</p>
+  </div>
+  <div class="relative flex flex-col items-center text-center">
+    <div class="relative z-10 flex size-12 items-center justify-center rounded-full border border-ink/20 bg-paper">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-5 text-ink/70"><path d="M12 3 20 7.5v9L12 21l-8-4.5v-9L12 3Z" stroke-linejoin="round" /><path d="M12 3v18M4 7.5l8 4.5 8-4.5" stroke-linejoin="round" /></svg>
+    </div>
+    <p class="mt-3 font-mono text-[11px] text-ink/45">02</p>
+    <p class="mt-1 text-[13px] leading-snug text-ink/75">Explore in 3D &amp; AR</p>
+  </div>
+  <div class="relative flex flex-col items-center text-center">
+    <div class="relative z-10 flex size-12 items-center justify-center rounded-full border border-ink/20 bg-paper">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-5 text-ink/70"><path d="M5 19V10M12 19V5M19 19v-6" stroke-linecap="round" /></svg>
+    </div>
+    <p class="mt-3 font-mono text-[11px] text-ink/45">03</p>
+    <p class="mt-1 text-[13px] leading-snug text-ink/75">Review data</p>
+  </div>
+  <div class="relative flex flex-col items-center text-center">
+    <div class="relative z-10 flex size-12 items-center justify-center rounded-full border border-ink/20 bg-paper">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-5 text-ink/70"><path d="M4 5h16v10H9l-4 4V5Z" stroke-linejoin="round" /></svg>
+    </div>
+    <p class="mt-3 font-mono text-[11px] text-ink/45">04</p>
+    <p class="mt-1 text-[13px] leading-snug text-ink/75">Discuss &amp; earn rewards</p>
+  </div>
+</div>
+
 <ScreenGallery
   columns={5}
   shape="alpha"
@@ -273,40 +297,38 @@ framework.
   caption="Focus group, n=7. Sessions were recorded with consent; faces are blurred."
 />
 
-Sessions were audio-recorded and video recorded with consent and transcribed. Field notes captured non-verbal cues and moments of disagreement between
-participants. Transcripts were coded inductively using AI (NotebookLM), then grouped
-into candidate themes through thematic analysis and reviewed against the raw data for
-consistency.
-
 ### Four themes that redirected the framework
 
-**Theme 1 — Rewards motivated engagement but lacked transparency**
-
-<Quote attribution="P1">
-  I would like to know about the potential rewards in the beginning — it confuses
-  me why there is a definite and an indefinite reward.
-</Quote>
-
-**Theme 2 — Task rigidity caused fatigue**
-
-<Quote attribution="P3">
-  I have to add a comment under every section, which is a tiring process. Rather, I
-  would prefer adding a combined comment at the end.
-</Quote>
-
-**Theme 3 — Intrinsic motivation mattered as much as extrinsic rewards**
-
-<Quote attribution="P5">
-  Knowing my feedback will make a difference motivates me more than a material
-  reward.
-</Quote>
-
-**Theme 4 — Users needed freedom to explore non-linearly**
-
-<Quote attribution="P1">
-  I should not be forced to complete the tasks in order to earn rewards. I may
-  switch to different tasks.
-</Quote>
+<div class="grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
+  <div>
+    <p class="mb-3 text-[15px] font-semibold text-ink">Rewards motivated engagement but lacked transparency</p>
+    <Quote attribution="P1">
+      I would like to know about the potential rewards in the beginning — it confuses
+      me why there is a definite and an indefinite reward.
+    </Quote>
+  </div>
+  <div>
+    <p class="mb-3 text-[15px] font-semibold text-ink">Task rigidity caused fatigue</p>
+    <Quote attribution="P3">
+      I have to add a comment under every section, which is a tiring process. Rather, I
+      would prefer adding a combined comment at the end.
+    </Quote>
+  </div>
+  <div>
+    <p class="mb-3 text-[15px] font-semibold text-ink">Intrinsic motivation mattered as much as extrinsic rewards</p>
+    <Quote attribution="P5">
+      Knowing my feedback will make a difference motivates me more than a material
+      reward.
+    </Quote>
+  </div>
+  <div>
+    <p class="mb-3 text-[15px] font-semibold text-ink">Users needed freedom to explore non-linearly</p>
+    <Quote attribution="P1">
+      I should not be forced to complete the tasks in order to earn rewards. I may
+      switch to different tasks.
+    </Quote>
+  </div>
+</div>
 
 ### The D-GAM framework — four schemas
 
@@ -320,21 +342,6 @@ across different project types and engagement goals.
   alt="Overview of the D-GAM framework showing how the four schemas interrelate."
   zoom
 />
-
-<div class="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
-  <Figure src={schemaReward} alt="Reward schema diagram." caption="1. Reward schema"
-  zoom
-/>
-  <Figure src={schemaFeedback} alt="Feedback schema diagram." caption="2. Feedback schema"
-  zoom
-/>
-  <Figure src={schemaUser} alt="User schema diagram." caption="3. User schema"
-  zoom
-/>
-  <Figure src={schemaProject} alt="Project schema diagram." caption="4. Project schema"
-  zoom
-/>
-</div>
 
 ### Framework in action — four scenarios
 
@@ -405,27 +412,26 @@ interacted with two scenarios, completed a post-task semi-structured interview, 
 filled out a System Usability Scale survey. They ranged from entrepreneurs and
 developers to designers, teachers, and an architect, aged 25 to 32.
 
-<DarkSection>
+## 05. Results
 
-### SUS results
+<p class="label mb-6 !text-ink/45">Achieved Results</p>
 
 The redesign is where the framework earns its claim. The task-based prototype
 scored below the industry average; the schema-driven redesign scored above it.
 
 <StatGrid
-  dark
-  columns={3}
+  columns={4}
   items={[
     { value: '67.46', label: 'Phase 02 · focus group · n=7', sub: 'Grade D · Needs improvement — below industry average, structural redesign required' },
     { value: '76.0', label: 'Phase 04 · final study · n=10', sub: 'Grade B — above industry average, framework redesign validated' },
     { value: '+8.54', label: 'Improvement across iterations', sub: 'The gain that validated the shift from task-based to task-free' },
+    { value: '90%', label: 'Increased user engagement', sub: 'Tentative, based on the 9/10 participants who found the redesign more motivating' },
   ]}
 />
 
 ### Key findings of thematic analysis
 
 <StatGrid
-  dark
   items={[
     { value: '8/10', label: 'Gamification guided the process', sub: 'Strongly agreed that game elements helped them navigate the review without confusion.' },
     { value: '9/10', label: 'Scenario 1 more motivating', sub: 'Combined incremental points and surprise rewards outperformed a single upfront fixed reward.' },
@@ -434,9 +440,7 @@ scored below the industry average; the schema-driven redesign scored above it.
   ]}
 />
 
-</DarkSection>
-
-## 05. Reflection
+## 06. Reflection
 
 The next step is implementing the application with a larger pool of participants,
 and developing a working prototype — along with integrating AI for semantic
