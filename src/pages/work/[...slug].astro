@@ -51,7 +51,10 @@ const next =
 
   <article class="px-6 py-24 md:px-14 md:py-32">
     <div
-      class="prose-case mx-auto max-w-[1000px] [&>h2]:scroll-mt-28 [&>h2]:mt-24 [&>h2]:mb-8 [&>h2]:font-display [&>h2]:text-h2 [&>h2]:font-normal [&>h2:first-child]:mt-0 [&_h3]:mt-14 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_p]:mb-6 [&_p]:text-ink/75 [&_strong]:font-semibold [&_strong]:text-ink"
+      class:list={[
+        'prose-case mx-auto max-w-[1000px] [&>h2]:scroll-mt-28 [&>h2]:mt-24 [&>h2]:mb-8 [&>h2]:font-display [&>h2]:text-h2 [&>h2]:font-normal [&>h2:first-child]:mt-0 [&_h3]:mt-14 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_p]:mb-6 [&_p]:text-ink/75 [&_strong]:font-semibold [&_strong]:text-ink',
+        project.id === 'd-gam' && 'prose-compact',
+      ]}
     >
       <Content />
     </div>
@@ -65,3 +68,44 @@ const next =
 
   {next && <NextProject project={next} />}
 </Base>
+
+<style is:global>
+  /*
+   * Scoped to D-GAM only (see project.id === 'd-gam' above) — the rest of the
+   * case study pages keep the default scale. Targets the shared components'
+   * own rendered markup (prose-case headings/paragraphs, StatGrid's dl/dd)
+   * since those can't take a per-page size prop without touching every case
+   * study. !important beats the Tailwind arbitrary-variant rules above,
+   * which share the same specificity and would otherwise win on source order.
+   */
+  .prose-compact > h2 {
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem) !important;
+    line-height: 1.1 !important;
+    margin-top: 3.5rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+  .prose-compact > h2:first-child {
+    margin-top: 0 !important;
+  }
+  .prose-compact h3 {
+    font-size: 1.0625rem !important;
+    margin-top: 2.25rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .prose-compact h4 {
+    font-size: 0.9375rem !important;
+  }
+  .prose-compact p {
+    font-size: 14.5px !important;
+    line-height: 1.6 !important;
+  }
+  .prose-compact dl dd {
+    font-size: clamp(1.5rem, 2.8vw, 2.1rem) !important;
+  }
+  .prose-compact dl dt {
+    font-size: 10px !important;
+  }
+  .prose-compact figure figcaption {
+    font-size: 10.5px !important;
+  }
+</style>
