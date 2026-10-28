@@ -49,8 +49,8 @@ import toolsOverview from '../../assets/d-one/Tools_Overview.png';
 Design systems are pretty standard practice at this point, most teams know that
 once you're shipping more than one product, inconsistency starts costing real
 time. CAADLAB just never had one. Over a few years we'd quietly shipped several
-separate tools — D-ART, D-ARE, D-DEM, D-PREDICT, D-Symbia, D-CodeWeaver,
-DesignSense+ — and every one of them had invented its own visual language from
+separate tools, D-ART, D-ARE, D-DEM, D-PREDICT, D-Symbia, D-CodeWeaver,
+DesignSense+, and every one of them had invented its own visual language from
 scratch. There was no consistency among products and no visual design guides to
 follow.
 
@@ -68,9 +68,9 @@ future growth, and this was what was needed for the CAADLAB.
 
 Here's the part people usually get wrong when I explain this: it wasn't that
 nobody knew what everyone else was building. Everyone had seen everyone else's
-tool — we talk, we sit in on each other's demos. The frustrating part is where
+tool, we talk, we sit in on each other's demos. The frustrating part is where
 it actually showed up: the moment I put two screens side by side and started
-measuring. Button padding, corner radius, icon sizing — none of it agreed,
+measuring. Button padding, corner radius, icon sizing, none of it agreed,
 anywhere, between any two tools. Everyone had seen D-Symbia. Nobody had checked
 what pixel value its buttons actually used. Knowing a tool exists and building
 to the same numbers as it are two completely different things, and there was no
@@ -79,8 +79,8 @@ into "so I'll reuse its spacing." Everyone just kept building their own
 version, in good faith, pixel by pixel, from scratch.
 
 And it wasn't only a look-and-feel problem. When people actually sat down and
-used D-ART, a chunk of them got stuck on the exact same thing — they couldn't
-tell what a number on screen actually meant. A commercial count of 7 — seven
+used D-ART, a chunk of them got stuck on the exact same thing, they couldn't
+tell what a number on screen actually meant. A commercial count of 7, seven
 *what*? Two years and a completely different tool later, people using D-DEM ran
 into the identical confusion, just described in their own words. Two teams, two
 tools, solving the same comprehension problem from zero, because nothing ever
@@ -100,7 +100,7 @@ performance, leaving feedback. That's the gap this project closes.
 ## 01. What I actually built
 
 A shared component library and style guide, built directly in Figma and wired
-to design tokens — so any tool that adopts it inherits the same buttons,
+to design tokens, so any tool that adopts it inherits the same buttons,
 inputs, cards, and layout patterns automatically, while keeping whatever is
 genuinely unique to what it does. D-Symbia's crop-simulation controls don't
 need to look like D-DEM's comment thread, and they still don't.
@@ -123,7 +123,7 @@ need to look like D-DEM's comment thread, and they still don't.
     {
       eyebrow: 'Style guide',
       title: 'One shared token system',
-      body: 'A single brand blue instead of an unlabeled navy nobody had actually agreed on, one type scale, one spacing/radius/elevation scale — all as live Figma variables, not hardcoded hex values copy-pasted between files.',
+      body: 'A single brand blue instead of an unlabeled navy nobody had actually agreed on, one type scale, one spacing/radius/elevation scale, all as live Figma variables, not hardcoded hex values copy-pasted between files.',
     },
     {
       eyebrow: 'Component library',
@@ -133,27 +133,27 @@ need to look like D-DEM's comment thread, and they still don't.
     {
       eyebrow: 'Documentation',
       title: 'The reasoning, not just the result',
-      body: "A living doc that explains why each piece exists, not just what it is — which real screen it came from, or why it's fair game to build broadly. So the next person doesn't have to guess, and a bad guess can actually get caught.",
+      body: "A living doc that explains why each piece exists, not just what it is, which real screen it came from, or why it's fair game to build broadly. So the next person doesn't have to guess, and a bad guess can actually get caught.",
     },
   ]}
 />
 
 <Figure
   src={designSystemContains}
-  alt="Diagram: Our Design System Contains — Style Guide (color, typography scale, icons, spacing/radius/elevation/grid), Component Library (atoms, molecules, organisms, 40+ components, all token-bound), and Documentation (getting started guide, component roadmap, usage notes, case study write-up)."
-  caption="Style Guide, Component Library, Documentation — the three pieces of D-ONE."
+  alt="Diagram: Our Design System Contains, Style Guide (color, typography scale, icons, spacing/radius/elevation/grid), Component Library (atoms, molecules, organisms, 40+ components, all token-bound), and Documentation (getting started guide, component roadmap, usage notes, case study write-up)."
+  caption="Style Guide, Component Library, Documentation, the three pieces of D-ONE."
   zoom
 />
 
 ### A look at what's in it
 
-46 components is a lot to show at once, so here's a sample — the full set runs
+46 components is a lot to show at once, so here's a sample, the full set runs
 from primitive form controls up through page-level layouts.
 
 <Figure
   src={keyComponentsOverview}
   alt="Key components and customization overview: Typography (14 styles), Color (primitives and semantic tokens), Buttons, Icons (8 groups), Inputs (3 variants x 5 states), Spacing (8 steps), Toggles, Checkboxes (3 x 4 states)."
-  caption="Typography, color, buttons, icons, inputs, spacing, toggles, checkboxes — all token-bound."
+  caption="Typography, color, buttons, icons, inputs, spacing, toggles, checkboxes, all token-bound."
   zoom
 />
 
@@ -161,7 +161,7 @@ from primitive form controls up through page-level layouts.
 
 ### How this actually started
 
-I'd been around the team long enough to watch this happen in real time — not
+I'd been around the team long enough to watch this happen in real time, not
 as an outsider auditing someone else's mess, but as a teammate watching one
 tool get built, then the next one landing in a totally different visual
 language a year later, then the one after that landing in a third. Nobody did
@@ -170,7 +170,7 @@ toward.
 
 This was built solo, over about three months, and "tools" here means more than
 just Figma: an AI coding agent (Claude) drove the Figma file directly through
-code — I described what I needed in plain language, and it built the tokens,
+code, I described what I needed in plain language, and it built the tokens,
 components, and variants. That's not something most design system case studies
 get to say. Every component in this library, every variant, every bound color
 token, every icon, was built by directing an agent that manipulated the Figma
@@ -180,21 +180,21 @@ real, or did I just build something that looks plausible?
 
 ### Where the pushback actually was
 
-Nobody had to be talked into this — when I brought it up, the reaction was
+Nobody had to be talked into this, when I brought it up, the reaction was
 closer to "yeah, obviously, why hasn't this happened yet." Everyone had
 already felt the cost of building their own version of the same thing. The
 real difficulty wasn't getting buy-in, it was internal: figuring out where the
 line sits between what's genuinely universal (a checkbox is a checkbox, no
 matter which tool it's in) and what's specific to one tool's job and
 shouldn't be flattened into sameness for its own sake. Get that line wrong
-either way and the system stops being useful — too rigid and it doesn't fit
+either way and the system stops being useful, too rigid and it doesn't fit
 anyone, too loose and it's not really a system.
 
 ### The spark
 
 The moment that actually got me to sit down and start this: putting
-D-Symbia's filter screen next to DesignSense+'s filter screen. Same job —
-checkboxes and sliders to narrow down options — solved twice, with not one
+D-Symbia's filter screen next to DesignSense+'s filter screen. Same job,
+checkboxes and sliders to narrow down options, solved twice, with not one
 shared decision between them. Same interaction pattern, reinvented from
 scratch. That's when this stopped being a "we should probably do this
 someday" and turned into three months of actual work.
@@ -207,11 +207,11 @@ someday" and turned into three months of actual work.
   items={[
     {
       title: 'Stay consistent without flattening anything',
-      body: "A dropdown or checkbox looks and behaves the same everywhere it shows up — but a tool's genuinely unique interaction stays exactly that.",
+      body: "A dropdown or checkbox looks and behaves the same everywhere it shows up, but a tool's genuinely unique interaction stays exactly that.",
     },
     {
       title: 'Build the basics broadly, build up only with proof',
-      body: "Buttons, inputs, and other primitives are safe to build ahead of need. Anything more composed only gets built once I've actually seen the pattern repeat on a real screen — not because it seemed like reasonable UI grammar.",
+      body: "Buttons, inputs, and other primitives are safe to build ahead of need. Anything more composed only gets built once I've actually seen the pattern repeat on a real screen, not because it seemed like reasonable UI grammar.",
     },
     {
       title: 'Fix the metrics-confusion problem once, system-wide',
@@ -219,14 +219,14 @@ someday" and turned into three months of actual work.
     },
     {
       title: 'Explain the reasoning, not just hand over the result',
-      body: "Every component's documentation says which real screen justified it, or why it's treated as universal — so the next person can tell a grounded decision from a guess.",
+      body: "Every component's documentation says which real screen justified it, or why it's treated as universal, so the next person can tell a grounded decision from a guess.",
     },
   ]}
 />
 
 ## 04. How I actually figured out what to build
 
-There wasn't a big discovery phase with interviews and surveys — the best
+There wasn't a big discovery phase with interviews and surveys, the best
 research I had access to was already sitting in front of me. I went through
 every one of our seven tools myself, screen by screen, and logged every spot
 where two tools were solving the same interaction problem in a different way:
@@ -236,22 +236,22 @@ feedback, setting up a run.
 One of my teammates had actually run a version of this exercise before,
 comparing a batch of outside tools against a shared checklist of what good
 public-facing design tools should do. I did the same thing, just pointed
-inward at our own suite instead of outward at the market — which felt like the
+inward at our own suite instead of outward at the market, which felt like the
 more useful place to start, since that's where the actual inconsistency was
 costing us time.
 
 ### Two mistakes caught by actually checking
 
-Two of the bigger pieces — the Filter Panel and the Control Panel — were
+Two of the bigger pieces, the Filter Panel and the Control Panel, were
 originally built from what a filter panel "should" look like: plausible
 checkboxes and sliders that I basically invented rather than pulled from a
 real screen. When I actually went back and checked them against real D-Symbia
 screenshots, neither one matched. I rebuilt both from the real Setup and
-Filters tabs — real field names (BIA System Type, DLI, Temperature, Humidity,
+Filters tabs, real field names (BIA System Type, DLI, Temperature, Humidity,
 Crop Suitability), real button labels (Set Context, Set Building Geometry, Run
 Analysis), nothing invented.
 
-### There wasn't a whiteboard session — there was a lot of second-guessing myself
+### There wasn't a whiteboard session, there was a lot of second-guessing myself
 
 Since this was solo, "ideation" mostly meant working through a draft, then
 going back and pressure-testing it against actual evidence before I let myself
@@ -263,14 +263,14 @@ scoped every organism after it.
 
 <Figure
   src={brainstormBoard}
-  alt="Brainstorm board titled 'what might we need?' — sticky notes covering filter panels, dropdowns, performance data display, file upload, comment threads, multi-select comparison, rating systems, progress bars, icon sets, toast states, empty states, pagination, maps, and card actions."
+  alt="Brainstorm board titled 'what might we need?', sticky notes covering filter panels, dropdowns, performance data display, file upload, comment threads, multi-select comparison, rating systems, progress bars, icon sets, toast states, empty states, pagination, maps, and card actions."
   caption="The raw brainstorm dump this started from, before anything got checked against a real screen."
   zoom
 />
 
 ## 05. Approach
 
-Atoms, molecules, organisms — I used the standard atomic design breakdown, but
+Atoms, molecules, organisms, I used the standard atomic design breakdown, but
 the textbook version assumes you build every layer out evenly. That doesn't
 work for one person with three months. So the rule became: atoms are
 infrastructure, build them broadly. Anything bigger needs a receipt.
@@ -299,18 +299,18 @@ infrastructure, build them broadly. Anything bigger needs a receipt.
 
 <Figure
   src={atomicDesignBoard}
-  alt="Diagram: We Followed Atomic Design — Sub-Atomic tokens (color, type, radius) compose into Atoms (label, input, button), which compose into Molecules (labelled input with clear action), which compose into Organisms (a Quick Filter panel with label, input, dropdown, and apply button)."
+  alt="Diagram: We Followed Atomic Design, Sub-Atomic tokens (color, type, radius) compose into Atoms (label, input, button), which compose into Molecules (labelled input with clear action), which compose into Organisms (a Quick Filter panel with label, input, dropdown, and apply button)."
   caption="Sub-atomic tokens → atoms → molecules → organisms, built from real instances on the canvas."
   zoom
 />
 
 ### Before → after, in one small example
 
-**Before** — no defined color styles. "Brand color" wasn't a decision, it was
-whatever hex value someone happened to paste in — D-Symbia's dark UI, D-DEM's
+**Before**, no defined color styles. "Brand color" wasn't a decision, it was
+whatever hex value someone happened to paste in, D-Symbia's dark UI, D-DEM's
 purple, D-ART's blue, three unrelated choices.
 
-**After** — one bound color token, a single Blue (`#2F6FED`) as the system's
+**After**, one bound color token, a single Blue (`#2F6FED`) as the system's
 brand accent, referenced by every button, link, and focus ring in the library.
 Changing the brand color now means changing one variable, not hunting through
 seven codebases.
@@ -327,22 +327,22 @@ seven codebases.
 D-DEM's Design Review screen packs a form-review viewport, an option
 selector, a performance chart, a site map, and a feedback thread into one
 view. Instead of rebuilding that as one big bespoke layout, I broke it down
-into smaller, independently reusable pieces — including two I built
+into smaller, independently reusable pieces, including two I built
 specifically for this: an Option Thumbnail with a real multi-select checkbox,
 so someone can compare more than one design option at once instead of only
 picking one, and a Chart Type Selector so a person picks how they want to view
-a metric — bar, pie, or table — instead of the chart being hardcoded.
+a metric, bar, pie, or table, instead of the chart being hardcoded.
 
 <Figure
   src={organismView}
   alt="A set of organisms from the component library: two Card Grid variants (Upcoming Projects, Compare Alternatives), the Data Review Layout (Design Review, Design Options, Performance Metrics, Site Context, Feedback), the Filter Panel (Filtration with crop and environment controls), the Control Panel (Set Building Model & Location), a Comment Thread, and an Empty State."
-  caption="Card Grid, Data Review Layout, Filter Panel, Control Panel, Comment Thread, and Empty State — organisms built from confirmed real screens."
+  caption="Card Grid, Data Review Layout, Filter Panel, Control Panel, Comment Thread, and Empty State, organisms built from confirmed real screens."
   zoom
 />
 
 ## 06. Outcomes
 
-This system is newly built — it's not rolled out across all seven tools yet,
+This system is newly built, it's not rolled out across all seven tools yet,
 so I don't have usage numbers to show off, and I'd rather say that plainly
 than make up a graph. What's real is what got shipped, and the mistakes it
 caught along the way.
@@ -359,8 +359,8 @@ caught along the way.
 
 <Figure
   src={keyComponentsGrid}
-  alt="Key Components grid: 15 of 40+ components built so far, real instances pulled straight off the canvas — Button, Badge, Top Nav Bar, Breadcrumb, Legend, Comment Item, Modal Dialog, Card Header, Filter Panel, Comment Thread, Control Panel, Rating, Project Card, Data Review Layout, Empty State."
-  caption="15 of 40+ components shipped — real instances, pulled straight off the canvas."
+  alt="Key Components grid: 15 of 40+ components built so far, real instances pulled straight off the canvas, Button, Badge, Top Nav Bar, Breadcrumb, Legend, Comment Item, Modal Dialog, Card Header, Filter Panel, Comment Thread, Control Panel, Rating, Project Card, Data Review Layout, Empty State."
+  caption="15 of 40+ components shipped, real instances, pulled straight off the canvas."
   zoom
 />
 
@@ -373,7 +373,7 @@ mismatch, and rebuilt both from the actual source.
 **Stat Tile & the panel built on top of it, cut.** A metric-card pattern that
 looked reasonable but wasn't grounded in any screen I could point to. When I
 asked myself twice what it was actually for and couldn't answer cleanly, I
-pulled it out — along with the layout built on top of it.
+pulled it out, along with the layout built on top of it.
 
 **A duplicated file-upload pattern, merged into one.** The Control Panel had
 quietly reinvented a file-upload component that already existed elsewhere. Now
@@ -384,12 +384,12 @@ caught on review and corrected at the source.
 
 ## 07. Future-proofing
 
-CAADLAB will keep shipping new tools — that's the whole point of what the
+CAADLAB will keep shipping new tools, that's the whole point of what the
 team does. D-ONE lives as shared libraries in Figma, so the next tool someone
 starts doesn't reinvent the button: it connects the library and inherits the
 token system, the components, and the reasoning documented behind each one.
 The build-atoms-broadly / prove-the-organism rule means the system can keep
-growing without every new addition needing to be re-justified from scratch —
+growing without every new addition needing to be re-justified from scratch,
 only the genuinely new stuff will.
 
 ## 08. Reflection
@@ -401,15 +401,15 @@ only the genuinely new stuff will.
   items={[
     {
       title: "Auditing seven tools' worth of inconsistency by myself",
-      body: 'There was no one to split this with — every screen, across every tool, got reviewed by one person before anything got built.',
+      body: 'There was no one to split this with, every screen, across every tool, got reviewed by one person before anything got built.',
     },
     {
       title: 'Catching my own invented patterns',
-      body: 'Without a second designer around, the only real safeguard against building something plausible-but-wrong was going back and re-checking every organism against a real screenshot — which is exactly how the Filter Panel, Control Panel, and Stat Tile mistakes got caught.',
+      body: 'Without a second designer around, the only real safeguard against building something plausible-but-wrong was going back and re-checking every organism against a real screenshot, which is exactly how the Filter Panel, Control Panel, and Stat Tile mistakes got caught.',
     },
     {
       title: 'Deciding what counts as "universal" under a deadline',
-      body: "Three months is enough to build the basics broadly, but not enough to wait forever for every organism's evidence to show up — some calls had to be made and then revisited as I got further through the audit.",
+      body: "Three months is enough to build the basics broadly, but not enough to wait forever for every organism's evidence to show up, some calls had to be made and then revisited as I got further through the audit.",
     },
   ]}
 />
@@ -417,7 +417,7 @@ only the genuinely new stuff will.
 ### What I learned
 
 A component is only as good as the evidence behind it. That sounds obvious
-once it's written down, but it wasn't obvious in the moment — a
+once it's written down, but it wasn't obvious in the moment, a
 checkbox-and-slider filter panel looks so reasonable as "what a filter panel
 should be" that it took actually pulling up the real D-Symbia screens to
 notice it was wrong. The thing that saved this project wasn't cleverness, it
@@ -426,8 +426,8 @@ was going back and checking my own work.
 ### What I'd do differently
 
 Bring other people in earlier. This was built solo and mostly validated at the
-end, against my own re-checking. Getting the people behind our other tools —
-and the developers who'll actually implement this — involved earlier, instead
+end, against my own re-checking. Getting the people behind our other tools,
+and the developers who'll actually implement this, involved earlier, instead
 of after components were already built, would have caught the ungrounded ones
 sooner and probably surfaced real patterns that are still sitting on my list
 as "confirmed but not built yet." Documentation is the other honest gap: the
@@ -435,7 +435,7 @@ doc explaining the reasoning behind each component works fine at 46
 components, but it's already at the size where it needs a proper way to
 navigate it, and that only gets harder as the library grows.
 
-*D-ONE doesn't change what any of our tools actually do — D-Symbia still
+*D-ONE doesn't change what any of our tools actually do, D-Symbia still
 simulates crops, D-DEM still gathers public feedback, D-ART still compares
 alternatives. What it changes is whether the next tool has to reinvent the
 button.*

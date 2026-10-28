@@ -37,7 +37,7 @@ const groups = [...new Set(notes.map((n) => n.label))];
   </figcaption>
 
   <ul
-    class="grid list-none grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+    class="note-grid grid list-none grid-cols-1 gap-3 sm:grid-cols-2"
     style={`--nb-cols: ${columns}`}
   >
     {
@@ -57,3 +57,11 @@ const groups = [...new Set(notes.map((n) => n.label))];
     }
   </ul>
 </figure>
+
+<style>
+  @media (min-width: 1024px) {
+    .note-grid {
+      grid-template-columns: repeat(var(--nb-cols), minmax(0, 1fr));
+    }
+  }
+</style>

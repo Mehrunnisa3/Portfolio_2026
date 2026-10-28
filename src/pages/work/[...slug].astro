@@ -53,7 +53,7 @@ const next =
     <div
       class:list={[
         'prose-case mx-auto max-w-[1000px] min-[1180px]:ml-[calc((100%-1000px)/2+4rem)] min-[1180px]:mr-[calc((100%-1000px)/2-4rem)] [&>h2]:scroll-mt-28 [&>h2]:mt-24 [&>h2]:mb-8 [&>h2]:font-display [&>h2]:text-h2 [&>h2]:font-normal [&>h2:first-child]:mt-0 [&_h3]:mt-14 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_p]:mb-6 [&_p]:text-ink/75 [&_strong]:font-semibold [&_strong]:text-ink',
-        ['d-gam', 'line-up'].includes(project.id) && 'prose-compact',
+        ['d-gam', 'line-up', 'd-one'].includes(project.id) && 'prose-compact',
       ]}
     >
       <Content />
@@ -71,12 +71,12 @@ const next =
 
 <style is:global>
   /*
-   * Scoped to D-GAM and Line Up (see the .includes check above) — D-ONE keeps
-   * case study pages keep the default scale. Targets the shared components'
-   * own rendered markup (prose-case headings/paragraphs, StatGrid's dl/dd)
-   * since those can't take a per-page size prop without touching every case
-   * study. !important beats the Tailwind arbitrary-variant rules above,
-   * which share the same specificity and would otherwise win on source order.
+   * Scoped to D-GAM, Line Up, and D-ONE (see the .includes check above).
+   * Targets the shared components' own rendered markup (prose-case
+   * headings/paragraphs, StatGrid's dl/dd) since those can't take a
+   * per-page size prop without touching every case study. !important
+   * beats the Tailwind arbitrary-variant rules above, which share the
+   * same specificity and would otherwise win on source order.
    */
   .prose-compact > h2 {
     font-size: clamp(1.5rem, 2.6vw, 2.1rem) !important;
